@@ -1,8 +1,8 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Train.aspx.vb" Inherits="users_train" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Departments.aspx.vb" Inherits="users_mytraining" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <style type="text/css">
         body
         {
@@ -163,7 +163,7 @@
             font-size: 16px;
         }
     </style>
-    <title>Cross Training Manager - Train</title>
+    <title>Cross Training Manager - Admin (Departments)</title>
 </head>
 <body>
     <div id="wrap">
@@ -175,12 +175,12 @@
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
                             <td width="60%">
-                                <a class="tabUnSelected" style="margin-left: 30px" href="Manage.aspx">Manage</a>
-                                <a class="tabSelected" href="Train.aspx">Train</a> <a class="tabUnSelected" href="MyTraining.aspx">
-                                    My Training</a>
+                                <a class="tabSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
+                                <a class="tabUnSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
+                                 Jobs</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="~/users/manage.aspx">
+                                <a class="link" href=""></a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
                                     Log Out</a>
                             </td>
                         </tr>
@@ -191,11 +191,11 @@
                         <table width="100%" style="margin-bottom: -3px">
                             <tr>
                                 <td>
-                                    <!--Navigation controls if needed
-<asp:LinkButton ID="lnkStatus" class="tabSelected" runat="server" style="margin-left:30px">Status</asp:LinkButton>
-<asp:LinkButton ID="lnkHistory" class="tabUnSelected" runat="server" style="margin-left:30px">History</asp:LinkButton>
-<asp:LinkButton ID="lnkRequest" class="tabUnSelected" runat="server" style="margin-left:30px">Request</asp:LinkButton>
--->
+                                <!--Navigation if needed
+                                    <asp:LinkButton ID="lnkStatus" class="tabSelected" runat="server" Style="margin-left: 30px">Departments</asp:LinkButton>
+                                    <asp:LinkButton ID="lnkHistory" class="tabUnSelected" runat="server">Employees</asp:LinkButton>
+                                    <asp:LinkButton ID="lnkRequest" class="tabUnSelected" runat="server">Jobs</asp:LinkButton>
+                                    -->
                                 </td>
                             </tr>
                         </table>
