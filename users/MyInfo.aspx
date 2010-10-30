@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Train.aspx.vb" Inherits="users_train" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="MyInfo.aspx.vb" Inherits="users_train" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -102,6 +102,12 @@
             font-size: 18px;
             z-index: -1;
         }
+        td.Title
+        {
+            font-weight: bold;
+            font-family: "Times New Roman";
+            font-size: 18px;
+        }
         a.tabUnSelected:hover
         {
             text-decoration: none;
@@ -163,7 +169,7 @@
             font-size: 16px;
         }
     </style>
-    <title>Cross Training Manager - Train</title>
+    <title>Cross Training Manager - My Info</title>
 </head>
 <body>
     <div id="wrap">
@@ -176,7 +182,7 @@
                         <tr>
                             <td width="60%">
                                 <a class="tabUnSelected" style="margin-left: 30px" href="Manage.aspx">Manage</a>
-                                <a class="tabSelected" href="Train.aspx">Train</a> <a class="tabUnSelected" href="MyTraining.aspx">
+                                <a class="tabUnSelected" href="Train.aspx">Train</a> <a class="tabUnSelected" href="MyTraining.aspx">
                                     My Training</a>
                             </td>
                             <td width="40%" align="right">
@@ -190,7 +196,8 @@
                     <div class="toolbar">
                         <table width="100%" style="margin-bottom: -3px">
                             <tr>
-                                <td>
+                                <td class="Title">
+                                    My Info
                                     <!--Navigation controls if needed
 <asp:LinkButton ID="lnkStatus" class="tabSelected" runat="server" style="margin-left:30px">Status</asp:LinkButton>
 <asp:LinkButton ID="lnkHistory" class="tabUnSelected" runat="server" style="margin-left:30px">History</asp:LinkButton>
