@@ -206,7 +206,9 @@
                                 </td>
                             </tr>
                         </table>
-                        <div class="two">
+                        
+                    </div>
+                    <div class="two">
                             <br />
                             <asp:Panel ID="ResetPasswordPanel" runat="server" BackColor="#F7F6F3" 
                                 BorderColor="#E6E2D8" BorderStyle="Solid" BorderWidth="3px" 
@@ -287,7 +289,6 @@
                             <br />
                             <br />
                         </div>
-                    </div>
                 </div>
             </asp:View>
         </asp:MultiView>
