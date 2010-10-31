@@ -202,15 +202,13 @@
                     </div>
                     <div class="two">
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                        <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" 
+                            CreateUserButtonText="Create Employee">
+                            <WizardSteps>
+                                <asp:CreateUserWizardStep runat="server" Title="Create a New Employee" />
+                                <asp:CompleteWizardStep runat="server" />
+                            </WizardSteps>
+                        </asp:CreateUserWizard>
                         <br />
                     </div>
                 </div>
