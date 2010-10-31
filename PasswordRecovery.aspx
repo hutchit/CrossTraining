@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:PasswordRecovery ID="PasswordRecovery1" runat="server">
+        <asp:PasswordRecovery ID="PasswordRecovery1" runat="server" onsendingmail="PasswordRecovery1_SendingMail">
         </asp:PasswordRecovery>
     
     </div>
