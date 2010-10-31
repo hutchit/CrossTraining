@@ -172,89 +172,8 @@
     <title>Cross Training Manager - My Info</title>
 </head>
 <body>
-    <div id="wrap">
         <form id="form1" runat="server">
-                    <div class="two">
-        <asp:Panel ID="ResetPasswordPanel" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8"
-            BorderStyle="Solid" BorderWidth="3px" Width="500px" style="padding:4px;">
-            <asp:Label ID="ResetPasswordPanelLabel" runat="server" Text="Change Your Security Question"
-                BackColor="#5D7B9D" BorderColor="#5D7B9D" BorderStyle="Solid" BorderWidth="2px"
-                Font-Bold="True" Font-Names="Tahoma" Width="99%" style="text-align:center"
-                ForeColor="White"></asp:Label>
-            <br />
-            <asp:Table ID="ResetPasswordTable" runat="server" style="font-family:Tahoma; text-align:center">
-                <asp:TableRow ID="OldQuestionRow" runat="server">
-                    <asp:TableCell ID="QuestionCell1" runat="server" style="text-align:right">
-                        <asp:Label ID="QuestionLabel1" runat="server" Text="Question:"></asp:Label>
-                    </asp:TableCell>
-                    <asp:TableCell ID="QuestionCell2" runat="server" style="text-align:left">
-                        <asp:Label ID="question" runat="server" Text=""></asp:Label>
-                    </asp:TableCell>
-                </asp:TableRow>
-                <asp:TableRow ID="PasswordRow" runat="server">
-                    <asp:TableCell ID="PasswordCell1" runat="server" style="text-align:right">
-                        <asp:Label ID="PasswordLabel1" runat="server" Text="Password:"></asp:Label>
-                    </asp:TableCell>
-                    <asp:TableCell ID="PasswordCell2" runat="server" style="text-align:left">
-                        <asp:TextBox ID="password" runat="server" Width="300px" TextMode="Password"></asp:TextBox>
-                    </asp:TableCell>
-                </asp:TableRow>
-                
-                <asp:TableRow ID="NewQuestionRow" runat="server">
-                    <asp:TableCell ID="NewQuestionCell" runat="server" style="text-align:right">
-                        <asp:Label ID="NewQuestionLabel" runat="server" Text="New Question:"></asp:Label>
-                    </asp:TableCell>
-                    <asp:TableCell ID="NewQuestionDropdown" runat="server" style="text-align:left">
-                        <asp:dropdownlist ID="newQuestion" runat="server" Width="300px">
-                            <asp:ListItem Text="" />
-                            <asp:ListItem Text="In what city was your first job?" />
-                            <asp:ListItem Text="In what city were you born?" />
-                            <asp:ListItem Text="What High School did you graduate from?" />
-                            <asp:ListItem Text="What is your favorite food?" />
-                            <asp:ListItem Text="What was the make and model of your first car?" />
-                        </asp:dropdownlist>
-                    </asp:TableCell>
-                </asp:TableRow>
-                
-                <asp:TableRow ID="NewAnswerRow" runat="server" style="text-align:right">
-                    <asp:TableCell ID="NewAnswerCell1" runat="server">
-                        <asp:Label ID="NewAnswerLabel" runat="server" Text="New Answer:"></asp:Label>
-                    </asp:TableCell>
-                    <asp:TableCell ID="NewAnswerCell2" runat="server" style="text-align:left">
-                        <asp:TextBox ID="newAnswer" runat="server" Width="300px"></asp:TextBox>
-                    </asp:TableCell>
-                </asp:TableRow>
-                
-                <asp:TableRow ID="ButtonsRow" runat="server" style="text-align:center">
-                    <asp:TableCell ID="ButtonsRowSpacer" runat="server" colspan="2" style="text-align:center">
-                    <asp:Table ID="ButtonsTable" runat="server" Width = "100%">
-                    <asp:TableRow>
-                    <asp:TableCell ID="ChangeQuestionButtonCell" runat="server" style="text-align:right">
-                        <asp:Button ID="ChangeQuestionButton" runat="server" BackColor="#FFFBFF"
-                        BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Tahoma" Font-Size="0.9em"
-                        ForeColor="#284775" Text="Change Question" />
-                    </asp:TableCell>
-                    <asp:TableCell ID="CancelButtonCell" runat="server" style="text-align:left">
-                        <asp:Button ID="QuestionCancel" runat="server" BackColor="#FFFBFF"
-                        BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"
-                        Font-Names="Tahoma" Font-Size="0.9em" PostBackUrl="~/users/Default.aspx"
-                        ForeColor="#284775" Text="Cancel" />
-                    </asp:TableCell>
-                    </asp:TableRow>
-                    </asp:Table>
-                    </asp:TableCell>
-                </asp:TableRow>
-  
-            </asp:Table>
-        </asp:Panel>   
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                    </div>
+    <div id="wrap">
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
                 <br />
@@ -287,11 +206,92 @@
                                 </td>
                             </tr>
                         </table>
+                        <div class="two">
+                            <br />
+                            <asp:Panel ID="ResetPasswordPanel" runat="server" BackColor="#F7F6F3" 
+                                BorderColor="#E6E2D8" BorderStyle="Solid" BorderWidth="3px" 
+                                style="padding:4px;" Width="500px">
+                                <asp:Label ID="ResetPasswordPanelLabel" runat="server" BackColor="#5D7B9D" 
+                                    BorderColor="#5D7B9D" BorderStyle="Solid" BorderWidth="2px" Font-Bold="True" 
+                                    Font-Names="Tahoma" ForeColor="White" style="text-align:center" 
+                                    Text="Change Your Security Question" Width="99%"></asp:Label>
+                                <br />
+                                <asp:Table ID="ResetPasswordTable" runat="server" 
+                                    style="font-family:Tahoma; text-align:center">
+                                    <asp:TableRow ID="OldQuestionRow" runat="server">
+                                        <asp:TableCell ID="QuestionCell1" runat="server" style="text-align:right">
+                                        <asp:Label ID="QuestionLabel1" runat="server" Text="Question:"></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell ID="QuestionCell2" runat="server" style="text-align:left">
+                                        <asp:Label ID="question" runat="server" Text=""></asp:Label>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow ID="PasswordRow" runat="server">
+                                        <asp:TableCell ID="PasswordCell1" runat="server" style="text-align:right">
+                                        <asp:Label ID="PasswordLabel1" runat="server" Text="Password:"></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell ID="PasswordCell2" runat="server" style="text-align:left">
+                                        <asp:TextBox ID="password" runat="server" TextMode="Password" Width="300px"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow ID="NewQuestionRow" runat="server">
+                                        <asp:TableCell ID="NewQuestionCell" runat="server" style="text-align:right">
+                                        <asp:Label ID="NewQuestionLabel" runat="server" Text="New Question:"></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell ID="NewQuestionDropdown" runat="server" style="text-align:left">
+                                        <asp:DropDownList ID="newQuestion" runat="server" Width="300px">
+                                            <asp:ListItem Text="" />
+                                            <asp:ListItem Text="In what city was your first job?" />
+                                            <asp:ListItem Text="In what city were you born?" />
+                                            <asp:ListItem Text="What High School did you graduate from?" />
+                                            <asp:ListItem Text="What is your favorite food?" />
+                                            <asp:ListItem Text="What was the make and model of your first car?" />
+                                        </asp:DropDownList>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow ID="NewAnswerRow" runat="server" style="text-align:right">
+                                        <asp:TableCell ID="NewAnswerCell1" runat="server">
+                                        <asp:Label ID="NewAnswerLabel" runat="server" Text="New Answer:"></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell ID="NewAnswerCell2" runat="server" style="text-align:left">
+                                        <asp:TextBox ID="newAnswer" runat="server" Width="300px"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow ID="ButtonsRow" runat="server" style="text-align:center">
+                                        <asp:TableCell ID="ButtonsRowSpacer" runat="server" colspan="2" 
+                                            style="text-align:center">
+                                        <asp:Table ID="ButtonsTable" runat="server" Width="100%">
+                                            <asp:TableRow>
+                                                <asp:TableCell ID="ChangeQuestionButtonCell" runat="server" 
+                                                    style="text-align:right">
+                                                <asp:Button ID="ChangeQuestionButton" runat="server" BackColor="#FFFBFF" 
+                                                    BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Tahoma" 
+                                                    Font-Size="0.9em" ForeColor="#284775" Text="Change Question" />
+                                                </asp:TableCell>
+                                                <asp:TableCell ID="CancelButtonCell" runat="server" style="text-align:left">
+                                                <asp:Button ID="QuestionCancel" runat="server" BackColor="#FFFBFF" 
+                                                    BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Tahoma" 
+                                                    Font-Size="0.9em" ForeColor="#284775" PostBackUrl="~/users/Default.aspx" 
+                                                    Text="Cancel" />
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                        </asp:Table>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </asp:Panel>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                        </div>
                     </div>
                 </div>
             </asp:View>
         </asp:MultiView>
-        </form>
     </div>
-</body>
+        </form>
+    </body>
 </html>
