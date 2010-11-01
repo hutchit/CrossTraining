@@ -191,7 +191,8 @@
                                      &nbsp;<a class="link" href="~/users/manage.aspx">Log Out</a>
                                      currently replacing it with the LoginStatus control after reading some ASP tutorials 
                                 -->
-                                <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                                <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
+                                    LogoutPageUrl="~/Logout.aspx" />
                             </td>
                         </tr>
                     </table>

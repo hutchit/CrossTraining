@@ -10,9 +10,14 @@
     <form id="form1" runat="server">
     <div>
     
-    &nbsp;<asp:LoginName ID="LoginName1" runat="server" />
-        have Been Logged out.</div>
-    <asp:LoginStatus ID="LoginStatus1" runat="server" />
-&nbsp; again</form>
+    &nbsp;YOU
+        have Been Logged out.<br />
+        <br />
+    </div>
+    <asp:LoginStatus ID="LoginStatus1" runat="server" BackColor="Red" 
+        BorderColor="Black" BorderStyle="Inset" ForeColor="White" Height="44px" 
+        LoginText="Click Here to Login Again" LogoutAction="RedirectToLoginPage" 
+        Width="214px" />
+    &nbsp; </form>
 </body>
 </html>

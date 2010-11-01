@@ -17,4 +17,8 @@ Partial Class users_Manage
     Protected Sub lnkReports_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkReports.Click, LinkButton12.Click, LinkButton8.Click, LinkButton4.Click
         MultiView1.ActiveViewIndex = 3
     End Sub
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+    End Sub
 End Class

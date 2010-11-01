@@ -21,7 +21,7 @@
     <form id="form1" runat="server">
     <div>
         <asp:LoginStatus ID="LoginStatus1" runat="server" 
-            LogoutPageUrl="~/Logout.aspx" />
+            LogoutPageUrl="~/Logout.aspx" LogoutAction="Redirect" />
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="DepartmentsView" runat="server">
                 <asp:ImageButton ID="imgBtnDD" runat="server" CssClass="tabimages" 
