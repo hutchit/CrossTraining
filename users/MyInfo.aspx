@@ -192,7 +192,7 @@
                                      currently replacing it with the LoginStatus control after reading some ASP tutorials 
                                 -->
                                 <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
-                                    LogoutPageUrl="~/Logout.aspx" />
+                                    LogoutPageUrl="~/Logout2.aspx" />
                             </td>
                         </tr>
                     </table>

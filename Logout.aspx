@@ -16,7 +16,8 @@
     </div>
     <asp:LoginStatus ID="LoginStatus1" runat="server" BackColor="Red" 
         BorderColor="Black" BorderStyle="Inset" ForeColor="White" Height="44px" 
-        LoginText="Click Here to Login Again" Width="214px" />
+        LoginText="Click Here to Login Again" LogoutAction="Redirect" 
+        LogoutPageUrl="~/admin/Departments.aspx" Width="214px" />
     &nbsp; </form>
 </body>
 </html>

@@ -182,7 +182,7 @@
                             <td width="40%" align="right">
                                 <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
                                 <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
-                                    LogoutPageUrl="~/Logout.aspx" />
+                                    LogoutPageUrl="~/Logout2.aspx" />
                             </td>
                         </tr>
                     </table>
