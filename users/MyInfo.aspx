@@ -192,7 +192,7 @@
                                      currently replacing it with the LoginStatus control after reading some ASP tutorials 
                                 -->
                                 <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
-                                    LogoutPageUrl="~/Logout2.aspx" />
+                                    LogoutPageUrl="~/Logout.aspx" />
                             </td>
                         </tr>
                     </table>
@@ -214,7 +214,6 @@
                         
                     </div>
                     <div class="two">
-                            <br />
                             <asp:Panel ID="ResetPasswordPanel" runat="server" BackColor="#F7F6F3" 
                                 BorderColor="#E6E2D8" BorderStyle="Solid" BorderWidth="3px" 
                                 style="padding:4px;" Width="500px">
