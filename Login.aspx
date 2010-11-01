@@ -64,6 +64,9 @@
                             </tr>
                             <tr>
                                 <td align="right" colspan="2">
+                                    <asp:LinkButton ID="LinkButton1" runat="server" 
+                                        PostBackUrl="~/PasswordRecovery.aspx">Forgot Password</asp:LinkButton>
+                                    &nbsp;&nbsp;
                                     <asp:Button ID="LoginButton" runat="server" BackColor="#FFFBFF" 
                                         BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CommandName="Login" 
                                         Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" Text="Log In" 
