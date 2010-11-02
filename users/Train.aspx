@@ -180,9 +180,10 @@
                                     My Training</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="~/users/manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
+                                    LogoutPageUrl="~/Logout.aspx" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>
