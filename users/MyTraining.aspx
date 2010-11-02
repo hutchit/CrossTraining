@@ -200,22 +200,22 @@
                         </table>
                     </div>
                     <div class="two">
-                        <asp:Label ID="Label2" runat="server" Text="SELECT [hours]"></asp:Label>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT [hours], [status], [date], [id], [trainee_id], [trainer_id] FROM [training]">
                         </asp:SqlDataSource>
+                        <asp:Label ID="Label2" runat="server" Text="SELECT [hours] FROM [training]"></asp:Label>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                     </div>
                 </div>
             </asp:View>
