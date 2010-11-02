@@ -7,6 +7,7 @@ Partial Class users_MyTraining
         Dim user As New CreateUserWizard
         user = CType(sender, CreateUserWizard)
         Dim sqlUser As New SqlDataSource
+        sqlUser.ConnectionString = System.Configuration.ConfigurationManager.AppSettings("ProjectConnectionString")
 
     End Sub
 End Class
