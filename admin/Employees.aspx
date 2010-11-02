@@ -180,9 +180,10 @@
                                  Jobs</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href=""></a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href=""></a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
+                                    LogoutPageUrl="~/Logout.aspx" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>
@@ -202,15 +203,13 @@
                     </div>
                     <div class="two">
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                        <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" 
+                            CreateUserButtonText="Create Employee">
+                            <WizardSteps>
+                                <asp:CreateUserWizardStep runat="server" Title="Create a New Employee" />
+                                <asp:CompleteWizardStep runat="server" />
+                            </WizardSteps>
+                        </asp:CreateUserWizard>
                         <br />
                     </div>
                 </div>

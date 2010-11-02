@@ -180,9 +180,9 @@
                                     My Training</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp;<asp:LoginStatus 
+                                    ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
+                                    LogoutPageUrl="~/Logout.aspx" />
                         </tr>
                     </table>
                 </div>
@@ -199,6 +199,11 @@
                         </table>
                     </div>
                     <div class="two">
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT [hours], [status], [date], [id], [trainee_id], [trainer_id] FROM [training]">
+                        </asp:SqlDataSource>
+                        <asp:Label ID="Label2" runat="server" Text="SELECT [hours] FROM [training]"></asp:Label>
                         <br />
                         <br />
                         <br />

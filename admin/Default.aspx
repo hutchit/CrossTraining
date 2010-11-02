@@ -20,6 +20,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <asp:LoginStatus ID="LoginStatus1" runat="server" 
+            LogoutPageUrl="~/Logout.aspx" LogoutAction="Redirect" />
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="DepartmentsView" runat="server">
                 <asp:ImageButton ID="imgBtnDD" runat="server" CssClass="tabimages" 
@@ -137,7 +139,7 @@
                     </SelectedItemTemplate>
                 </asp:ListView>
                 <asp:SqlDataSource ID="sqlDepartments" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:jerredsProjectConnectionString %>" 
+                    ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                     InsertCommand="INSERT INTO departments(name) VALUES (@name)" 
                     SelectCommand="SELECT * FROM [departments] ORDER BY [name]">
                     <InsertParameters>
@@ -323,7 +325,7 @@
                     </SelectedItemTemplate>
                 </asp:ListView>
                 <asp:SqlDataSource ID="sqlEmployees" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:jerredsProjectConnectionString %>" 
+                    ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                     InsertCommand="INSERT INTO employees(department_id, email, first_name, last_name) VALUES (@department_id, @email, @first_name, @last_name)" 
                     SelectCommand="SELECT * FROM [employees] ORDER BY [first_name], [last_name]">
                     <InsertParameters>
@@ -450,7 +452,7 @@
                     </SelectedItemTemplate>
                 </asp:ListView>
                 <asp:SqlDataSource ID="sqlJobs" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:jerredsProjectConnectionString %>" 
+                    ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                     InsertCommand="INSERT INTO jobs(name) VALUES (@name)" 
                     SelectCommand="SELECT * FROM [jobs] ORDER BY [name]">
                     <InsertParameters>
