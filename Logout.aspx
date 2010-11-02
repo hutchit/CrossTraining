@@ -13,6 +13,7 @@
     &nbsp;YOU
         have Been Logged out.<br />
         <br />
+        Please
         <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Login.aspx">Click here to Log In again</asp:LinkButton>
     </div>
     &nbsp; </form>
