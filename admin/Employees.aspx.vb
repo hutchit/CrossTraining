@@ -9,4 +9,5 @@ Partial Class users_MyTraining
         Dim sqlUser As New SqlDataSource
 
     End Sub
+
 End Class

@@ -172,7 +172,7 @@
             <asp:View ID="View1" runat="server">
                 <br />
                 <div class="toolbar">
-                    <table width="100%" style="margin-bottom: -3px">
+                    <table style="margin-bottom: -3px; width: 100%;">
                         <tr>
                             <td width="60%">
                                 <a class="tabSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
@@ -180,9 +180,10 @@
                                  Jobs</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href=""></a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href=""></a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
+                                    LogoutPageUrl="~/Logout.aspx" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>
