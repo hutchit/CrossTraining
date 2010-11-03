@@ -14,14 +14,15 @@ Partial Class users_MyTraining
         'CType(CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("ddDepartments"), DropDownList)
         ' Dim txtFirstName As TextBox = CType(CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtFirstName"), TextBox)
         ' Dim txtLastName As TextBox = CType(CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("txtLastName"), TextBox)
-        Dim supervisor As Integer
-        Dim supervisee As Integer
 
-        supervisor = Convert.ToInt32(DropDownList1.DataValueField)
-        supervisee = Convert.ToInt32(DropDownList2.DataValueField)
+        'Dim supervisor As Integer
+        'Dim supervisee As Integer
 
-        sqlUser.InsertParameters.Add("supervisor_id", supervisor)
-        sqlUser.InsertParameters.Add("supervisee_id", supervisee)
+        'supervisor = CType(DropDownList1.SelectedValue, Integer)
+        'supervisee = CType(DropDownList2.DataValueField, Integer)
+
+        sqlUser.InsertParameters.Add("supervisor_id", DropDownList1.SelectedValue)
+        sqlUser.InsertParameters.Add("supervisee_id", DropDownList2.SelectedValue)
 
         'sqlUser.InsertParameters.Add("first_name", txtFirstName.Text)
         'sqlUser.InsertParameters.Add("last_name", txtLastName.Text)

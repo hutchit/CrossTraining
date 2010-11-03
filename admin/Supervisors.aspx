@@ -15,7 +15,7 @@
         }
         #wrap
         {
-            width: 900px;
+            width: 1000px;
             margin: 0 auto 0 auto;
         }
         #outerBorder
@@ -176,9 +176,10 @@
                         <tr>
                             <td width="60%">
                                 <a class="tabUnSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
-                                <a class="tabSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
-                                 Jobs</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <asp:LinkButton ID="LinkButton1" runat="server" ForeColor="#666666">Supervisors</asp:LinkButton>
+                                <a class="tabUnSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
+                                 Jobs</a>
+                                <a class="tabSelected" href="Jobs.aspx">
+                                 Supervisors</a>
                             </td>
                             <td width="40%" align="right">
                                 <a class="link" href=""></a> &nbsp;|&nbsp; 
@@ -207,7 +208,7 @@
                             Text="Supervisor"></asp:Label>
                         &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" 
                             DataSourceID="SqlDataSource1" DataTextField="first_name" DataValueField="id" 
-                            Height="16px" Width="152px">
+                            Height="16px" Width="152px" AutoPostBack="True">
                         </asp:DropDownList>
                         <br />
                         &nbsp;<br />
@@ -220,8 +221,7 @@
                         </asp:DropDownList>
                         <asp:Button ID="Button1" runat="server" style="width: 41px" Text="Add " />
                         <br />
-                        &nbsp;<asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2" 
-                            InsertItemPosition="FirstItem">
+                        &nbsp;<asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2">
                             <ItemTemplate>
                                 <tr style="background-color:#DCDCDC;color: #000000;">
                                     <td>
@@ -240,7 +240,7 @@
                                 </tr>
                             </ItemTemplate>
                             <AlternatingItemTemplate>
-                                <tr style="background-color:#FFFFFF;">
+                                <tr style="background-color:#FFF8DC;">
                                     <td>
                                         <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" 
                                             Text="Delete" />
@@ -364,9 +364,14 @@
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             DeleteCommand="DELETE FROM supervisee_supervisor WHERE (supervisee_id = @supervisee_id)" 
                             InsertCommand="INSERT INTO supervisee_supervisor(supervisee_id, supervisor_id) VALUES (@supervisee_id, @supervisor_id)" 
-                            SelectCommand="SELECT supervisee_id, supervisor_id FROM supervisee_supervisor" 
+                            SelectCommand="SELECT supervisee_id, supervisor_id FROM supervisee_supervisor WHERE supervisor_id = @supervisor_id" 
+                            
                             
                             UpdateCommand="UPDATE supervisee_supervisor SET supervisee_id = @supervisee_id, supervisor_id = @supervisor_id">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="DropDownList1" Name="supervisor_id" 
+                                    PropertyName="SelectedValue" />
+                            </SelectParameters>
                             <DeleteParameters>
                                 <asp:Parameter Name="supervisee_id" />
                             </DeleteParameters>
