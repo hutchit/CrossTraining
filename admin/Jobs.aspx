@@ -15,7 +15,7 @@
         }
         #wrap
         {
-            width: 900px;
+            width: 1000px;
             margin: 0 auto 0 auto;
         }
         #outerBorder
@@ -174,10 +174,12 @@
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
-                            <td width="60%">
+                            <td width="80%">
                                 <a class="tabUnSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
                                 <a class="tabUnSelected" href="Employees.aspx">Employees</a> <a class="tabSelected" href="Jobs.aspx">
                                  Jobs</a>
+                                 <a class="tabUnSelected" href="Supervisors.aspx">
+                                 Supervisors</a>
                             </td>
                             <td width="40%" align="right">
                                 <a class="link" href=""></a> &nbsp;|&nbsp; 
