@@ -186,7 +186,14 @@
                                     My Training</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp;
+                                <asp:LinkButton ID="LinkButton1" runat="server" 
+                                    PostBackUrl="~/admin/Departments.aspx">Admin Panel</asp:LinkButton>
+                                &nbsp;| <a class="link" href="MyInfo.aspx">My Info</a>
+                                <!-- This was here before, but it wasn't working
+                                     &nbsp;<a class="link" href="~/users/manage.aspx">Log Out</a>
+                                     currently replacing it with the LoginStatus control after reading some ASP tutorials 
+                                -->
+                                &nbsp;|&nbsp;
                                 <!-- This was here before, but it wasn't working
                                      &nbsp;<a class="link" href="~/users/manage.aspx">Log Out</a>
                                      currently replacing it with the LoginStatus control after reading some ASP tutorials 
@@ -374,6 +381,7 @@ BackColor="#FFFBFF" CommandName="Cancel" Text="Cancel" />                       
                             <br />
                             <br />
                             <br />
+                            <asp:LoginName ID="LoginName1" runat="server" Visible="False" />
                             <br />
                             <br />
                             <br />
