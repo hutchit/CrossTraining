@@ -178,7 +178,7 @@
                                 <a class="tabUnSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
                                 <a class="tabUnSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
                                  Jobs</a>
-                                <a class="tabSelected" href="Jobs.aspx">
+                                <a class="tabSelected" href="Supervisors.aspx">
                                  Supervisors</a>
                             </td>
                             <td width="40%" align="right">
@@ -204,7 +204,7 @@
                         </table>
                     </div>
                     <div class="two">
-                        &nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" ForeColor="#999999" 
+                        &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" ForeColor="#999999" 
                             Text="Supervisor"></asp:Label>
                         &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" 
                             DataSourceID="SqlDataSource1" DataTextField="first_name" DataValueField="id" 
@@ -219,15 +219,22 @@
                             DataSourceID="SqlDataSource1" DataTextField="first_name" DataValueField="id" 
                             Height="17px" Width="148px">
                         </asp:DropDownList>
-                        <asp:Button ID="Button1" runat="server" style="width: 41px" Text="Add " />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button1" runat="server" Height="27px" style="width: 41px" 
+                            Text="Add " Width="100px" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <br />
-                        &nbsp;<asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2">
+                        &nbsp;<asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2" 
+                            DataKeyNames="id">
                             <ItemTemplate>
                                 <tr style="background-color:#DCDCDC;color: #000000;">
                                     <td>
                                         <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" 
                                             Text="Delete" />
                                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="idLabel" runat="server" 
+                                            Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="supervisee_idLabel" runat="server" 
@@ -240,11 +247,15 @@
                                 </tr>
                             </ItemTemplate>
                             <AlternatingItemTemplate>
-                                <tr style="background-color:#FFF8DC;">
+                                <tr style="background-color:#FFFFFF;">
                                     <td>
                                         <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" 
                                             Text="Delete" />
                                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="idLabel" runat="server" 
+                                            Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="supervisee_idLabel" runat="server" 
@@ -274,6 +285,8 @@
                                             Text="Clear" />
                                     </td>
                                     <td>
+                                        &nbsp;</td>
+                                    <td>
                                         <asp:TextBox ID="supervisee_idTextBox" runat="server" 
                                             Text='<%# Bind("supervisee_id") %>' />
                                     </td>
@@ -292,6 +305,8 @@
                                                 <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
                                                     <th runat="server">
                                                     </th>
+                                                    <th runat="server">
+                                                        id</th>
                                                     <th runat="server">
                                                         supervisee_id</th>
                                                     <th runat="server">
@@ -327,6 +342,9 @@
                                             Text="Cancel" />
                                     </td>
                                     <td>
+                                        <asp:Label ID="idLabel1" runat="server" Text='<%# Eval("id") %>' />
+                                    </td>
+                                    <td>
                                         <asp:TextBox ID="supervisee_idTextBox" runat="server" 
                                             Text='<%# Bind("supervisee_id") %>' />
                                     </td>
@@ -342,6 +360,10 @@
                                         <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" 
                                             Text="Delete" />
                                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="idLabel" runat="server" 
+                                            Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="supervisee_idLabel" runat="server" 
@@ -362,22 +384,20 @@
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            DeleteCommand="DELETE FROM supervisee_supervisor WHERE (supervisee_id = @supervisee_id)" 
+                            DeleteCommand="DELETE FROM supervisee_supervisor WHERE (id=@id)" 
                             InsertCommand="INSERT INTO supervisee_supervisor(supervisee_id, supervisor_id) VALUES (@supervisee_id, @supervisor_id)" 
-                            SelectCommand="SELECT supervisee_id, supervisor_id FROM supervisee_supervisor WHERE supervisor_id = @supervisor_id" 
+                            SelectCommand="SELECT id, supervisee_id, supervisor_id FROM supervisee_supervisor" 
                             
                             
-                            UpdateCommand="UPDATE supervisee_supervisor SET supervisee_id = @supervisee_id, supervisor_id = @supervisor_id">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="DropDownList1" Name="supervisor_id" 
-                                    PropertyName="SelectedValue" />
-                            </SelectParameters>
+                            UpdateCommand="UPDATE supervisee_supervisor SET supervisee_id = @supervisee_id, supervisor_id = @supervisor_id WHERE id=@id
+">
                             <DeleteParameters>
-                                <asp:Parameter Name="supervisee_id" />
+                                <asp:Parameter Name="id" />
                             </DeleteParameters>
                             <UpdateParameters>
                                 <asp:Parameter Name="supervisee_id" />
                                 <asp:Parameter Name="supervisor_id" />
+                                <asp:Parameter Name="id" />
                             </UpdateParameters>
                             <InsertParameters>
                                 <asp:Parameter Name="supervisee_id" />
