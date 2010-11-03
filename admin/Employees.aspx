@@ -162,6 +162,10 @@
             font-family: "Times New Roman";
             font-size: 16px;
         }
+        .style1
+        {
+            width: 64%;
+        }
     </style>
     <title>Cross Training Manager - Admin (Employees)</title>
 </head>
@@ -174,12 +178,11 @@
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
-                            <td width="60%">
+                            <td class="style1">
                                 <a class="tabUnSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
                                 <a class="tabSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
                                  Jobs</a>
-                                 <a class="tabUnSelected" href="Supervisors.aspx">
-                                 Supervisors</a>
+                                 <a class="tabUnSelected" href="Supervisors.aspx">Supervisors</a>
                             </td>
                             <td width="40%" align="right">
                                 <a class="link" href=""></a> &nbsp;|&nbsp; 
