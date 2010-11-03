@@ -218,6 +218,7 @@
                             DataSourceID="SqlDataSource1" DataTextField="first_name" DataValueField="id" 
                             Height="17px" Width="148px">
                         </asp:DropDownList>
+                        <asp:Button ID="Button1" runat="server" style="width: 41px" Text="Add " />
                         <br />
                         &nbsp;<asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2" 
                             InsertItemPosition="FirstItem">
@@ -362,16 +363,10 @@
                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             DeleteCommand="DELETE FROM supervisee_supervisor WHERE (supervisee_id = @supervisee_id)" 
-                            InsertCommand="INSERT INTO supervisee_supervisor(supervisee_id, supervisor_id) VALUES (@supervisee_id, @supervisor_id)
-
-" 
-                            SelectCommand=" SELECT [supervisor_id] FROM [supervisee_supervisor] WHERE (([supervisee_id] =@id) AND ([supervisor_id] = @id))" 
+                            InsertCommand="INSERT INTO supervisee_supervisor(supervisee_id, supervisor_id) VALUES (@supervisee_id, @supervisor_id)" 
+                            SelectCommand="SELECT supervisee_id, supervisor_id FROM supervisee_supervisor" 
                             
                             UpdateCommand="UPDATE supervisee_supervisor SET supervisee_id = @supervisee_id, supervisor_id = @supervisor_id">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="DropDownList1" Name="id" 
-                                    PropertyName="SelectedValue" />
-                            </SelectParameters>
                             <DeleteParameters>
                                 <asp:Parameter Name="supervisee_id" />
                             </DeleteParameters>
