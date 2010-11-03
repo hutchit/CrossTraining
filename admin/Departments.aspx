@@ -15,7 +15,7 @@
         }
         #wrap
         {
-            width: 900px;
+            width: 1000px;
             margin: 0 auto 0 auto;
         }
         #outerBorder
@@ -174,16 +174,19 @@
                 <div class="toolbar">
                     <table style="margin-bottom: -3px; width: 100%;">
                         <tr>
-                            <td width="60%">
+                            <td width="80%">
                                 <a class="tabSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
                                 <a class="tabUnSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
                                  Jobs</a>
+                                 <a class="tabUnSelected" href="Supervisors.aspx">
+                                 Supervisors</a>
                             </td>
                             <td width="40%" align="right">
                                 <a class="link" href=""></a> &nbsp;|&nbsp; 
                                 <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
                                     LogoutPageUrl="~/Logout.aspx" />
 &nbsp;</td>
+
                         </tr>
                     </table>
                 </div>
