@@ -15,7 +15,7 @@
         }
         #wrap
         {
-            width: 900px;
+            width: 1000px;
             margin: 0 auto 0 auto;
         }
         #outerBorder
@@ -178,6 +178,8 @@
                                 <a class="tabUnSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
                                 <a class="tabSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
                                  Jobs</a>
+                                 <a class="tabUnSelected" href="Supervisors.aspx">
+                                 Supervisors</a>
                             </td>
                             <td width="40%" align="right">
                                 <a class="link" href=""></a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
@@ -201,13 +203,14 @@
                     <div class="two">
                         <br />
                         <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" 
-                            CreateUserButtonText="Create Employee">
+                            CreateUserButtonText="Create Employee" Font-Names="Times New Romen" 
+                            Font-Size="Medium">
                             <WizardSteps>
                                 <asp:CreateUserWizardStep runat="server" Title="Create a New Employee" >
                                     <ContentTemplate>
                                         <table border="0">
                                             <tr>
-                                                <td align="center" colspan="2">
+                                                <td align="center" colspan="2" style="font-size: 18px; font-weight: bold">
                                                     Create a New Employee</td>
                                             </tr>
                                             <tr>
@@ -340,12 +343,13 @@
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
-                            <td width="60%">
+                            <td width="80%">
                                 <a class="tabUnSelected" style="margin-left: 30px" href="Departments.aspx">Departments</a>
                                 <a class="tabSelected" href="Employees.aspx">Employees</a> <a class="tabUnSelected" href="Jobs.aspx">
                                  Jobs</a>
+                                 <a class="tabUnSelected" href="Supervisors.aspx">Supervisors</a>
                             </td>
-                            <td width="40%" align="right">
+                            <td width="20%" align="right">
                                 <a class="link" href=""></a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
                                     Log Out</a>
                             </td>
@@ -365,6 +369,7 @@
                         </table>
                     </div>
                     <div class="two">
+                        <br />
                         <asp:ListView ID="ListView1" runat="server" DataKeyNames="id" 
                             DataSourceID="SqlEmployees">
                             <ItemTemplate>
@@ -445,7 +450,8 @@
                                     <td>
                                         &nbsp;</td>
                                     <td>
-                                        <asp:TextBox ID="department_idTextBox" runat="server" Text='<%# Bind("department_id") %>' />
+                                        <asp:TextBox ID="department_idTextBox" runat="server" 
+                                            Text='<%# Bind("department_id") %>' />
                                     </td>
                                     <td>
                                         <asp:TextBox ID="emailTextBox" runat="server" Text='<%# Bind("email") %>' />
