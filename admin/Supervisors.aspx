@@ -162,6 +162,10 @@
             font-family: "Times New Roman";
             font-size: 16px;
         }
+        .style1
+        {
+            font-size: large;
+        }
     </style>
     <title>Cross Training Manager - Admin (Employees)</title>
 </head>
@@ -204,7 +208,11 @@
                         </table>
                     </div>
                     <div class="two">
-                        &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" ForeColor="#999999" 
+                        &nbsp;<b><span class="style1">Manage Supervisors</span><br />
+                        </b>
+                        <br />
+                        <br />
+                        &nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" ForeColor="#999999" 
                             Text="Supervisor"></asp:Label>
                         &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" 
                             DataSourceID="SqlDataSource1" DataTextField="first_name" DataValueField="id" 

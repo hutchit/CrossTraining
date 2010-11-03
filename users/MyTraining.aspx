@@ -162,6 +162,10 @@
             font-family: "Times New Roman";
             font-size: 16px;
         }
+        .style1
+        {
+            height: 24px;
+        }
     </style>
     <title>Cross Training Manager - My Training</title>
 </head>
@@ -229,9 +233,10 @@
                                     My Training</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus2" runat="server" LogoutAction="Redirect" 
+                                    LogoutPageUrl="~/Logout.aspx" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>
@@ -267,15 +272,15 @@
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
-                            <td width="60%">
+                            <td width="60%" class="style1">
                                 <a class="tabUnSelected" style="margin-left: 30px" href="manage.aspx">Manage</a>
                                 <a class="tabUnSelected" href="train.aspx">Train</a> <a class="tabSelected" href="MyTraining.aspx">
                                     My Training</a>
                             </td>
-                            <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
-                                    Log Out</a>
-                            </td>
+                            <td width="40%" align="right" class="style1">
+                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus3" runat="server" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>

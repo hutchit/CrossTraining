@@ -226,8 +226,9 @@
                                         My Training</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="~/users/manage.aspx">
-                                    Log Out</a>
+                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus2" runat="server" 
+                                    LogoutPageUrl="~/Logout.aspx" />
                             </td>
                         </tr>
                     </table>
@@ -271,9 +272,10 @@
                                         My Training</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="~/users/manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus3" runat="server" 
+                                    LogoutPageUrl="~/Logout.aspx" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>
@@ -316,9 +318,10 @@
                                         My Training</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; <a class="link" href="~/users/manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
+                                <asp:LoginStatus ID="LoginStatus4" runat="server" 
+                                    LogoutPageUrl="~/Logout.aspx" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>
