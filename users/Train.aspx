@@ -36,6 +36,30 @@
             border-color: #FF0000;
             background: -moz-linear-gradient(top,  	#FFFFFF,  #C0C0C0);
         }
+                div.content
+        {
+            padding: 10px;
+            margin-top: 10px;
+            -moz-border-radius: 30px;
+            -webkit-border-radius: 30px;
+            -khtml-border-radius: 30px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #C0C0C0;
+            background-color: #FFFFFF;
+        }
+        span.title
+        {
+        	padding: 10px;
+            margin-top: 10px;
+            -moz-border-radius: 30px;
+            -webkit-border-radius: 30px;
+            -khtml-border-radius: 30px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #C0C0C0;
+            background-color: #FFFFFF;
+        }
         div.two
         {
             padding: 10px;

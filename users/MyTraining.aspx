@@ -36,6 +36,30 @@
             border-color: #FF0000;
             background: -moz-linear-gradient(top,  	#FFFFFF,  #C0C0C0);
         }
+        div.content
+        {
+            padding: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -khtml-border-radius: 10px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #C0C0C0;
+            background-color: #FFFFFF;
+        }
+        span.title
+        {
+        	padding: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+            -moz-border-radius: 30px;
+            -webkit-border-radius: 30px;
+            -khtml-border-radius: 30px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #C0C0C0;
+            background-color: #FFFFFF;
+        }
         div.two
         {
             padding: 10px;
@@ -203,22 +227,86 @@
                         </table>
                     </div>
                     <div class="two">
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                        <asp:Label runat="server" Font-Bold="True" 
+                            Font-Names="Times New Roman" Font-Size="Large" ForeColor="Black">See My Training Status</asp:Label>
+                        <br />
+                        <asp:Label runat="server" ID="message" Font-Bold="True" 
+                            Font-Names="Times New Roman" Font-Size="Large" ForeColor="Red" />
+                        <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlJobs">
+                            <ItemTemplate>
+                                <tr style="background-color:#DCDCDC;color: #000000;">
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="statusLabel" jobID='<%# Eval("id") %>' runat="server" text="" />
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="requestButton" jobID='<%# Eval("id") %>' runat="server" Text="Request Training" OnClick="requestTraining" />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                            <AlternatingItemTemplate>
+                                <tr style="background-color:#FFFFFF;">
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="statusLabel" jobID='<%# Eval("id") %>' runat="server" text="" />
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="requestButton" jobID='<%# Eval("id") %>' runat="server" Text="Request Training" OnClick="requestTraining" />
+                                    </td>
+                                </tr>
+                            </AlternatingItemTemplate>
+                            <EmptyDataTemplate>
+                                <table runat="server" 
+                                    style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
+                                    <tr>
+                                        <td>
+                                            No data was returned.</td>
+                                    </tr>
+                                </table>
+                            </EmptyDataTemplate>
+                            <LayoutTemplate>
+                                <table runat="server">
+                                    <tr runat="server">
+                                        <td runat="server">
+                                            <table ID="itemPlaceholderContainer" runat="server" border="1" 
+                                                style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                                <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
+                                                    <th runat="server">
+                                                        name</th>
+                                                        <th>Experience
+                                                        </th>
+                                                        <th></th>
+                                                </tr>
+                                                <tr ID="itemPlaceholder" runat="server">
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr runat="server">
+                                        <td runat="server" 
+                                            style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                                            <asp:DataPager ID="DataPager1" runat="server">
+                                                <Fields>
+                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" 
+                                                        ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                                                    <asp:NumericPagerField />
+                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="True" 
+                                                        ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                                                </Fields>
+                                            </asp:DataPager>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </LayoutTemplate>
+                        </asp:ListView>
+                        <asp:SqlDataSource ID="SqlJobs" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT [hours], [status], [date], [id], [trainee_id], [trainer_id] FROM [training]">
+                            SelectCommand="SELECT * FROM [jobs] ORDER BY [name]">
                         </asp:SqlDataSource>
-                        <asp:Label ID="Label2" runat="server" Text="SELECT [hours] FROM [training]"></asp:Label>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
                     </div>
                 </div>
             </asp:View>
@@ -279,7 +367,8 @@
                             </td>
                             <td width="40%" align="right" class="style1">
                                 <a class="link" href="MyInfo.aspx">My Info</a> &nbsp;|&nbsp; 
-                                <asp:LoginStatus ID="LoginStatus3" runat="server" />
+                                <asp:LoginStatus ID="LoginStatus3" runat="server" 
+                                    LogoutPageUrl="~/Login.aspx" />
 &nbsp;</td>
                         </tr>
                     </table>
@@ -297,18 +386,19 @@
                         </table>
                     </div>
                     <div class="two">
+                        Request Training for <asp:label ID="name" runat="server" />
                         <br />
+                        Please select the job you would like to be trained on &nbsp;<asp:DropDownList 
+                            ID = "jobs" runat="server" AutoPostBack="True">
+                        </asp:DropDownList>
                         <br />
+                        Department &nbsp; <asp:TextBox ID = "department" runat="server" Enabled = "false" />
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                    </div>
+                        <asp:Button ID="submitRequest" runat="server" Text="Submit Request" />
+                        &nbsp;&nbsp;
+                        <asp:Label ID="lblTrainingRequested" runat="server" Font-Bold="True" 
+                            Font-Names="Times New Roman" Font-Size="Large" ForeColor="Red"></asp:Label>
+                        </div>
                 </div>
             </asp:View>
         </asp:MultiView>
