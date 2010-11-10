@@ -212,8 +212,30 @@
                         <asp:Label ID="Label1" runat="server" Font-Bold="True" 
                             Font-Names="Times New Roman" Font-Size="18px" Text="Manage Jobs"></asp:Label>
                         <br />
+                        <br />
+                        <table>
+                        <tr style="">
+                            <td>
+                                <asp:Button ID="InsertButton" runat="server" Text="Insert" />
+                                <asp:Button ID="CancelButton" runat="server" Text="Clear" />
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                                <asp:TextBox ID="nameTextBox" runat="server" Text='' />
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="ddDepartments" runat="server" DataSourceID="SqlDepartments"
+                                    DataTextField="name" DataValueField="id" Width="125px">
+                                </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>"
+                                    SelectCommand="SELECT * FROM [departments]"></asp:SqlDataSource>
+                            </td>
+                        </tr>
+                        </table>
                         <asp:ListView ID="ListView1" runat="server" DataKeyNames="id" 
-                            DataSourceID="SqlJobs" InsertItemPosition="FirstItem">
+                            DataSourceID="SqlJobs">
                             <ItemTemplate>
                                 <tr style="background-color:#DCDCDC;color: #000000;">
                                     <td>
@@ -226,6 +248,10 @@
                                     </td>
                                     <td>
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="department_idLabel" runat="server" 
+                                            Text='<%# Eval("department_id") %>' />
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -241,6 +267,10 @@
                                     </td>
                                     <td>
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="department_idLabel" runat="server" 
+                                            Text='<%# Eval("department_id") %>' />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -266,6 +296,10 @@
                                     <td>
                                         <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
                                     </td>
+                                    <td>
+                                        <asp:TextBox ID="department_idTextBox" runat="server" 
+                                            Text='<%# Bind("department_id") %>' />
+                                    </td>
                                 </tr>
                             </InsertItemTemplate>
                             <LayoutTemplate>
@@ -281,6 +315,8 @@
                                                         id</th>
                                                     <th runat="server">
                                                         name</th>
+                                                    <th runat="server">
+                                                        department_id</th>
                                                 </tr>
                                                 <tr ID="itemPlaceholder" runat="server">
                                                 </tr>
@@ -304,7 +340,7 @@
                                 </table>
                             </LayoutTemplate>
                             <EditItemTemplate>
-                                <tr style="background-color:#FF0000;color: #FFFFFF;">
+                                <tr style="background-color:#008A8C; color: #FFFFFF;">
                                     <td>
                                         <asp:Button ID="UpdateButton" runat="server" CommandName="Update" 
                                             Text="Update" />
@@ -316,6 +352,10 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="department_idTextBox" runat="server" 
+                                            Text='<%# Bind("department_id") %>' />
                                     </td>
                                 </tr>
                             </EditItemTemplate>
@@ -332,24 +372,30 @@
                                     <td>
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                                     </td>
+                                    <td>
+                                        <asp:Label ID="department_idLabel" runat="server" 
+                                            Text='<%# Eval("department_id") %>' />
+                                    </td>
                                 </tr>
                             </SelectedItemTemplate>
                         </asp:ListView>
                         <asp:SqlDataSource ID="SqlJobs" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             DeleteCommand="DELETE FROM jobs WHERE (id = @id)" 
-                            InsertCommand="INSERT INTO jobs(name) VALUES (@name)" 
+                            InsertCommand="INSERT INTO jobs(name, department_id) VALUES (@name, @department_id)" 
                             SelectCommand="SELECT jobs.* FROM jobs" 
-                            UpdateCommand="UPDATE jobs SET name = @name WHERE id = @id">
+                            UpdateCommand="UPDATE jobs SET name = @name, department_id = @department_id WHERE (id = @id)">
                             <DeleteParameters>
                                 <asp:Parameter Name="id" />
                             </DeleteParameters>
                             <UpdateParameters>
                                 <asp:Parameter Name="name" />
+                                <asp:Parameter Name="department_id" />
                                 <asp:Parameter Name="id" />
                             </UpdateParameters>
                             <InsertParameters>
                                 <asp:Parameter Name="name" />
+                                <asp:Parameter Name="department_id" />
                             </InsertParameters>
                         </asp:SqlDataSource>
                         <br />

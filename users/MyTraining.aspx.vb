@@ -20,6 +20,12 @@ Partial Class users_MyTraining
         message.Text = m_user.requestTraining(button1.Attributes("jobID").ToString, 0, 1) + " for " & m_user.getJobName(button1.Attributes("jobID").ToString)
         ListView1.DataBind()
         fillJobsDropdown(m_user.userid)
+        If message.Text.Contains("Requested") Then
+            message.ForeColor = Drawing.Color.Green
+        Else
+            message.ForeColor = Drawing.Color.Red
+        End If
+        lblTrainingRequested.Text = ""
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -30,6 +36,8 @@ Partial Class users_MyTraining
 
         name.Text = m_user.first_name + " " + m_user.last_name
         department.Text = m_user.departmentName
+        SqlTraining.SelectParameters("trainee_id").DefaultValue = m_user.userid
+        lblHistoryTitle.Text = "Training History for " + m_user.first_name + " " + m_user.last_name
         If Not Page.IsPostBack Then
             fillJobsDropdown(m_user.userid)
         End If
@@ -72,6 +80,13 @@ Partial Class users_MyTraining
         Else
             lblTrainingRequested.Text = "No Jobs available"
         End If
+        If lblTrainingRequested.Text.Contains("Requested") Then
+            lblTrainingRequested.ForeColor = Drawing.Color.Green
+        Else
+            lblTrainingRequested.ForeColor = Drawing.Color.Red
+        End If
+        message.Text = ""
+        ListView1.DataBind()
     End Sub
 
     Protected Sub jobs_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles jobs.SelectedIndexChanged
