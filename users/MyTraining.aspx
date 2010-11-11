@@ -232,17 +232,26 @@
                         <br />
                         <asp:Label runat="server" ID="message" Font-Bold="True" 
                             Font-Names="Times New Roman" Font-Size="Large" ForeColor="Red" />
-                        <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlJobs">
+                        <br />
+                        Department Filter
+                        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" 
+                            DataSourceID="SqlDepartmentst" DataTextField="name" DataValueField="id">
+                        </asp:DropDownList>
+                        <asp:SqlDataSource ID="SqlDepartmentst" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT * FROM [departments]"></asp:SqlDataSource>
+                        &nbsp;<asp:ListView ID="ListView1" runat="server" DataSourceID="SqlJobs">
                             <ItemTemplate>
                                 <tr style="background-color:#DCDCDC;color: #000000;">
                                     <td>
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="statusLabel" jobID='<%# Eval("id") %>' runat="server" text="" />
+                                        <asp:Label ID="statusLabel" runat="server" jobID='<%# Eval("id") %>' text="" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="requestButton" jobID='<%# Eval("id") %>' runat="server" Text="Request Training" OnClick="requestTraining" />
+                                        <asp:Button ID="requestButton" runat="server" jobID='<%# Eval("id") %>' 
+                                            OnClick="requestTraining" Text="Request Training" />
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -252,10 +261,11 @@
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="statusLabel" jobID='<%# Eval("id") %>' runat="server" text="" />
+                                        <asp:Label ID="statusLabel" runat="server" jobID='<%# Eval("id") %>' text="" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="requestButton" jobID='<%# Eval("id") %>' runat="server" Text="Request Training" OnClick="requestTraining" />
+                                        <asp:Button ID="requestButton" runat="server" jobID='<%# Eval("id") %>' 
+                                            OnClick="requestTraining" Text="Request Training" />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -277,9 +287,11 @@
                                                 <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
                                                     <th runat="server">
                                                         name</th>
-                                                        <th>Experience
-                                                        </th>
-                                                        <th></th>
+                                                    <th>
+                                                        Experience
+                                                    </th>
+                                                    <th>
+                                                    </th>
                                                 </tr>
                                                 <tr ID="itemPlaceholder" runat="server">
                                                 </tr>
@@ -305,7 +317,16 @@
                         </asp:ListView>
                         <asp:SqlDataSource ID="SqlJobs" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT * FROM [jobs] ORDER BY [name]">
+                            
+                            SelectCommand="SELECT * FROM [jobs] WHERE ([department_id] = @department_id)">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="DropDownList1" Name="department_id" 
+                                    PropertyName="SelectedValue" Type="Int32" />
+                            </SelectParameters>
+                            <FilterParameters>
+                                <asp:ControlParameter ControlID="DropDownList1" Name="department" 
+                                    PropertyName="SelectedValue" />
+                            </FilterParameters>
                         </asp:SqlDataSource>
                     </div>
                 </div>
@@ -671,7 +692,10 @@
                             ID = "jobs" runat="server" AutoPostBack="True">
                         </asp:DropDownList>
                         <br />
-                        Department &nbsp; <asp:TextBox ID = "department" runat="server" Enabled = "false" />
+                        Department &nbsp; 
+                        <asp:DropDownList ID="department" runat="server" AutoPostBack="True" 
+                            DataSourceID="SqlDepartmentst" DataTextField="name" DataValueField="id">
+                        </asp:DropDownList>
                         <br />
                         <asp:Button ID="submitRequest" runat="server" Text="Submit Request" />
                         &nbsp;&nbsp;
