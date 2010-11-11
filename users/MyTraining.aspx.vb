@@ -17,9 +17,15 @@ Partial Class users_MyTraining
     End Sub
     Protected Sub requestTraining(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim button1 As Button = CType(sender, Button)
-        message.Text = m_user.requestTraining(button1.Attributes("jobID").ToString, 0, 1) + " for " & m_user.getJobName(button1.Attributes("jobID").ToString)
+        message.Text = m_user.requestTraining(button1.Attributes("jobID").ToString, 0, 1, DropDownList1.SelectedValue) + " for " & m_user.getJobName(button1.Attributes("jobID").ToString)
         ListView1.DataBind()
-        fillJobsDropdown(m_user.userid)
+        fillJobsDropdown(m_user.userid, department.SelectedValue)
+        If message.Text.Contains("Requested") Then
+            message.ForeColor = Drawing.Color.Green
+        Else
+            message.ForeColor = Drawing.Color.Red
+        End If
+        lblTrainingRequested.Text = ""
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -29,16 +35,15 @@ Partial Class users_MyTraining
 
 
         name.Text = m_user.first_name + " " + m_user.last_name
-        department.Text = m_user.departmentName
-        If Not Page.IsPostBack Then
-            fillJobsDropdown(m_user.userid)
-        End If
+        SqlTraining.SelectParameters("trainee_id").DefaultValue = m_user.userid
+        lblHistoryTitle.Text = "Training History for " + m_user.first_name + " " + m_user.last_name
     End Sub
 
 
-    Private Sub fillJobsDropdown(ByVal employeeID As Integer)
+    Private Sub fillJobsDropdown(ByVal employeeID As Integer, ByVal department_id As Integer)
         jobs.Items.Clear()
-        Dim sqlJobs As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM jobs")
+        Dim sqlJobs As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM jobs WHERE department_id = @department_id")
+        sqlJobs.SelectParameters.Add("department_id", department_id)
         Dim grid As New GridView
         grid.DataSource = sqlJobs
         sqlJobs.Select(DataSourceSelectArguments.Empty)
@@ -67,11 +72,18 @@ Partial Class users_MyTraining
 
     Protected Sub submitRequest_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles submitRequest.Click
         If jobs.Items.Count > 0 Then
-            lblTrainingRequested.Text = m_user.requestTraining(jobs.Text, 0, 1) + " for " + jobs.SelectedItem.Text
-            fillJobsDropdown(m_user.userid)
+            lblTrainingRequested.Text = m_user.requestTraining(jobs.Text, 0, 1, department.SelectedValue) + " for " + jobs.SelectedItem.Text
+            fillJobsDropdown(m_user.userid, department.SelectedValue)
         Else
             lblTrainingRequested.Text = "No Jobs available"
         End If
+        If lblTrainingRequested.Text.Contains("Requested") Then
+            lblTrainingRequested.ForeColor = Drawing.Color.Green
+        Else
+            lblTrainingRequested.ForeColor = Drawing.Color.Red
+        End If
+        message.Text = ""
+        ListView1.DataBind()
     End Sub
 
     Protected Sub jobs_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles jobs.SelectedIndexChanged
@@ -107,5 +119,16 @@ Partial Class users_MyTraining
                     requestButton.Text = "Error"
             End Select
         End If
+    End Sub
+
+    Protected Sub department_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles department.DataBound
+        department.SelectedValue = m_user.departmentID
+        If Not Page.IsPostBack Then
+            fillJobsDropdown(m_user.userid, department.SelectedValue)
+        End If
+    End Sub
+
+    Protected Sub department_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles department.SelectedIndexChanged
+        fillJobsDropdown(m_user.userid, department.SelectedValue)
     End Sub
 End Class

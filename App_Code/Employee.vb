@@ -142,7 +142,7 @@ Public Class Employee
         End If
     End Function
 
-    Public Function requestTraining(ByVal job_id As Integer, ByVal initial_experience As Integer, ByVal status As Integer) As String
+    Public Function requestTraining(ByVal job_id As Integer, ByVal initial_experience As Integer, ByVal status As Integer, ByVal did As Integer) As String
         Dim sqlTraining As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
         Dim level As Integer = trainingLevel(job_id)
         Dim message As String = ""
@@ -170,7 +170,7 @@ Public Class Employee
         If initial_experience = 0 Or initial_experience = 1 Then
             sqlTraining.InsertCommand = "INSERT INTO training(trainee_id, department_id, job_id, initial_experience, status) VALUES (@trainee_id, @department_id, @job_id, @initial_experience, @status)"
             sqlTraining.InsertParameters.Add("trainee_id", userid)
-            sqlTraining.InsertParameters.Add("department_id", departmentID)
+            sqlTraining.InsertParameters.Add("department_id", did)
             sqlTraining.InsertParameters.Add("job_id", job_id)
             sqlTraining.InsertParameters.Add("initial_experience", initial_experience)
             sqlTraining.InsertParameters.Add("status", status)
