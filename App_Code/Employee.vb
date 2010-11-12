@@ -182,6 +182,7 @@ Public Class Employee
     End Function
 
 
+
     Public Function trainingLevel(ByVal jobid As Integer) As Integer
         Dim sqltraining As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM training WHERE trainee_id = @trainee_id and job_id = @job_id")
         Dim grid As New GridView

@@ -162,6 +162,10 @@
             font-family: "Times New Roman";
             font-size: 16px;
         }
+        .style1
+        {
+            width: 118px;
+        }
     </style>
     <title>Cross Training Manager - Manage</title>
 </head>
@@ -201,16 +205,54 @@
                         </table>
                     </div>
                     <div class="two">
+                        <table style="width:100%;">
+                            <tr>
+                                <td class="style1">
+                                    Trainer Name</td>
+                                <td>
+                                    <asp:DropDownList ID="DropDownList1" runat="server" 
+                                        DataSourceID="SqlDataSource2" DataTextField="first_name" 
+                                        DataValueField="trainer_id" Height="16px" Width="95px">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="style1">
+                                    Trainee Name</td>
+                                <td>
+                                    <asp:DropDownList ID="DropDownList2" runat="server" 
+                                        DataSourceID="SqlDataSource3" DataTextField="first_name" 
+                                        DataValueField="trainee_id" Width="94px">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="style1">
+                                    Department</td>
+                            </tr>
+                        </table>
                         <br />
                         <br />
                         <br />
                         <br />
                         <br />
+                        <asp:Button ID="Button1" runat="server" Height="23px" Text="Assign Trainning" 
+                            Width="110px" />
                         <br />
                         <br />
                         <br />
-                        <br />
-                        <br />
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT training.trainer_id, employees.first_name FROM employees INNER JOIN supervisee_supervisor ON employees.id = supervisee_supervisor.supervisor_id CROSS JOIN departments CROSS JOIN jobs CROSS JOIN training">
+                        </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT employees.first_name, training.trainee_id FROM training INNER JOIN employees ON training.id = employees.id">
+                        </asp:SqlDataSource>
                         <br />
                     </div>
                 </div>
@@ -251,12 +293,228 @@
                         <br />
                         <br />
                         <br />
+                        <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
+                            <ItemTemplate>
+                                <tr style="background-color:#DCDCDC;color: #000000;">
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="department_idLabel" runat="server" 
+                                            Text='<%# Eval("department_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="last_nameLabel" runat="server" Text='<%# Eval("last_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="first_nameLabel" runat="server" 
+                                            Text='<%# Eval("first_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="trainer_idLabel" runat="server" 
+                                            Text='<%# Eval("trainer_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="trainee_idLabel" runat="server" 
+                                            Text='<%# Eval("trainee_id") %>' />
+                                    </td>
+                                    <td>
+                                    <asp:Button ID="acceptButton" runat="server" employee_ID='<%# Eval("id") %>' 
+                                            OnClick="acceptTranning" Text="Accept Request" />
+                                     </td>
+                                     <td>
+                                    <asp:Button ID="resetButton" runat="server"  employee_ID='<%# Eval("id") %>' 
+                                            OnClick="denyTrainning" Text="Deny Request" />
+                                     </td>
+                                </tr>
+                            </ItemTemplate>
+                            <AlternatingItemTemplate>
+                                <tr style="background-color:#FFF8DC;">
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="department_idLabel" runat="server" 
+                                            Text='<%# Eval("department_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="last_nameLabel" runat="server" Text='<%# Eval("last_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="first_nameLabel" runat="server" 
+                                            Text='<%# Eval("first_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="trainer_idLabel" runat="server" 
+                                            Text='<%# Eval("trainer_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="trainee_idLabel" runat="server" 
+                                            Text='<%# Eval("trainee_id") %>' />
+                                    </td>
+                                    <td>
+                                    <asp:Button ID="acceptButton" runat="server" employee_ID='<%# Eval("id") %>' 
+                                            OnClick="requestTraining" Text="Accept Request" />
+                                     </td>
+                                     <td>
+                                    <asp:Button ID="resetButton" runat="server" employee_ID='<%# Eval("id") %>' 
+                                            OnClick="requestTraining" Text="Deny Request" />
+                                     </td>
+                                </tr>
+                            </AlternatingItemTemplate>
+                            <EmptyDataTemplate>
+                                <table runat="server" 
+                                    style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
+                                    <tr>
+                                        <td>
+                                            No data was returned.</td>
+                                    </tr>
+                                </table>
+                            </EmptyDataTemplate>
+                            <InsertItemTemplate>
+                                <tr style="">
+                                    <td>
+                                        <asp:Button ID="InsertButton" runat="server" CommandName="Insert" 
+                                            Text="Insert" />
+                                        <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" 
+                                            Text="Clear" />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="department_idTextBox" runat="server" 
+                                            Text='<%# Bind("department_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="last_nameTextBox" runat="server" 
+                                            Text='<%# Bind("last_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="first_nameTextBox" runat="server" 
+                                            Text='<%# Bind("first_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="trainer_idTextBox" runat="server" 
+                                            Text='<%# Bind("trainer_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="trainee_idTextBox" runat="server" 
+                                            Text='<%# Bind("trainee_id") %>' />
+                                    </td>
+                                </tr>
+                            </InsertItemTemplate>
+                            <LayoutTemplate>
+                                <table runat="server">
+                                    <tr runat="server">
+                                        <td runat="server">
+                                            <table ID="itemPlaceholderContainer" runat="server" border="1" 
+                                                style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                                <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
+                                                    <th runat="server">
+                                                        name</th>
+                                                    <th runat="server">
+                                                        department_id</th>
+                                                    <th runat="server">
+                                                        last_name</th>
+                                                    <th runat="server">
+                                                        first_name</th>
+                                                    <th runat="server">
+                                                        trainer_id</th>
+                                                    <th runat="server">
+                                                        trainee_id</th>
+                                                </tr>
+                                                <tr ID="itemPlaceholder" runat="server">
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr runat="server">
+                                        <td runat="server" 
+                                            style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                                            <asp:DataPager ID="DataPager1" runat="server">
+                                                <Fields>
+                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" 
+                                                        ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                                                    <asp:NumericPagerField />
+                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="True" 
+                                                        ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                                                </Fields>
+                                            </asp:DataPager>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </LayoutTemplate>
+                            <EditItemTemplate>
+                                <tr style="background-color:#008A8C;color: #FFFFFF;">
+                                    <td>
+                                        <asp:Button ID="UpdateButton" runat="server" CommandName="Update" 
+                                            Text="Update" />
+                                        <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" 
+                                            Text="Cancel" />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="department_idTextBox" runat="server" 
+                                            Text='<%# Bind("department_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="last_nameTextBox" runat="server" 
+                                            Text='<%# Bind("last_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="first_nameTextBox" runat="server" 
+                                            Text='<%# Bind("first_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="trainer_idTextBox" runat="server" 
+                                            Text='<%# Bind("trainer_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="trainee_idTextBox" runat="server" 
+                                            Text='<%# Bind("trainee_id") %>' />
+                                    </td>
+                                </tr>
+                            </EditItemTemplate>
+                            <SelectedItemTemplate>
+                                <tr style="background-color:#008A8C;font-weight: bold;color: #FFFFFF;">
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="department_idLabel" runat="server" 
+                                            Text='<%# Eval("department_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="last_nameLabel" runat="server" Text='<%# Eval("last_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="first_nameLabel" runat="server" 
+                                            Text='<%# Eval("first_name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="trainer_idLabel" runat="server" 
+                                            Text='<%# Eval("trainer_id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="trainee_idLabel" runat="server" 
+                                            Text='<%# Eval("trainee_id") %>' />
+                                    </td>
+                                </tr>
+                            </SelectedItemTemplate>
+                        </asp:ListView>
                         <br />
                         <br />
                         <br />
                         <br />
                         <br />
                         <br />
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT jobs.name, jobs.department_id, employees.last_name, employees.first_name, training.trainer_id, training.trainee_id FROM training INNER JOIN jobs ON training.job_id = jobs.id CROSS JOIN employees CROSS JOIN supervisee_supervisor CROSS JOIN departments">
+                        </asp:SqlDataSource>
                         <br />
                     </div>
                 </div>
