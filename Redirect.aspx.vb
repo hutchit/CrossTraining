@@ -12,7 +12,7 @@ Partial Class Redirect
         If String.Compare("admin", user1) = 0 Then
             Response.Redirect("admin/Departments.aspx")
         Else
-            Response.Redirect("users/Manage.aspx")
+            Response.Redirect("users/MyTraining.aspx")
 
 
         End If
