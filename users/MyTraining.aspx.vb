@@ -142,8 +142,14 @@ Partial Class users_MyTraining
         Dim initial_experienceLabel As Label = CType(e.Item.FindControl("initial_experienceLabel"), Label)
         Dim final_experienceLabel As Label = CType(e.Item.FindControl("final_experienceLabel"), Label)
         Dim statusLabel As Label = CType(e.Item.FindControl("statusLabel"), Label)
-        Dim trainer As New Employee(CType(trainer_idLabel.Text, Integer))
-        Dim supervisor As New Employee(CType(supervisor_idLabel.Text, Integer))
+        Dim trainer As New Employee()
+        If trainer_idLabel.Text <> "" Then
+            trainer = New Employee(CType(trainer_idLabel.Text, Integer))
+        End If
+        Dim supervisor As New Employee()
+        If supervisor_idLabel.Text <> "" Then
+            supervisor = New Employee(CType(supervisor_idLabel.Text, Integer))
+        End If
         job_idLabel.Text = trainer.getJobName(job_idLabel.Text)
         statusLabel.Text = trainer.getStatus(statusLabel.Text)
         trainer_idLabel.Text = trainer.first_name & " " & trainer.last_name

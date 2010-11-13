@@ -265,6 +265,9 @@
                                     <td>
                                         <asp:Button ID="completeTraining" OnClick="completeTraining" runat="server" Text="Complete" />
                                     </td>
+                                    <td>
+                                        <asp:Button ID="rejectTraining" OnClick="rejectTraining" runat="server" Text="Reject" />
+                                    </td>
                                 </tr>
                             </ItemTemplate>
                             <AlternatingItemTemplate>
@@ -303,6 +306,9 @@
                                     </td>
                                     <td>
                                         <asp:Button ID="completeTraining" OnClick="completeTraining" runat="server" Text="Complete" />
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="rejectTraining" OnClick="rejectTraining" runat="server" Text="Reject" />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -369,6 +375,19 @@
                                         <td runat="server">
                                             <table ID="itemPlaceholderContainer" runat="server" border="1" 
                                                 style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                                <tr id="Tr1" runat="server" style="background-color:#DCDCDC;color: #000000;">
+                                                    <th id="Th1" runat="server"></th>
+                                                    <th id="Th2" runat="server"></th>
+                                                    <th id="Th3" runat="server"></th>
+                                                    <th id="Th4" runat="server"></th>
+                                                    <th id="Th5" colspan="2" runat="server">
+                                                        Experience</th>
+                                                    <th id="Th7" runat="server"></th>
+                                                    <th id="Th8" runat="server"></th>
+                                                    <th id="Th9" runat="server"></th>
+                                                    <th id="Th10" runat="server"></th>
+                                                    <th id="Th11" runat="server"></th>
+                                                </tr>
                                                 <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
                                                     <th runat="server">
                                                         Trainee</th>
@@ -379,15 +398,17 @@
                                                     <th runat="server">
                                                         Job</th>
                                                     <th runat="server">
-                                                        Initial Experience</th>
+                                                        Initial</th>
                                                     <th runat="server">
-                                                        Final Experience</th>
+                                                        Final</th>
                                                     <th runat="server">
                                                         Status</th>
                                                     <th runat="server">
                                                         Hours</th>
                                                     <th runat="server">
                                                         Date</th>
+                                                    <th id="Th6" runat="server"></th>
+                                                    <th id="Th12" runat="server"></th>
                                                 </tr>
                                                 <tr ID="itemPlaceholder" runat="server">
                                                 </tr>

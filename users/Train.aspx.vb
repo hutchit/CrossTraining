@@ -8,6 +8,10 @@ Partial Class users_Train
 
     End Sub
 
+    Protected Sub rejectTraining(ByVal sender As Object, ByVal e As System.EventArgs)
+
+    End Sub
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim _user As MembershipUser = Membership.GetUser(Page.User.Identity.Name)
         m_trainer = New trainer(_user.UserName)
@@ -22,8 +26,14 @@ Partial Class users_Train
         Dim initial_experienceLabel As Label = CType(e.Item.FindControl("initial_experienceLabel"), Label)
         Dim final_experienceLabel As Label = CType(e.Item.FindControl("final_experienceLabel"), Label)
         Dim statusLabel As Label = CType(e.Item.FindControl("statusLabel"), Label)
-        Dim trainee As New Employee(CType(trainee_idLabel.Text, Integer))
-        Dim supervisor As New Employee(CType(supervisor_idLabel.Text, Integer))
+        Dim trainee As New Employee()
+        If trainee_idLabel.Text <> "" Then
+            trainee = New Employee(CType(trainee_idLabel.Text, Integer))
+        End If
+        Dim supervisor As New Employee()
+        If supervisor_idLabel.Text <> "" Then
+            supervisor = New Employee(CType(supervisor_idLabel.Text, Integer))
+        End If
         job_idLabel.Text = trainee.getJobName(job_idLabel.Text)
         statusLabel.Text = trainee.getStatus(statusLabel.Text)
         trainee_idLabel.Text = trainee.first_name & " " & trainee.last_name
