@@ -20,19 +20,104 @@ Partial Class users_Manage
         MultiView1.ActiveViewIndex = 3
     End Sub
 
-    Protected Sub acceptTraning(ByVal sender As Object, ByVal e As System.EventArgs)
+    'Protected Sub acceptTraining(ByVal sender As Object, ByVal e As System.EventArgs)
 
+    '    Dim button1 As Button = CType(sender, Button)
+    '    Dim status1 As Integer = 2
+
+    '    Dim user_status As String = m_user.getStatus(status1)
+
+
+
+    'End Sub
+
+
+
+    'Protected Sub Page_PreLoad(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreLoad
+    '    Dim sqlsuper As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM employees WHERE username = @username")
+    '    Dim u_name As String = User.Identity.Name
+    '    sqlsuper.SelectParameters.Add("username", u_name)
+    '    sqlsuper.SelectCommand = "SELECT supervisee_supervisor.supervisor_id FROM supervisee_supervisor INNER JOIN employees ON supervisee_supervisor.supervisor_id = employees.id WHERE employees.username=@username"
+    '    Label1.Text = sqlsuper.SelectCommand("supervisee_supervisor.supervisor_id").ToString
+
+    'End Sub
+
+    'Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
+    '    Dim sqlassign As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
+    '    Dim _id As Integer = DropDownList3.SelectedValue
+    '    Dim trainer1 As Integer = DropDownList1.SelectedValue
+    '    sqlassign.UpdateCommand = "UPDATE training SET status = @status, trainer_id=@trainer_id"
+    '    sqlassign.SelectCommand = "SELECT id from training WHERE id=@id"
+    '    sqlassign.SelectParameters.Add("id", _id)
+    '    sqlassign.SelectCommand = "SELECT id from training WHERE id=@id"
+    '    sqlassign.UpdateParameters.Add("status", "")
+    '    sqlassign.UpdateParameters.Add("trainer_id", "")
+
+
+    '    sqlassign.SelectParameters("id").DefaultValue = _id
+
+    '    sqlassign.UpdateParameters("status").DefaultValue = 1
+
+    '    sqlassign.UpdateParameters("trainer_id").DefaultValue = trainer1
+    '    ' sqlassign.UpdateParameters.Add("status", 2)
+    '    ' sqlassign.UpdateParameters.Add("trainer_id", DropDownList1.SelectedValue)
+    '    sqlassign.Update()
+
+
+    'End Sub
+
+    Protected Sub acceptTraining(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim button1 As Button = CType(sender, Button)
-        Dim manager1 As Employee
+        Dim trainer1 As Integer = DropDownList1.SelectedValue
+        Dim train_id As Integer = Convert.ToInt32(button1.Attributes("training_ID").ToString)
+        Dim supervisor1 As Integer = Label1.Text
+        Dim sqlTraining1 As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
 
-        manager1.get()
+        sqlTraining1.UpdateCommand = "UPDATE training SET status = @status, trainer_id=@trainer_id, supervisor_id=@supervisor_id WHERE training.id = @id"
+        sqlTraining1.UpdateParameters.Add("id", train_id)
+        sqlTraining1.UpdateParameters.Add("status", 2)
+        sqlTraining1.UpdateParameters.Add("trainer_id", trainer1)
+        sqlTraining1.UpdateParameters.Add("supervisor_id", supervisor1)
+        sqlTraining1.Update()
+        ListView1.DataBind()
+      
+    End Sub
+
+
+    Protected Sub denyTraining(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim button1 As Button = CType(sender, Button)
+        Dim trainer1 As Integer = DropDownList1.SelectedValue
+        Dim train_id As Integer = Convert.ToInt32(button1.Attributes("training_ID").ToString)
+
+        Dim sqlTraining1 As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
+
+        sqlTraining1.UpdateCommand = "UPDATE training SET status = @status WHERE training.id = @id"
+        sqlTraining1.UpdateParameters.Add("id", train_id)
+        sqlTraining1.UpdateParameters.Add("status", 0)
+        sqlTraining1.Update()
+        ListView1.DataBind()
 
     End Sub
 
-    Protected Sub denyTraning(ByVal sender As Object, ByVal e As System.EventArgs)
+   
 
-        Dim button1 As Button = CType(sender, Button)
+  
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim user1 As String
+
+        user1 = User.Identity.Name
+
+        Select Case user1
+            Case "jerreds"
+                Label1.Text = 1
+            Case "joshc"
+                Label1.Text = 2
+            Case "heshang"
+                Label1.Text = 3
+            Case "chrisr"
+                Label1.Text = 4
+
+        End Select
+
     End Sub
-
-
 End Class
