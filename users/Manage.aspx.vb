@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Web.Services.Description
+Imports System.Data.SqlClient
 
 Partial Class users_Manage
     Inherits System.Web.UI.Page
@@ -81,7 +82,7 @@ Partial Class users_Manage
         sqlTraining1.Update()
         ListView1.DataBind()
         ListView2.DataBind()
-      
+
     End Sub
 
 
@@ -100,25 +101,43 @@ Partial Class users_Manage
         ListView2.DataBind()
     End Sub
 
-   
 
-  
+
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim user1 As String
 
         user1 = User.Identity.Name
 
-        Select Case user1
-            Case "jerreds"
-                Label1.Text = 1
-            Case "joshc"
-                Label1.Text = 2
-            Case "heshang"
-                Label1.Text = 3
-            Case "chrisr"
-                Label1.Text = 4
+        'Select Case user1
+        '    Case "jerreds"
+        '        Label1.Text = 1
+        '    Case "joshc"
+        '        Label1.Text = 2
+        '    Case "heshang"
+        '        Label1.Text = 3
+        '    Case "chrisr"
+        '        Label1.Text = 4
 
-        End Select
+        'End Select
+        Dim sqlTraining2 As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
+        Dim grid As New GridView
+        Dim id As Integer
+        sqlTraining2.SelectCommand = "SELECT supervisee_supervisor.supervisor_id FROM employees INNER JOIN supervisee_supervisor ON employees.id = supervisee_supervisor.supervisor_id WHERE (employees.username = @username)"
+        sqlTraining2.SelectParameters.Add("username", user1)
+        sqlTraining2.SelectCommand = "SELECT supervisee_supervisor.supervisor_id FROM employees INNER JOIN supervisee_supervisor ON employees.id = supervisee_supervisor.supervisor_id WHERE (employees.username = @username)"
+
+        grid.DataSource = sqlTraining2
+        sqlTraining2.Select(DataSourceSelectArguments.Empty)
+        grid.DataBind()
+        If grid.Rows.Count <> 0 Then
+            id = grid.Rows(0).Cells(0).Text.Trim
+          
+        End If
+
+        Label1.Text = id
+
 
     End Sub
+
 End Class

@@ -247,7 +247,7 @@
                         </table>
                     </div>
                     <div class="two">
-                        <asp:Label ID="Label3" runat="server" Text="2"></asp:Label>
+                        <asp:Label ID="Label3" runat="server" ForeColor="White" Text="2"></asp:Label>
                         <br />
                         <asp:Label ID="Label2" runat="server" ForeColor="White" Text="1"></asp:Label>
                         <asp:Label ID="Label1" runat="server" Text="2" ForeColor="White"></asp:Label>
