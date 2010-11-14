@@ -80,6 +80,7 @@ Partial Class users_Manage
         sqlTraining1.UpdateParameters.Add("supervisor_id", supervisor1)
         sqlTraining1.Update()
         ListView1.DataBind()
+        ListView2.DataBind()
       
     End Sub
 
@@ -96,7 +97,7 @@ Partial Class users_Manage
         sqlTraining1.UpdateParameters.Add("status", 0)
         sqlTraining1.Update()
         ListView1.DataBind()
-
+        ListView2.DataBind()
     End Sub
 
    
