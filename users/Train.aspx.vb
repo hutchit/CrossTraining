@@ -5,6 +5,24 @@ Partial Class users_Train
     Dim m_trainer As trainer
 
     Protected Sub completeTraining(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim buttonSender As Button = CType(sender, Button)
+        Dim hours As Double
+        Dim trainingDate As String
+        trainingDate = ""
+        hours = 0
+        For Each i As ListViewItem In ListViewTrain.Items
+            Dim tb As DropDownList = CType(i.FindControl("hoursdropdown"), DropDownList)
+            If tb.Attributes("trainingID") = buttonSender.Attributes("trainingID") Then
+                hours = tb.SelectedItem.Text
+            End If
+            Dim datetextbox As TextBox = CType(i.FindControl("datetextbox"), TextBox)
+            If datetextbox.Attributes("trainingID") = buttonSender.Attributes("trainingID") Then
+                trainingDate = datetextbox.Text
+            End If
+        Next
+        m_trainer.completeTraining(buttonSender.Attributes("trainingID"), m_trainer.getInitialExperience(buttonSender.Attributes("trainingID")), _
+                                    hours, trainingDate)
+        ListViewTrain.DataBind()
 
     End Sub
 
@@ -26,6 +44,8 @@ Partial Class users_Train
         Dim initial_experienceLabel As Label = CType(e.Item.FindControl("initial_experienceLabel"), Label)
         Dim final_experienceLabel As Label = CType(e.Item.FindControl("final_experienceLabel"), Label)
         Dim statusLabel As Label = CType(e.Item.FindControl("statusLabel"), Label)
+        Dim hoursDropDown As DropDownList = CType(e.Item.FindControl("hoursDropDown"), DropDownList)
+        Dim datetextbox As TextBox = CType(e.Item.FindControl("datetextbox"), TextBox)
         Dim trainee As New Employee()
         If trainee_idLabel.Text <> "" Then
             trainee = New Employee(CType(trainee_idLabel.Text, Integer))
@@ -39,5 +59,14 @@ Partial Class users_Train
         trainee_idLabel.Text = trainee.first_name & " " & trainee.last_name
         supervisor_idLabel.Text = supervisor.first_name & " " & supervisor.last_name
         department_idLabel.Text = supervisor.getDepartmentName(department_idLabel.Text)
+
+        Dim dec As Decimal
+        dec = 0
+        hoursDropDown.Items.Add("")
+        While dec < 40
+            dec += 0.5
+            hoursDropDown.Items.Add(dec.ToString("##0.00"))
+        End While
+
     End Sub
 End Class

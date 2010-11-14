@@ -3,6 +3,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel="stylesheet" type="text/css" media="all" href="jsDatePick_ltr.min.css" />
+    <script type="text/javascript" src="jsDatePick.min.1.3.js"></script>
+    <script type="text/javascript">
+	window.onload = function(){
+		new JsDatePick({
+			useMode:2,
+			target:"datetextbox",
+			dateFormat:"%d-%M-%Y"
+			/*selectedDate:{				This is an example of what the full configuration offers.
+				day:5,						For full documentation about these settings please see the full version of the code.
+				month:9,
+				year:2006
+			},
+			yearsRange:[1978,2020],
+			limitToToday:false,
+			cellColorScheme:"beige",
+			dateFormat:"%m-%d-%Y",
+			imgPath:"img/",
+			weekStartDay:1*/
+		});
+	};
+
+        };
+</script>
+
     <style type="text/css">
         body
         {
@@ -257,13 +282,13 @@
                                         <asp:Label ID="statusLabel" runat="server" Text='<%# Eval("status") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="hoursLabel" runat="server" Text='<%# Eval("hours") %>' />
+                                        <asp:dropdownlist ID="hoursdropdown" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                        <asp:Label ID="dateLabel" runat="server" Text='<%# Eval("date") %>' />
+                                        <asp:textbox ID="datetextbox" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="completeTraining" OnClick="completeTraining" runat="server" Text="Complete" />
+                                        <asp:Button ID="completeTraining" trainingID='<%# Eval("id") %>' OnClick="completeTraining" runat="server" Text="Complete" />
                                     </td>
                                     <td>
                                         <asp:Button ID="rejectTraining" OnClick="rejectTraining" runat="server" Text="Reject" />
@@ -299,16 +324,16 @@
                                         <asp:Label ID="statusLabel" runat="server" Text='<%# Eval("status") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="hoursLabel" runat="server" Text='<%# Eval("hours") %>' />
+                                        <asp:dropdownlist ID="hoursdropdown" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                        <asp:Label ID="dateLabel" runat="server" Text='<%# Eval("date") %>' />
+                                        <asp:textbox ID="datetextbox" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="completeTraining" OnClick="completeTraining" runat="server" Text="Complete" />
+                                        <asp:Button ID="completeTraining" trainingID='<%# Eval("id") %>' OnClick="completeTraining" runat="server" Text="Complete" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="rejectTraining" OnClick="rejectTraining" runat="server" Text="Reject" />
+                                        <asp:Button ID="rejectTraining" trainingID='<%# Eval("id") %>' OnClick="rejectTraining" runat="server" Text="Reject" />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -526,7 +551,7 @@
                         </asp:ListView>
                         <asp:SqlDataSource ID="SqlTraining" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT * FROM [training] WHERE ([trainer_id] = @trainer_id)">
+                            SelectCommand="SELECT * FROM [training] WHERE ([trainer_id] = @trainer_id) AND ([status] = 2)">
                             <SelectParameters>
                                 <asp:Parameter Name="trainer_id" Type="Int32" />
                             </SelectParameters>
