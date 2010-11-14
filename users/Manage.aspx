@@ -202,14 +202,60 @@
                     </div>
                     <div class="two">
                         <br />
+                        <b>ASSIGN TRAINNING</b><br />
+                        <br />
+                        <br />
+                        <br />
+                        <b>EMPLOYEE NAME</b>
+                        <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="True" 
+                            DataSourceID="SqlDataSource5" DataTextField="first_name" DataValueField="id">
+                        </asp:DropDownList>
+                        <b>
+                        <br />
+                        <br />
+                        DEPATMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:DropDownList ID="DropDownList8" runat="server" AutoPostBack="True" 
+                            DataSourceID="SqlDataSource8" DataTextField="name" DataValueField="id">
+                        </asp:DropDownList>
+                        <br />
+                        <br />
+                        JOB NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>&nbsp;<asp:DropDownList ID="DropDownList6" runat="server" 
+                            AutoPostBack="True" DataSourceID="SqlDataSource7" DataTextField="name" 
+                            DataValueField="id">
+                        </asp:DropDownList>
+                        <br />
+                        <br />
+                        <b>TRAINER</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:DropDownList ID="DropDownList7" runat="server" AutoPostBack="True" 
+                            DataSourceID="SqlDataSource2" DataTextField="first_name" 
+                            DataValueField="trainer_id">
+                        </asp:DropDownList>
                         <br />
                         <br />
                         <br />
                         <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="Button1" runat="server" Text="Assign" Width="85px" />
                         <br />
                         <br />
                         <br />
                         <br />
+                        <asp:SqlDataSource ID="SqlDataSource7" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT jobs.name, jobs.id FROM jobs INNER JOIN departments ON jobs.department_id = departments.id WHERE (departments.id = @id)">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="DropDownList8" Name="id" 
+                                    PropertyName="SelectedValue" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource8" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT departments.name, departments.id FROM employees INNER JOIN departments ON employees.department_id = departments.id WHERE (employees.id = @id)">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="DropDownList5" Name="id" 
+                                    PropertyName="SelectedValue" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
                         <br />
                         <br />
                     </div>

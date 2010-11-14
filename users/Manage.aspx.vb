@@ -109,17 +109,6 @@ Partial Class users_Manage
 
         user1 = User.Identity.Name
 
-        'Select Case user1
-        '    Case "jerreds"
-        '        Label1.Text = 1
-        '    Case "joshc"
-        '        Label1.Text = 2
-        '    Case "heshang"
-        '        Label1.Text = 3
-        '    Case "chrisr"
-        '        Label1.Text = 4
-
-        'End Select
         Dim sqlTraining2 As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
         Dim grid As New GridView
         Dim id As Integer
@@ -140,4 +129,27 @@ Partial Class users_Manage
 
     End Sub
 
+    Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim user_id As Integer = DropDownList5.SelectedValue
+        Dim did As Integer = DropDownList8.SelectedValue
+        Dim jobID As Integer = DropDownList6.SelectedValue
+        Dim iniEx As Integer = 1
+        Dim status As Integer = 2
+        Dim suprID As Integer = Label1.Text
+        Dim trainer As Integer = DropDownList7.SelectedValue
+
+
+        Dim sqlTraining3 As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
+        sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, status,supervisor_id) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @status, @supervisor_id)"
+        sqlTraining3.InsertParameters.Add("trainer_id", trainer)
+        sqlTraining3.InsertParameters.Add("trainee_id", user_id)
+        sqlTraining3.InsertParameters.Add("department_id", did)
+        sqlTraining3.InsertParameters.Add("job_id", jobID)
+        sqlTraining3.InsertParameters.Add("initial_experience", iniEx)
+        sqlTraining3.InsertParameters.Add("status", status)
+        sqlTraining3.InsertParameters.Add("supervisor_id", suprID)
+        sqlTraining3.Insert()
+        ListView2.DataBind()
+
+    End Sub
 End Class
