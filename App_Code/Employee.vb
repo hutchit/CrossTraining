@@ -12,6 +12,17 @@ Public Class Employee
     Private m_departmentID As Integer
     Private m_email As String
 
+    Public Sub New()
+        m_email = ""
+        m_departmentID = 0
+        m_department_name = ""
+        m_last_name = ""
+        m_first_name = ""
+        m_userID = 0
+        m_username = ""
+        grid = New GridView
+        sqlconnection = New SqlDataSource
+    End Sub
 
     Public Sub New(ByVal uname As String)
         sqlconnection = New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM employees WHERE username = @username")
@@ -107,7 +118,11 @@ Public Class Employee
         grid.DataSource = sqlDepartments
         sqlDepartments.Select(DataSourceSelectArguments.Empty)
         grid.DataBind()
-        Return grid.Rows(0).Cells(1).Text
+        If grid.Rows.Count > 0 Then
+            Return grid.Rows(0).Cells(1).Text
+        Else
+            Return ""
+        End If
     End Function
 
     Public Function getJobName(ByVal id As Integer) As String
@@ -117,7 +132,11 @@ Public Class Employee
         grid.DataSource = sqlJobs
         sqlJobs.Select(DataSourceSelectArguments.Empty)
         grid.DataBind()
-        Return grid.Rows(0).Cells(1).Text
+        If grid.Rows.Count > 0 Then
+            Return grid.Rows(0).Cells(1).Text
+        Else
+            Return ""
+        End If
     End Function
 
     Public Function getDepartmentName(ByVal id As Integer) As String
@@ -127,7 +146,11 @@ Public Class Employee
         grid.DataSource = sqlDepartments
         sqlDepartments.Select(DataSourceSelectArguments.Empty)
         grid.DataBind()
-        Return grid.Rows(0).Cells(1).Text
+        If grid.Rows.Count > 0 Then
+            Return grid.Rows(0).Cells(1).Text
+        Else
+            Return ""
+        End If
     End Function
 
     Private Sub updateAllProperties()
@@ -210,6 +233,7 @@ Public Class Employee
 
         Return message
     End Function
+
 
 
     Public Function trainingLevel(ByVal jobid As Integer) As Integer

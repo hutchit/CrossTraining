@@ -19,7 +19,9 @@ Partial Class users_MyTraining
         Dim button1 As Button = CType(sender, Button)
         message.Text = m_user.requestTraining(button1.Attributes("jobID").ToString, 0, 1, DropDownList1.SelectedValue) + " for " & m_user.getJobName(button1.Attributes("jobID").ToString)
         ListView1.DataBind()
-        fillJobsDropdown(m_user.userid, department.SelectedValue)
+        If department.SelectedValue <> "" Then
+            fillJobsDropdown(m_user.userid, department.SelectedValue)
+        End If
         If message.Text.Contains("Requested") Then
             message.ForeColor = Drawing.Color.Green
         Else
@@ -140,8 +142,14 @@ Partial Class users_MyTraining
         Dim initial_experienceLabel As Label = CType(e.Item.FindControl("initial_experienceLabel"), Label)
         Dim final_experienceLabel As Label = CType(e.Item.FindControl("final_experienceLabel"), Label)
         Dim statusLabel As Label = CType(e.Item.FindControl("statusLabel"), Label)
-        Dim trainer As New Employee(trainer_idLabel.Text)
-        Dim supervisor As New Employee(supervisor_idLabel.Text)
+        Dim trainer As New Employee()
+        If trainer_idLabel.Text <> "" Then
+            trainer = New Employee(CType(trainer_idLabel.Text, Integer))
+        End If
+        Dim supervisor As New Employee()
+        If supervisor_idLabel.Text <> "" Then
+            supervisor = New Employee(CType(supervisor_idLabel.Text, Integer))
+        End If
         job_idLabel.Text = trainer.getJobName(job_idLabel.Text)
         statusLabel.Text = trainer.getStatus(statusLabel.Text)
         trainer_idLabel.Text = trainer.first_name & " " & trainer.last_name
