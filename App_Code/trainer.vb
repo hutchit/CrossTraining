@@ -54,6 +54,25 @@ Public Class trainer
         Return message
     End Function
 
+    Public Function rejectTraining(ByVal training As Integer, ByVal initial_experience As Integer, ByVal trainingDate As String) As String
+        Dim sqlTraining As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
+        Dim hours As Integer = 0
+        Dim final_experience As Integer = initial_experience
+        Dim status As Integer = 0
+        Dim message As String = "Training Canceled"
+
+        sqlTraining.UpdateCommand = "UPDATE training SET final_experience = @final_experience, status = @status, hours = @hours, date = @date WHERE id = @id "
+            sqlTraining.UpdateParameters.Add("id", training)
+            sqlTraining.UpdateParameters.Add("hours", hours)
+            sqlTraining.UpdateParameters.Add("date", trainingDate)
+            sqlTraining.UpdateParameters.Add("final_experience", final_experience)
+            sqlTraining.UpdateParameters.Add("status", status)
+
+            sqlTraining.Update()
+
+        Return message
+    End Function
+
     Function getInitialExperience(ByVal id As Integer) As Integer
 
         If id <> 0 Then
