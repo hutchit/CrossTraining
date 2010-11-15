@@ -287,7 +287,7 @@
                                 </tr>
                             </ItemTemplate>
                             <AlternatingItemTemplate>
-                                <tr style="background-color:#FFF8DC;">
+                                <tr style="background-color:#FFFFFF;">
                                     <td>
                                         <asp:Label ID="trainee_idLabel" runat="server" 
                                             Text='<%# Eval("trainee_id") %>' />
