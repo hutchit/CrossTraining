@@ -20,14 +20,29 @@ Partial Class users_Train
                 trainingDate = datetextbox.Text
             End If
         Next
-        m_trainer.completeTraining(buttonSender.Attributes("trainingID"), m_trainer.getInitialExperience(buttonSender.Attributes("trainingID")), _
+        message.ForeColor = Drawing.Color.Green
+        message.Text = m_trainer.completeTraining(buttonSender.Attributes("trainingID"), m_trainer.getInitialExperience(buttonSender.Attributes("trainingID")), _
                                     hours, trainingDate)
         ListViewTrain.DataBind()
-
+        ListView1.DataBind()
     End Sub
-
     Protected Sub rejectTraining(ByVal sender As Object, ByVal e As System.EventArgs)
-
+        Dim buttonSender As Button = CType(sender, Button)
+        Dim hours As Double
+        Dim trainingDate As String
+        trainingDate = ""
+        hours = 0
+        For Each i As ListViewItem In ListViewTrain.Items
+            Dim datetextbox As TextBox = CType(i.FindControl("datetextbox"), TextBox)
+            If datetextbox.Attributes("trainingID") = buttonSender.Attributes("trainingID") Then
+                trainingDate = datetextbox.Text
+            End If
+        Next
+        message.ForeColor = Drawing.Color.Red
+        message.Text = m_trainer.rejectTraining(buttonSender.Attributes("trainingID"), m_trainer.getInitialExperience(buttonSender.Attributes("trainingID")), _
+                                    trainingDate)
+        ListViewTrain.DataBind()
+        ListView1.DataBind()
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -35,6 +50,7 @@ Partial Class users_Train
         m_trainer = New trainer(_user.UserName)
         SqlTraining.SelectParameters("trainer_id").DefaultValue = m_trainer.userid
         SqlDataSource1.SelectParameters("trainer_id").DefaultValue = m_trainer.userid
+        historyLabel.Text = "Veiw Training Classes held by " & m_trainer.first_name & " " & m_trainer.last_name
     End Sub
 
     Protected Sub ListViewTrain_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ListViewItemEventArgs) Handles ListViewTrain.ItemDataBound

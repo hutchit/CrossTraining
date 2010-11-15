@@ -240,6 +240,8 @@
                         </table>
                     </div>
                     <div class="two">
+                    <asp:Label runat="server" ID="message" Font-Bold="True" 
+                            Font-Names="Times New Roman" Font-Size="Large" ForeColor="Red" />
                         <asp:ListView ID="ListViewTrain" runat="server" DataKeyNames="id" 
                             DataSourceID="SqlTraining">
                             <ItemTemplate>
@@ -274,13 +276,13 @@
                                         <asp:dropdownlist ID="hoursdropdown" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                        <asp:textbox ID="datetextbox" style="width: 100px;" CssClass="datePicker" trainingID='<%# Eval("id") %>' ReadOnly="true" runat="server" />
+                                        <asp:textbox ID="datetextbox" style="width: 100px;" CssClass="datePicker" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
                                         <asp:Button ID="completeTraining" trainingID='<%# Eval("id") %>' OnClick="completeTraining" runat="server" Text="Complete" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="rejectTraining" OnClick="rejectTraining" runat="server" Text="Reject" />
+                                        <asp:Button ID="rejectTraining" OnClick="rejectTraining" trainingID='<%# Eval("id") %>' runat="server" Text="Reject" />
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -316,7 +318,7 @@
                                         <asp:dropdownlist ID="hoursdropdown" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                         <asp:textbox ID="datetextbox" style="width: 100px;" CssClass="datePicker" trainingID='<%# Eval("id") %>' ReadOnly="true" runat="server" />
+                                         <asp:textbox ID="datetextbox" style="width: 100px;" CssClass="datePicker" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
                                         <asp:Button ID="completeTraining" trainingID='<%# Eval("id") %>' OnClick="completeTraining" runat="server" Text="Complete" />
@@ -579,6 +581,7 @@
                         </table>
                     </div>
                     <div class="two">
+                        <asp:Label ID = "historyLabel" runat="server" Font-Bold="True" Font-Size="18px" Font-Names="Times New Roman" />
                         <asp:ListView ID="ListView1" runat="server" DataKeyNames="id" 
                             DataSourceID="SqlDataSource1">
                             <ItemTemplate>
