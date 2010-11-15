@@ -688,14 +688,15 @@
                     <div class="two">
                         Request Training for <asp:label ID="name" runat="server" />
                         <br />
-                        Please select the job you would like to be trained on &nbsp;<asp:DropDownList 
-                            ID = "jobs" runat="server" AutoPostBack="True">
-                        </asp:DropDownList>
-                        <br />
                         Department &nbsp; 
                         <asp:DropDownList ID="department" runat="server" AutoPostBack="True" 
                             DataSourceID="SqlDepartmentst" DataTextField="name" DataValueField="id">
                         </asp:DropDownList>
+                        <br />
+                        Please select the job you would like to be trained on &nbsp;<asp:DropDownList 
+                            ID="jobs" runat="server" AutoPostBack="True">
+                        </asp:DropDownList>
+                        <br />
                         <br />
                         <asp:Button ID="submitRequest" runat="server" Text="Submit Request" />
                         &nbsp;&nbsp;
