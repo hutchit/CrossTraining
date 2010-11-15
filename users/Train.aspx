@@ -3,30 +3,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" type="text/css" media="all" href="jsDatePick_ltr.min.css" />
-    <script type="text/javascript" src="jsDatePick.min.1.3.js"></script>
-    <script type="text/javascript">
-	window.onload = function(){
-		new JsDatePick({
-			useMode:2,
-			target:"datetextbox",
-			dateFormat:"%d-%M-%Y"
-			/*selectedDate:{				This is an example of what the full configuration offers.
-				day:5,						For full documentation about these settings please see the full version of the code.
-				month:9,
-				year:2006
-			},
-			yearsRange:[1978,2020],
-			limitToToday:false,
-			cellColorScheme:"beige",
-			dateFormat:"%m-%d-%Y",
-			imgPath:"img/",
-			weekStartDay:1*/
-		});
-	};
+ <link type="text/css" href="jquery-ui-1.8.6.custom.css" rel="stylesheet" />
 
-        };
-</script>
+     <script src="jquery-1.4.2.min.js" type="text/javascript"></script>
+
+     <script src="jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
+
+    <SCRIPT type="text/javascript">
+
+        $(function() {
+
+                $(".datePicker").datepicker();
+
+        });   
+
+       </SCRIPT>
 
     <style type="text/css">
         body
@@ -285,7 +276,7 @@
                                         <asp:dropdownlist ID="hoursdropdown" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                        <asp:textbox ID="datetextbox" trainingID='<%# Eval("id") %>' runat="server" />
+                                        <asp:textbox ID="datetextbox" style="width: 100px;" CssClass="datePicker" trainingID='<%# Eval("id") %>' ReadOnly="true" runat="server" />
                                     </td>
                                     <td>
                                         <asp:Button ID="completeTraining" trainingID='<%# Eval("id") %>' OnClick="completeTraining" runat="server" Text="Complete" />
@@ -327,7 +318,7 @@
                                         <asp:dropdownlist ID="hoursdropdown" trainingID='<%# Eval("id") %>' runat="server" />
                                     </td>
                                     <td>
-                                        <asp:textbox ID="datetextbox" trainingID='<%# Eval("id") %>' runat="server" />
+                                         <asp:textbox ID="datetextbox" style="width: 100px;" CssClass="datePicker" trainingID='<%# Eval("id") %>' ReadOnly="true" runat="server" />
                                     </td>
                                     <td>
                                         <asp:Button ID="completeTraining" trainingID='<%# Eval("id") %>' OnClick="completeTraining" runat="server" Text="Complete" />
