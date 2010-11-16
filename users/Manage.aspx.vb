@@ -136,18 +136,27 @@ Partial Class users_Manage
         Dim iniEx As Integer = 1
         Dim status As Integer = 2
         Dim suprID As Integer = Label1.Text
-        Dim trainer As Integer = DropDownList7.SelectedValue
-
 
         Dim sqlTraining3 As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
-        sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, status,supervisor_id) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @status, @supervisor_id)"
-        sqlTraining3.InsertParameters.Add("trainer_id", trainer)
         sqlTraining3.InsertParameters.Add("trainee_id", user_id)
         sqlTraining3.InsertParameters.Add("department_id", did)
         sqlTraining3.InsertParameters.Add("job_id", jobID)
-        sqlTraining3.InsertParameters.Add("initial_experience", iniEx)
-        sqlTraining3.InsertParameters.Add("status", status)
         sqlTraining3.InsertParameters.Add("supervisor_id", suprID)
+
+        If chkTrainer.Checked = True Then
+            sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, final_experience, status,supervisor_id) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @final_experience, @status, @supervisor_id)"
+            sqlTraining3.InsertParameters.Add("status", 3)
+            sqlTraining3.InsertParameters.Add("initial_experience", 0)
+            sqlTraining3.InsertParameters.Add("final_experience", 2)
+            sqlTraining3.InsertParameters.Add("trainer_id", suprID)
+        Else
+            Dim trainer As Integer = DropDownList7.SelectedValue
+            sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, status,supervisor_id) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @status, @supervisor_id)"
+            sqlTraining3.InsertParameters.Add("status", 3)
+            sqlTraining3.InsertParameters.Add("initial_experience", New Employee(user_id).trainingLevel(jobID))
+            sqlTraining3.InsertParameters.Add("trainer_id", trainer)
+        End If
+
         sqlTraining3.Insert()
         ListView2.DataBind()
 

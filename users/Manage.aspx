@@ -223,12 +223,14 @@
                             AutoPostBack="True" DataSourceID="SqlDataSource7" DataTextField="name" 
                             DataValueField="id">
                         </asp:DropDownList>
+                        &nbsp;&nbsp;
+                        <asp:CheckBox ID="chkTrainer" runat="server" Text="Create Trainer" />
                         <br />
                         <br />
                         <b>TRAINER</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:DropDownList ID="DropDownList7" runat="server" AutoPostBack="True" 
                             DataSourceID="SqlDataSource2" DataTextField="first_name" 
-                            DataValueField="trainer_id">
+                            DataValueField="trainee_id">
                         </asp:DropDownList>
                         <br />
                         <br />
@@ -305,7 +307,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Assign Trainer</b>&nbsp;
                         <asp:DropDownList ID="DropDownList1" runat="server" 
                             DataSourceID="SqlDataSource2" DataTextField="first_name" 
-                            DataValueField="trainer_id">
+                            DataValueField="trainee_id">
                         </asp:DropDownList>
                         <asp:ListView ID="ListView1" runat="server" DataKeyNames="Expr1" 
                             DataSourceID="SqlDataSource1">
@@ -681,7 +683,8 @@
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT training.trainer_id, employees.first_name FROM training INNER JOIN employees ON training.trainer_id = employees.id">
+                            
+                            SelectCommand="SELECT training.trainee_id, employees.first_name FROM training INNER JOIN employees ON training.trainee_id = employees.id WHERE (training.final_experience = 2)">
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
