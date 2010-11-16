@@ -12,10 +12,36 @@ Public Class Employee
     Private m_departmentID As Integer
     Private m_email As String
 
+    Public Sub New()
+        m_email = ""
+        m_departmentID = 0
+        m_department_name = ""
+        m_last_name = ""
+        m_first_name = ""
+        m_userID = 0
+        m_username = ""
+        grid = New GridView
+        sqlconnection = New SqlDataSource
+    End Sub
 
     Public Sub New(ByVal uname As String)
         sqlconnection = New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM employees WHERE username = @username")
         sqlconnection.SelectParameters.Add("username", uname)
+        sqlconnection.UpdateCommand = "UPDATE employees SET department_id = @department_id, email = @email, first_name = @first_name, last_name = @last_name, username = @username WHERE (id = @id)"
+        sqlconnection.UpdateParameters.Add("department_id", "")
+        sqlconnection.UpdateParameters.Add("email", "")
+        sqlconnection.UpdateParameters.Add("first_name", "")
+        sqlconnection.UpdateParameters.Add("last_name", "")
+        sqlconnection.UpdateParameters.Add("username", "")
+        sqlconnection.UpdateParameters.Add("id", "")
+        grid = New GridView
+        grid.DataSource = sqlconnection
+        updateAllProperties()
+    End Sub
+
+    Public Sub New(ByVal uid As Integer)
+        sqlconnection = New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM employees WHERE id = @id")
+        sqlconnection.SelectParameters.Add("id", uid)
         sqlconnection.UpdateCommand = "UPDATE employees SET department_id = @department_id, email = @email, first_name = @first_name, last_name = @last_name, username = @username WHERE (id = @id)"
         sqlconnection.UpdateParameters.Add("department_id", "")
         sqlconnection.UpdateParameters.Add("email", "")
@@ -92,7 +118,11 @@ Public Class Employee
         grid.DataSource = sqlDepartments
         sqlDepartments.Select(DataSourceSelectArguments.Empty)
         grid.DataBind()
-        Return grid.Rows(0).Cells(1).Text
+        If grid.Rows.Count > 0 Then
+            Return grid.Rows(0).Cells(1).Text
+        Else
+            Return ""
+        End If
     End Function
 
     Public Function getJobName(ByVal id As Integer) As String
@@ -102,29 +132,52 @@ Public Class Employee
         grid.DataSource = sqlJobs
         sqlJobs.Select(DataSourceSelectArguments.Empty)
         grid.DataBind()
-        Return grid.Rows(0).Cells(1).Text
+        If grid.Rows.Count > 0 Then
+            Return grid.Rows(0).Cells(1).Text
+        Else
+            Return ""
+        End If
+    End Function
+
+    Public Function getDepartmentName(ByVal id As Integer) As String
+        Dim sqlDepartments As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM departments WHERE id = @id")
+        sqlDepartments.SelectParameters.Add("id", id)
+        Dim grid As New GridView
+        grid.DataSource = sqlDepartments
+        sqlDepartments.Select(DataSourceSelectArguments.Empty)
+        grid.DataBind()
+        If grid.Rows.Count > 0 Then
+            Return grid.Rows(0).Cells(1).Text
+        Else
+            Return ""
+        End If
     End Function
 
     Private Sub updateAllProperties()
         sqlconnection.Select(DataSourceSelectArguments.Empty)
         grid.DataBind()
-        m_username = grid.Rows(0).Cells(5).Text.Trim
-        m_userID = grid.Rows(0).Cells(0).Text.Trim
-        m_departmentID = grid.Rows(0).Cells(1).Text.Trim
-        m_department_name = getDepartment(departmentID).Trim
-        m_first_name = grid.Rows(0).Cells(3).Text.Trim
-        m_last_name = grid.Rows(0).Cells(4).Text.Trim
-        m_email = grid.Rows(0).Cells(2).Text.Trim
+        If grid.Rows.Count <> 0 Then
+            m_username = grid.Rows(0).Cells(5).Text.Trim
+            m_userID = grid.Rows(0).Cells(0).Text.Trim
+            m_departmentID = grid.Rows(0).Cells(1).Text.Trim
+            m_department_name = getDepartment(departmentID).Trim
+            m_first_name = grid.Rows(0).Cells(3).Text.Trim
+            m_last_name = grid.Rows(0).Cells(4).Text.Trim
+            m_email = grid.Rows(0).Cells(2).Text.Trim
+        End If
+
     End Sub
 
     Private Sub updateDB()
-        sqlconnection.UpdateParameters("id").DefaultValue = userid
-        sqlconnection.UpdateParameters("department_id").DefaultValue = departmentID
-        sqlconnection.UpdateParameters("first_name").DefaultValue = first_name
-        sqlconnection.UpdateParameters("last_name").DefaultValue = last_name
-        sqlconnection.UpdateParameters("email").DefaultValue = email
-        sqlconnection.UpdateParameters("username").DefaultValue = username
-        sqlconnection.Update()
+        If userid <> 0 Then
+            sqlconnection.UpdateParameters("id").DefaultValue = userid
+            sqlconnection.UpdateParameters("department_id").DefaultValue = departmentID
+            sqlconnection.UpdateParameters("first_name").DefaultValue = first_name
+            sqlconnection.UpdateParameters("last_name").DefaultValue = last_name
+            sqlconnection.UpdateParameters("email").DefaultValue = email
+            sqlconnection.UpdateParameters("username").DefaultValue = username
+            sqlconnection.Update()
+        End If
     End Sub
 
     Public Function trainingAvailable(ByVal jobId As Integer) As Boolean
@@ -205,5 +258,19 @@ Public Class Employee
         Else
             Return 5 'Unknown case
         End If
+    End Function
+
+    Public Function getStatus(ByVal status As Integer) As String
+        Select Case status
+            Case 0
+                Return "Rejected"
+            Case 1
+                Return "Requested"
+            Case 2
+                Return "Approved"
+            Case 3
+                Return "Completed"
+        End Select
+        Return "Error"
     End Function
 End Class

@@ -366,12 +366,12 @@
                             Font-Names="Times New Roman" Font-Size="Large" Text="Training History for "></asp:Label>
                         <br />
                         <br />
-                        <asp:ListView ID="ListView2" runat="server" DataKeyNames="id" 
+                        <asp:ListView ID="trainingHistoryListview" runat="server" DataKeyNames="id" 
                             DataSourceID="SqlTraining">
                             <ItemTemplate>
                                 <tr style="background-color:#DCDCDC;color: #000000;">
                                     <td>
-                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("date", "dd.mm.yyyy")%>' />
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("date", "{0:MM.dd.yyyy}")%>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="trainer_idLabel" runat="server" 
@@ -407,7 +407,7 @@
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#FFFFFF;">
                                     <td>
-                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("date", "dd.mm.yyyy")%>' />
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("date", "{0:MM.dd.yyyy}")%>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="trainer_idLabel" runat="server" 
