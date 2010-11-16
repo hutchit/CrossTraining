@@ -244,20 +244,43 @@ Public Class Employee
         grid.DataSource = sqltraining
         sqltraining.Select(DataSourceSelectArguments.Empty)
         grid.DataBind()
-
-        If grid.Rows.Count = 0 Then
-            Return 0 'Has not been requested yet
-        ElseIf grid.Rows.Count = 1 And grid.Rows(0).Cells(7).Text = "&nbsp;" Then
-            Return 3 'Pending request for training
-        ElseIf grid.Rows.Count = 1 And grid.Rows(0).Cells(7).Text = "1" Then
-            Return 1 'Is trained for this job
-        ElseIf (grid.Rows.Count = 2 And grid.Rows(0).Cells(7).Text = "2") Or (grid.Rows.Count = 2 And grid.Rows(1).Cells(7).Text = "2") Then
-            Return 2 'Can train people on this job
-        ElseIf (grid.Rows.Count = 2 And grid.Rows(0).Cells(7).Text = "&nbsp;" And grid.Rows(0).Cells(6).Text = "1") Or (grid.Rows.Count = 2 And grid.Rows(1).Cells(7).Text = "&nbsp;" And grid.Rows(1).Cells(6).Text = "1") Then
-            Return 4 'Pending request to become a trainer
+        Dim trained As Integer = 0
+        Dim pending As Integer = 0
+        For Each row As GridViewRow In grid.Rows
+            If row.Cells(7).Text = "2" Then
+                Return 2
+            ElseIf row.Cells(7).Text = "1" Then
+                trained = 1
+            ElseIf row.Cells(6).Text = "0" And (row.Cells(8).Text = "1" Or row.Cells(8).Text = "2") Then
+                pending = 1
+            ElseIf row.Cells(6).Text = "1" And (row.Cells(8).Text = "1" Or row.Cells(8).Text = "2") Then
+                pending = 1
+            End If
+        Next
+        If trained = 0 And pending = 0 Then
+            Return 0
+        ElseIf trained = 1 And pending = 0 Then
+            Return 1
+        ElseIf pending = 1 And trained = 0 Then
+            Return 3
+        ElseIf pending = 1 And trained = 1 Then
+            Return 1
         Else
-            Return 5 'Unknown case
+            Return 5
         End If
+        'If grid.Rows.Count = 0 Then
+        '    Return 0 'Has not been requested yet
+        'ElseIf grid.Rows.Count = 1 And grid.Rows(0).Cells(7).Text = "&nbsp;" Then
+        '    Return 3 'Pending request for training
+        'ElseIf grid.Rows.Count = 1 And grid.Rows(0).Cells(7).Text = "1" Then
+        '    Return 1 'Is trained for this job
+        'ElseIf (grid.Rows.Count = 2 And grid.Rows(0).Cells(7).Text = "2") Or (grid.Rows.Count = 2 And grid.Rows(1).Cells(7).Text = "2") Then
+        '    Return 2 'Can train people on this job
+        'ElseIf (grid.Rows.Count = 2 And grid.Rows(0).Cells(7).Text = "&nbsp;" And grid.Rows(0).Cells(6).Text = "1") Or (grid.Rows.Count = 2 And grid.Rows(1).Cells(7).Text = "&nbsp;" And grid.Rows(1).Cells(6).Text = "1") Then
+        '    Return 4 'Pending request to become a trainer
+        'Else
+        '    Return 5 'Unknown case
+        'End If
     End Function
 
     Public Function getStatus(ByVal status As Integer) As String
