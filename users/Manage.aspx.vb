@@ -152,7 +152,7 @@ Partial Class users_Manage
         Else
             Dim trainer As Integer = DropDownList7.SelectedValue
             sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, status,supervisor_id) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @status, @supervisor_id)"
-            sqlTraining3.InsertParameters.Add("status", 3)
+            sqlTraining3.InsertParameters.Add("status", 2)
             sqlTraining3.InsertParameters.Add("initial_experience", New Employee(user_id).trainingLevel(jobID))
             sqlTraining3.InsertParameters.Add("trainer_id", trainer)
         End If
@@ -160,5 +160,23 @@ Partial Class users_Manage
         sqlTraining3.Insert()
         ListView2.DataBind()
 
+    End Sub
+
+    Protected Sub DropDownList8_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList8.DataBound
+        Dim sv As Integer
+        sv = New Employee(CType(DropDownList5.SelectedValue, Integer)).departmentID
+        DropDownList8.SelectedValue = sv
+    End Sub
+
+    Protected Sub DropDownList5_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList5.SelectedIndexChanged
+        DropDownList8.DataBind()
+    End Sub
+
+    Protected Sub DropDownList6_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList6.DataBound
+        DropDownList7.DataBind()
+    End Sub
+
+    Protected Sub DropDownList6_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList6.SelectedIndexChanged
+        DropDownList7.DataBind()
     End Sub
 End Class

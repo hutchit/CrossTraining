@@ -213,9 +213,9 @@
                         <b>
                         <br />
                         <br />
-                        DEPATMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        DEPARTMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:DropDownList ID="DropDownList8" runat="server" AutoPostBack="True" 
-                            DataSourceID="SqlDataSource8" DataTextField="name" DataValueField="id">
+                            DataSourceID="SqlDataSource8" DataTextField="name" DataValueField="id" >
                         </asp:DropDownList>
                         <br />
                         <br />
@@ -228,7 +228,7 @@
                         <br />
                         <br />
                         <b>TRAINER</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:DropDownList ID="DropDownList7" runat="server" AutoPostBack="True" 
+                        <asp:DropDownList ID="DropDownList7" runat="server" 
                             DataSourceID="SqlDataSource2" DataTextField="first_name" 
                             DataValueField="trainee_id">
                         </asp:DropDownList>
@@ -244,7 +244,7 @@
                         <br />
                         <asp:SqlDataSource ID="SqlDataSource7" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT jobs.name, jobs.id FROM jobs INNER JOIN departments ON jobs.department_id = departments.id WHERE (departments.id = @id)">
+                            SelectCommand="SELECT name, id FROM jobs WHERE (department_id = @id)">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="DropDownList8" Name="id" 
                                     PropertyName="SelectedValue" />
@@ -252,11 +252,7 @@
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource8" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT departments.name, departments.id FROM employees INNER JOIN departments ON employees.department_id = departments.id WHERE (employees.id = @id)">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="DropDownList5" Name="id" 
-                                    PropertyName="SelectedValue" />
-                            </SelectParameters>
+                            SelectCommand="SELECT departments.name, departments.id FROM departments">
                         </asp:SqlDataSource>
                         <br />
                         <br />
@@ -306,7 +302,7 @@
                         </asp:DropDownList>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Assign Trainer</b>&nbsp;
                         <asp:DropDownList ID="DropDownList1" runat="server" 
-                            DataSourceID="SqlDataSource2" DataTextField="first_name" 
+                            DataSourceID="SqlDataSource3" DataTextField="first_name" 
                             DataValueField="trainee_id">
                         </asp:DropDownList>
                         <asp:ListView ID="ListView1" runat="server" DataKeyNames="Expr1" 
@@ -683,7 +679,14 @@
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            
+                            SelectCommand="SELECT training.trainee_id, employees.first_name FROM training INNER JOIN employees ON training.trainee_id = employees.id WHERE (training.final_experience = 2) AND (training.job_id = @job_id)">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="DropDownList6" Name="job_id" 
+                                    PropertyName="SelectedValue" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT training.trainee_id, employees.first_name FROM training INNER JOIN employees ON training.trainee_id = employees.id WHERE (training.final_experience = 2)">
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
