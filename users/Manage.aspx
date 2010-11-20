@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Manage.aspx.vb" Inherits="users_manage" %>
 
+<%@ Register assembly="CrystalDecisions.Web, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -298,7 +300,8 @@
                         <br />
                         <b>Select your Employee</b>
                         <asp:DropDownList ID="DropDownList4" runat="server" AutoPostBack="True" 
-                            DataSourceID="SqlDataSource5" DataTextField="first_name" DataValueField="id">
+                            DataSourceID="SqlDataSource5" DataTextField="first_name" 
+                            DataValueField="id" Height="16px" Width="91px">
                         </asp:DropDownList>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Assign Trainer</b>&nbsp;
                         <asp:DropDownList ID="DropDownList1" runat="server" 
@@ -414,17 +417,21 @@
                                                 style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
                                                 <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
                                                     <th runat="server">
-                                                        Expr1</th>
+                                                        TrainingID</th>
                                                     <th runat="server">
                                                         status</th>
                                                     <th runat="server">
                                                         name</th>
                                                     <th runat="server">
-                                                        Expr2</th>
+                                                        Department</th>
                                                     <th runat="server">
                                                         job_id</th>
                                                     <th runat="server">
                                                         initial_experience</th>
+                                                    <th id="Th1" runat="server">
+                                                        Accept Request</th>
+                                                    <th id="Th2" runat="server">
+                                                        Deny Request</th>
                                                 </tr>
                                                 <tr ID="itemPlaceholder" runat="server">
                                                 </tr>

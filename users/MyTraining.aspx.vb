@@ -19,9 +19,7 @@ Partial Class users_MyTraining
         Dim button1 As Button = CType(sender, Button)
         message.Text = m_user.requestTraining(button1.Attributes("jobID").ToString, 0, 1, DropDownList1.SelectedValue) + " for " & m_user.getJobName(button1.Attributes("jobID").ToString)
         ListView1.DataBind()
-        If department.SelectedValue <> "" Then
-            fillJobsDropdown(m_user.userid, department.SelectedValue)
-        End If
+        fillJobsDropdown(m_user.userid, department.SelectedValue)
         If message.Text.Contains("Requested") Then
             message.ForeColor = Drawing.Color.Green
         Else
@@ -132,28 +130,5 @@ Partial Class users_MyTraining
 
     Protected Sub department_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles department.SelectedIndexChanged
         fillJobsDropdown(m_user.userid, department.SelectedValue)
-    End Sub
-
-    Protected Sub trainingHistoryListview_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ListViewItemEventArgs) Handles trainingHistoryListview.ItemDataBound
-        Dim department_idLabel As Label = CType(e.Item.FindControl("department_idLabel"), Label)
-        Dim supervisor_idLabel As Label = CType(e.Item.FindControl("supervisor_idLabel"), Label)
-        Dim trainer_idLabel As Label = CType(e.Item.FindControl("trainer_idLabel"), Label)
-        Dim job_idLabel As Label = CType(e.Item.FindControl("job_idLabel"), Label)
-        Dim initial_experienceLabel As Label = CType(e.Item.FindControl("initial_experienceLabel"), Label)
-        Dim final_experienceLabel As Label = CType(e.Item.FindControl("final_experienceLabel"), Label)
-        Dim statusLabel As Label = CType(e.Item.FindControl("statusLabel"), Label)
-        Dim trainer As New Employee()
-        If trainer_idLabel.Text <> "" Then
-            trainer = New Employee(CType(trainer_idLabel.Text, Integer))
-        End If
-        Dim supervisor As New Employee()
-        If supervisor_idLabel.Text <> "" Then
-            supervisor = New Employee(CType(supervisor_idLabel.Text, Integer))
-        End If
-        job_idLabel.Text = trainer.getJobName(job_idLabel.Text)
-        statusLabel.Text = trainer.getStatus(statusLabel.Text)
-        trainer_idLabel.Text = trainer.first_name & " " & trainer.last_name
-        supervisor_idLabel.Text = supervisor.first_name & " " & supervisor.last_name
-        department_idLabel.Text = supervisor.getDepartmentName(department_idLabel.Text)
     End Sub
 End Class

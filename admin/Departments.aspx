@@ -356,7 +356,6 @@
                                 <asp:Parameter Name="name" />
                             </InsertParameters>
                         </asp:SqlDataSource>
-                        <asp:Button ID="btnResetDB" runat="server" Text="Reset All Tables" />
                         <br />
                     </div>
                 </div>
