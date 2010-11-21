@@ -4,7 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Untitled Page</title>
+    <LINK REL=StyleSheet HREF="~\styles.css" TYPE="text/css" MEDIA=screen>
+    <title>Password Recovery</title>
 </head>
 <body>
     <form id="form1" runat="server">

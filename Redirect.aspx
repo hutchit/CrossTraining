@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <LINK REL=StyleSheet HREF="~\styles.css" TYPE="text/css" MEDIA=screen>
     <title></title>
 </head>
 <body>
