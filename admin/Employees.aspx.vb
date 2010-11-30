@@ -29,4 +29,13 @@ Partial Class users_MyTraining
         MultiView1.ActiveViewIndex = 0
     End Sub
 
+    Protected Sub ContinueButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        CreateUserWizard1.ActiveStepIndex = 0
+        Context.Response.Redirect(Context.Request.Url.AbsoluteUri)
+        Context.Response.End()
+    End Sub
+    Protected Sub deleteUser(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim b As Button = CType(sender, Button)
+        Membership.DeleteUser(b.Attributes("userName").Trim, True)
+    End Sub
 End Class
