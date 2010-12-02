@@ -4,27 +4,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<LINK REL=StyleSheet HREF="~\styles.css" TYPE="text/css" MEDIA=screen>
+<LINK REL=StyleSheet HREF="styles.css" TYPE="text/css" MEDIA=screen>
     <title></title>
 </head>
 <body>
+    <div id="wrap" style="width:400px">
     <form id="form1" runat="server">
-    <asp:Login ID="Login1" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8" 
-        BorderPadding="4" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" 
-        Font-Size="0.8em" ForeColor="#333333" Height="370px" Width="650px" 
-        DestinationPageUrl="~/Redirect.aspx">
-        <TextBoxStyle Font-Size="0.8em" />
-        <LoginButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" 
-            BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" />
+    <div class="one" style="width:400px">
+    <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/Redirect.aspx">
         <LayoutTemplate>
             <table border="0" cellpadding="4" cellspacing="0" 
                 style="border-collapse:collapse;">
                 <tr>
                     <td>
-                        <table border="0" cellpadding="0" style="height:467px; width:832px;">
+                        <table border="0" cellpadding="0">
                             <tr>
-                                <td align="center" colspan="2" 
-                                    style="color:White;background-color:#5D7B9D;font-size:0.9em;font-weight:bold;">
+                                <td align="center" colspan="2">
                                     Log In</td>
                             </tr>
                             <tr>
@@ -77,10 +72,9 @@
                 </tr>
             </table>
         </LayoutTemplate>
-        <InstructionTextStyle Font-Italic="True" ForeColor="Black" />
-        <TitleTextStyle BackColor="#5D7B9D" Font-Bold="True" Font-Size="0.9em" 
-            ForeColor="White" />
     </asp:Login>
+    </div>   
     </form>
+    </div>
 </body>
 </html>

@@ -9,7 +9,7 @@
         }
         #wrap
         {
-            width: 1000px;
+            width: 900px;
             margin: 0 auto 0 auto;
         }
         #outerBorder
@@ -29,6 +29,8 @@
             border-width: 2px;
             border-color: #FF0000;
             background: -moz-linear-gradient(top,  	#FFFFFF,  #C0C0C0);
+            font-family: "Times New Roman";
+            font-size: medium;
         }
         div.two
         {

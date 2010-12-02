@@ -251,7 +251,7 @@
                                     </td>
                                     <td>
                                         <asp:Label ID="department_idLabel" runat="server" 
-                                            Text='<%# Eval("department_id") %>' />
+                                            Text='<%# Eval("Department") %>' />
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -270,7 +270,7 @@
                                     </td>
                                     <td>
                                         <asp:Label ID="department_idLabel" runat="server" 
-                                            Text='<%# Eval("department_id") %>' />
+                                            Text='<%# Eval("Department") %>' />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -312,11 +312,11 @@
                                                     <th runat="server">
                                                     </th>
                                                     <th runat="server">
-                                                        id</th>
+                                                        ID</th>
                                                     <th runat="server">
-                                                        name</th>
+                                                        Name</th>
                                                     <th runat="server">
-                                                        department_id</th>
+                                                        Department</th>
                                                 </tr>
                                                 <tr ID="itemPlaceholder" runat="server">
                                                 </tr>
@@ -340,7 +340,7 @@
                                 </table>
                             </LayoutTemplate>
                             <EditItemTemplate>
-                                <tr style="background-color:#008A8C; color: #FFFFFF;">
+                                <tr style="background-color:RED; color: #FFFFFF;">
                                     <td>
                                         <asp:Button ID="UpdateButton" runat="server" CommandName="Update" 
                                             Text="Update" />
@@ -351,11 +351,15 @@
                                         <asp:Label ID="idLabel1" runat="server" Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                        <asp:TextBox ID="TextBox1" runat="server" 
+                                            Text='<%# Bind("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="department_idTextBox" runat="server" 
-                                            Text='<%# Bind("department_id") %>' />
+                                        <asp:DropDownList SelectedValue='<%# Bind("department_id") %>' ID="DropDownList1" runat="server" DataSourceID="SqlDepartments"
+                                            DataTextField="name" DataValueField="id" Width="125px">
+                                        </asp:DropDownList>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>"
+                                            SelectCommand="SELECT * FROM [departments]"></asp:SqlDataSource>
                                     </td>
                                 </tr>
                             </EditItemTemplate>
@@ -383,7 +387,8 @@
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             DeleteCommand="DELETE FROM jobs WHERE (id = @id)" 
                             InsertCommand="INSERT INTO jobs(name, department_id) VALUES (@name, @department_id)" 
-                            SelectCommand="SELECT jobs.* FROM jobs" 
+                            SelectCommand="SELECT jobs.id, jobs.name, jobs.department_id, jobs.description, departments.name AS Department FROM jobs INNER JOIN departments ON jobs.department_id = departments.id" 
+                            
                             UpdateCommand="UPDATE jobs SET name = @name, department_id = @department_id WHERE (id = @id)">
                             <DeleteParameters>
                                 <asp:Parameter Name="id" />

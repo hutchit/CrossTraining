@@ -164,8 +164,10 @@ Partial Class users_Manage
 
     Protected Sub DropDownList8_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList8.DataBound
         Dim sv As Integer
-        sv = New Employee(CType(DropDownList5.SelectedValue, Integer)).departmentID
-        DropDownList8.SelectedValue = sv
+        If DropDownList5.SelectedValue <> "" Then
+            sv = New Employee(CType(DropDownList5.SelectedValue, Integer)).departmentID
+            DropDownList8.SelectedValue = sv
+        End If
     End Sub
 
     Protected Sub DropDownList5_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList5.SelectedIndexChanged
