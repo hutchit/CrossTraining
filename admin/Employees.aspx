@@ -21,7 +21,7 @@
                                  Jobs</a>
                                  <a class="tabUnSelected" href="Supervisors.aspx">Supervisors</a>
                             </td>
-                            <td width="40%" align="right">
+                            <td width="20%" align="right">
                                 <a class="link" href=""></a> &nbsp;|&nbsp; 
                                 <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
                                     LogoutPageUrl="~/Logout.aspx" />
@@ -266,7 +266,7 @@
                                 <tr style="background-color:#FFFFFF;">
                                     <td>
                                         <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" 
-                                            Text="Delete" />
+                                            Text="Delete" OnClick="deleteUser" userName='<%# Eval("username") %>' />
                                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
                                     </td>
                                     <td>

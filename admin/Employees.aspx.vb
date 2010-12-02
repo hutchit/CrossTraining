@@ -19,6 +19,7 @@ Partial Class users_MyTraining
         sqlUser.InsertParameters.Add("last_name", txtLastName.Text)
         sqlUser.InsertParameters.Add("username", CreateUserWizard1.UserName)
         sqlUser.Insert()
+        ListView1.DataBind()
     End Sub
 
     Protected Sub LinkButton2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LinkButton2.Click, lnkEmployeeList.Click
