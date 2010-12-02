@@ -82,12 +82,12 @@
                                             Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="supervisee_idLabel" runat="server" 
-                                            Text='<%# Eval("supervisee_id") %>' />
+                                        <asp:Label ID="Label4" runat="server" 
+                                            Text='<%# Eval("SupervisorFirstName") & " " & Eval("SupervisorLastName") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="supervisor_idLabel" runat="server" 
-                                            Text='<%# Eval("supervisor_id") %>' />
+                                        <asp:Label ID="supervisee_idLabel" runat="server" 
+                                            Text='<%# Eval("EmployeeFirstName") & " " & Eval("EmployeeLastName") %>' />
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -99,16 +99,16 @@
                                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
                                     </td>
                                     <td>
+                                        <asp:Label ID="Label3" runat="server" 
+                                            Text='<%# Eval("SupervisorFirstName") & " " & Eval("SupervisorLastName") %>' />
+                                    </td>
+                                    <td>
                                         <asp:Label ID="idLabel" runat="server" 
                                             Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="supervisee_idLabel" runat="server" 
-                                            Text='<%# Eval("supervisee_id") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="supervisor_idLabel" runat="server" 
-                                            Text='<%# Eval("supervisor_id") %>' />
+                                            Text='<%# Eval("EmployeeFirstName") & " " & Eval("EmployeeLastName") %>' />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -151,11 +151,11 @@
                                                     <th runat="server">
                                                     </th>
                                                     <th runat="server">
-                                                        id</th>
+                                                        Id</th>
                                                     <th runat="server">
-                                                        supervisee_id</th>
+                                                        Supervisor</th>
                                                     <th runat="server">
-                                                        supervisor_id</th>
+                                                        Supervisee</th>
                                                 </tr>
                                                 <tr ID="itemPlaceholder" runat="server">
                                                 </tr>
@@ -231,7 +231,7 @@
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             DeleteCommand="DELETE FROM supervisee_supervisor WHERE (id=@id)" 
                             InsertCommand="INSERT INTO supervisee_supervisor(supervisee_id, supervisor_id) VALUES (@supervisee_id, @supervisor_id)" 
-                            SelectCommand="SELECT id, supervisee_id, supervisor_id FROM supervisee_supervisor" 
+                            SelectCommand="SELECT supervisee_supervisor.id, supervisee_supervisor.supervisee_id, supervisee_supervisor.supervisor_id, employees.first_name AS EmployeeFirstName, employees.last_name AS EmployeeLastName, employees_1.first_name AS SupervisorFirstName, employees_1.last_name AS SupervisorLastName FROM supervisee_supervisor INNER JOIN employees ON supervisee_supervisor.supervisee_id = employees.id INNER JOIN employees AS employees_1 ON supervisee_supervisor.supervisor_id = employees_1.id" 
                             
                             
                             UpdateCommand="UPDATE supervisee_supervisor SET supervisee_id = @supervisee_id, supervisor_id = @supervisor_id WHERE id=@id

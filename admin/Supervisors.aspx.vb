@@ -14,6 +14,7 @@ Partial Class users_MyTraining
 
    
         sqlUser.Insert()
+        ListView1.DataBind()
 
     End Sub
 End Class
