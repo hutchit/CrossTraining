@@ -245,7 +245,7 @@
                                     </td>
                                     <td>
                                         <asp:Label ID="department_idLabel" runat="server" 
-                                            Text='<%# Eval("department_id") %>' />
+                                            Text='<%# Eval("departmentName") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="emailLabel" runat="server" Text='<%# Eval("email") %>' />
@@ -274,7 +274,7 @@
                                     </td>
                                     <td>
                                         <asp:Label ID="department_idLabel" runat="server" 
-                                            Text='<%# Eval("department_id") %>' />
+                                            Text='<%# Eval("departmentName") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="emailLabel" runat="server" Text='<%# Eval("email") %>' />
@@ -341,17 +341,17 @@
                                                     <th runat="server">
                                                     </th>
                                                     <th runat="server">
-                                                        id</th>
+                                                        Id</th>
                                                     <th runat="server">
-                                                        department_id</th>
+                                                        Department</th>
                                                     <th runat="server">
-                                                        email</th>
+                                                        Email</th>
                                                     <th runat="server">
-                                                        first_name</th>
+                                                        First Name</th>
                                                     <th runat="server">
-                                                        last_name</th>
+                                                        Last Name</th>
                                                     <th runat="server">
-                                                        username</th>
+                                                        Username</th>
                                                 </tr>
                                                 <tr ID="itemPlaceholder" runat="server">
                                                 </tr>
@@ -386,8 +386,11 @@
                                         <asp:Label ID="idLabel1" runat="server" Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="department_idTextBox" runat="server" 
-                                            Text='<%# Bind("department_id") %>' />
+                                        <asp:DropDownList SelectedValue='<%# Bind("department_id") %>' ID="DropDownList1" runat="server" DataSourceID="SqlDepartments"
+                                            DataTextField="name" DataValueField="id" Width="125px">
+                                        </asp:DropDownList>
+                                        <asp:SqlDataSource ID="SqlDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>"
+                                            SelectCommand="SELECT * FROM [departments]"></asp:SqlDataSource>
                                     </td>
                                     <td>
                                         <asp:TextBox ID="emailTextBox" runat="server" Text='<%# Bind("email") %>' />
@@ -401,8 +404,8 @@
                                             Text='<%# Bind("last_name") %>' />
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="usernameTextBox" runat="server" 
-                                            Text='<%# Bind("username") %>' />
+                                        <asp:label ID="usernameTextBox" runat="server" 
+                                            Text='<%# eval("username") %>' />
                                     </td>
                                 </tr>
                             </EditItemTemplate>
@@ -439,7 +442,8 @@
                         <asp:SqlDataSource ID="SqlEmployees" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             DeleteCommand="DELETE FROM employees WHERE (id = @id)" 
-                            SelectCommand="SELECT employees.* FROM employees" 
+                            SelectCommand="SELECT employees.id, employees.department_id, employees.email, employees.first_name, employees.last_name, employees.username, departments.name AS departmentName FROM employees INNER JOIN departments ON employees.department_id = departments.id" 
+                            
                             UpdateCommand="UPDATE employees SET department_id = @department_id, email = @email, first_name = @first_name, last_name = @last_name, username = @username WHERE (id = @id)">
                             <DeleteParameters>
                                 <asp:Parameter Name="id" />
