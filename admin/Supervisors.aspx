@@ -99,12 +99,12 @@
                                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Label3" runat="server" 
-                                            Text='<%# Eval("SupervisorFirstName") & " " & Eval("SupervisorLastName") %>' />
-                                    </td>
-                                    <td>
                                         <asp:Label ID="idLabel" runat="server" 
                                             Text='<%# Eval("id") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="Label5" runat="server" 
+                                            Text='<%# Eval("SupervisorFirstName") & " " & Eval("SupervisorLastName") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="supervisee_idLabel" runat="server" 
@@ -179,7 +179,7 @@
                                 </table>
                             </LayoutTemplate>
                             <EditItemTemplate>
-                                <tr style="background-color:#008A8C;color: #FFFFFF;">
+                                <tr style="background-color:red;color: #FFFFFF;">
                                     <td>
                                         <asp:Button ID="UpdateButton" runat="server" CommandName="Update" 
                                             Text="Update" />
@@ -190,12 +190,18 @@
                                         <asp:Label ID="idLabel1" runat="server" Text='<%# Eval("id") %>' />
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="supervisee_idTextBox" runat="server" 
-                                            Text='<%# Bind("supervisee_id") %>' />
+                                    <asp:DropDownList SelectedValue='<%# Bind("supervisor_id") %>' ID="DropDownList1" runat="server" DataSourceID="SqlSupervisor"
+                                            DataTextField="name" DataValueField="id" Width="125px">
+                                        </asp:DropDownList>
+                                        <asp:SqlDataSource ID="SqlSupervisor" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>"
+                                            SelectCommand="SELECT (first_name + ' ' + last_name) as name, id FROM [employees]"></asp:SqlDataSource>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="supervisor_idTextBox" runat="server" 
-                                            Text='<%# Bind("supervisor_id") %>' />
+                                        <asp:DropDownList SelectedValue='<%# Bind("supervisee_id") %>' ID="DropDownList3" runat="server" DataSourceID="SqlSupervisee"
+                                            DataTextField="name" DataValueField="id" Width="125px">
+                                        </asp:DropDownList>
+                                        <asp:SqlDataSource ID="SqlSupervisee" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>"
+                                            SelectCommand="SELECT (first_name + ' ' + last_name) as name, id FROM [employees]"></asp:SqlDataSource>
                                     </td>
                                 </tr>
                             </EditItemTemplate>
@@ -225,7 +231,7 @@
                         <br />
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT [id], [first_name] FROM [employees]">
+                            SelectCommand="SELECT [id], ([first_name] + ' ' + [last_name]) as first_name FROM [employees]">
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
