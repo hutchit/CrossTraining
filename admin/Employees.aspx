@@ -405,7 +405,7 @@
                                     </td>
                                     <td>
                                         <asp:label ID="usernameTextBox" runat="server" 
-                                            Text='<%# eval("username") %>' />
+                                            Text='<%# bind("username") %>' />
                                     </td>
                                 </tr>
                             </EditItemTemplate>
