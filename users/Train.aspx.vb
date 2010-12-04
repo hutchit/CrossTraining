@@ -51,7 +51,7 @@ Partial Class users_Train
         SqlTraining.SelectParameters("trainer_id").DefaultValue = m_trainer.userid
         SqlDataSource1.SelectParameters("trainer_id").DefaultValue = m_trainer.userid
         historyLabel.Text = "Veiw Training Classes held by " & m_trainer.first_name & " " & m_trainer.last_name
-        lblWelcome.Text = "Welcome, " & m_user.first_name & " " & m_user.last_name
+        lblWelcome.Text = "Welcome, " & m_trainer.first_name & " " & m_trainer.last_name
         Dim weather As Animaonline.Weather.WeatherData.GoogleWeatherData = Animaonline.Weather.GoogleWeatherAPI.GetWeather(Animaonline.Globals.LanguageCode.en_US, "Wichita")
 
         lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
