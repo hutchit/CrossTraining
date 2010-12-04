@@ -78,7 +78,7 @@
                             DataValueField="id">
                         </asp:DropDownList>
                         &nbsp;&nbsp;
-                        <asp:CheckBox ID="chkTrainer" runat="server" Text="Create Trainer" />
+                        <asp:CheckBox ID="chkTrainer" runat="server" Text="Promote To Trainer" />
                         <br />
                         <br />
                         <b>TRAINER</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
