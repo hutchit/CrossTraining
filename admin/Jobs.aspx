@@ -186,7 +186,10 @@
                                  Supervisors</a>
                             </td>
                             <td width="40%" align="right">
-                                <a class="link" href=""></a> &nbsp;|&nbsp; 
+                                <a class="link" href=""></a> 
+                                <asp:LinkButton ID="LinkButton3" runat="server" 
+                                    PostBackUrl="~/users/MyInfo.aspx">User page</asp:LinkButton>
+                                &nbsp;|&nbsp; 
                                 <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
                                     LogoutPageUrl="~/Logout.aspx" />
 &nbsp;</td>

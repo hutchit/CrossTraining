@@ -3,8 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <LINK REL=StyleSheet HREF="~\styles.css" TYPE="text/css" MEDIA=screen>
+    <LINK REL=StyleSheet HREF="~/styles.css" TYPE="text/css" MEDIA=screen>
     <title>Cross Training Manager - Admin (Employees)</title>
+    <style type="text/css">
+        .style1
+        {
+            width: 723px;
+        }
+    </style>
 </head>
 <body>
     <div id="wrap">
@@ -22,7 +28,10 @@
                                  <a class="tabUnSelected" href="Supervisors.aspx">Supervisors</a>
                             </td>
                             <td width="20%" align="right">
-                                <a class="link" href=""></a> &nbsp;|&nbsp; 
+                                <a class="link" href=""></a> 
+                                <asp:LinkButton ID="LinkButton3" runat="server" 
+                                    PostBackUrl="~/users/MyInfo.aspx">User page</asp:LinkButton>
+                                &nbsp;|&nbsp; 
                                 <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" 
                                     LogoutPageUrl="~/Logout.aspx" />
 &nbsp;</td>
@@ -211,8 +220,11 @@
                                  <a class="tabUnSelected" href="Supervisors.aspx">Supervisors</a>
                             </td>
                             <td width="20%" align="right">
-                                <a class="link" href=""></a> &nbsp;|&nbsp;<asp:LoginStatus ID="LoginStatus2" 
-                                    runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Redirect.aspx" />
+                                <a class="link" href=""></a> 
+                                <asp:LinkButton ID="LinkButton4" runat="server" 
+                                    PostBackUrl="~/users/MyInfo.aspx">User page</asp:LinkButton>
+                                &nbsp;|&nbsp;<asp:LoginStatus ID="LoginStatus2" runat="server" 
+                                    LogoutAction="Redirect" LogoutPageUrl="~/Redirect.aspx" />
 &nbsp;</td>
                         </tr>
                     </table>
