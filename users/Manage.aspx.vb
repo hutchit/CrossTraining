@@ -123,9 +123,15 @@ Partial Class users_Manage
             id = grid.Rows(0).Cells(0).Text.Trim
           
         End If
-
+        Dim _user As MembershipUser = Membership.GetUser(Page.User.Identity.Name)
+        m_user = New Employee(_user.UserName)
         Label1.Text = id
+        lblWelcome.Text = lblWelcome.Text & m_user.first_name & " " & m_user.last_name
+        Dim weather As Animaonline.Weather.WeatherData.GoogleWeatherData = Animaonline.Weather.GoogleWeatherAPI.GetWeather(Animaonline.Globals.LanguageCode.en_US, "Wichita")
 
+        lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
+
+        imgWeather.ImageUrl = "~/images/weather/" & weather.CurrentConditions.Condition & ".png"
 
     End Sub
 

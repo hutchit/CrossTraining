@@ -39,6 +39,12 @@ Partial Class users_MyTraining
         name.Text = m_user.first_name + " " + m_user.last_name
         SqlTraining.SelectParameters("trainee_id").DefaultValue = m_user.userid
         lblHistoryTitle.Text = "Training History for " + m_user.first_name + " " + m_user.last_name
+        lblWelcome.Text = lblWelcome.Text & m_user.first_name & " " & m_user.last_name
+        Dim weather As Animaonline.Weather.WeatherData.GoogleWeatherData = Animaonline.Weather.GoogleWeatherAPI.GetWeather(Animaonline.Globals.LanguageCode.en_US, "Wichita")
+
+        lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
+
+        imgWeather.ImageUrl = "~/images/weather/" & weather.CurrentConditions.Condition & ".png"
     End Sub
 
 

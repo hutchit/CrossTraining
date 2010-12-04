@@ -51,6 +51,12 @@ Partial Class users_Train
         SqlTraining.SelectParameters("trainer_id").DefaultValue = m_trainer.userid
         SqlDataSource1.SelectParameters("trainer_id").DefaultValue = m_trainer.userid
         historyLabel.Text = "Veiw Training Classes held by " & m_trainer.first_name & " " & m_trainer.last_name
+        lblWelcome.Text = lblWelcome.Text & m_trainer.first_name & " " & m_trainer.last_name
+        Dim weather As Animaonline.Weather.WeatherData.GoogleWeatherData = Animaonline.Weather.GoogleWeatherAPI.GetWeather(Animaonline.Globals.LanguageCode.en_US, "Wichita")
+
+        lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
+
+        imgWeather.ImageUrl = "~/images/weather/" & weather.CurrentConditions.Condition & ".png"
     End Sub
 
     Protected Sub ListViewTrain_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ListViewItemEventArgs) Handles ListViewTrain.ItemDataBound

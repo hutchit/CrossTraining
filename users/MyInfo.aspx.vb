@@ -1,7 +1,7 @@
 ﻿
 Partial Class users_Train
     Inherits System.Web.UI.Page
-
+    Dim m_employee As Employee
     'Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     '
     'End Sub
@@ -21,8 +21,13 @@ Partial Class users_Train
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LoadComplete
         Dim _user As MembershipUser = Membership.GetUser(Page.User.Identity.Name)
         question.Text = _user.PasswordQuestion
+        m_employee = New Employee(_user.UserName)
+        lblWelcome.Text = lblWelcome.Text & m_employee.first_name & " " & m_employee.last_name
+        Dim weather As Animaonline.Weather.WeatherData.GoogleWeatherData = Animaonline.Weather.GoogleWeatherAPI.GetWeather(Animaonline.Globals.LanguageCode.en_US, "Wichita")
 
-    
+        lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
+
+        imgWeather.ImageUrl = "~/images/weather/" & weather.CurrentConditions.Condition & ".png"
     End Sub
 
  
