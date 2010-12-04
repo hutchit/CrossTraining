@@ -37,6 +37,6 @@ Partial Class users_MyTraining
     End Sub
     Protected Sub deleteUser(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim b As Button = CType(sender, Button)
-        Membership.DeleteUser(b.Attributes("userName").Trim, True)
+        Membership.DeleteUser(b.Attributes("userName"), True)
     End Sub
 End Class

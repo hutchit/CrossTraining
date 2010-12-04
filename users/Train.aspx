@@ -24,10 +24,21 @@
 </head>
 <body>
     <div id="wrap">
+    <table width = "100%">
+         <tr>
+         <td style="width:80%;">
+        <asp:Label ID="lblWelcome" runat="server" Font-Bold="True" 
+            Font-Names="Times New Roman" Font-Size="Large" Text="Welcome, "></asp:Label>
+            </td>
+            <td align="right">
+                <asp:Image ID="imgWeather" runat="server" Height="60px" ImageAlign="Middle" />
+                <asp:Label ID="lblTemp" runat="server" Text="" Font-Bold="True" Font-Names="Times New Roman" Font-Size="X-Large"></asp:Label>
+            </td>
+           </tr>
+            </table>
         <form id="form1" runat="server">
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
-                <br />
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
