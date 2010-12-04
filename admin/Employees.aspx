@@ -211,9 +211,9 @@
                                  <a class="tabUnSelected" href="Supervisors.aspx">Supervisors</a>
                             </td>
                             <td width="20%" align="right">
-                                <a class="link" href=""></a> &nbsp;|&nbsp; <a class="link" href="manage.aspx">
-                                    Log Out</a>
-                            </td>
+                                <a class="link" href=""></a> &nbsp;|&nbsp;<asp:LoginStatus ID="LoginStatus2" 
+                                    runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Redirect.aspx" />
+&nbsp;</td>
                         </tr>
                     </table>
                 </div>
