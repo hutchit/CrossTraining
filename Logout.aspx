@@ -4,18 +4,19 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <LINK REL=StyleSheet HREF="~\styles.css" TYPE="text/css" MEDIA=screen>
+    <LINK REL=StyleSheet HREF="~/styles.css" TYPE="text/css" MEDIA=screen>
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
     
-    &nbsp;YOU
+        <asp:Label ID="Label1" runat="server" Text="name"></asp:Label>
+        , YOU
         have Been Logged out.<br />
         <br />
         Please
-        <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Login.aspx">Click here to Log In again</asp:LinkButton>
+               <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Login.aspx">Click here to Log In again</asp:LinkButton>
     </div>
     &nbsp; </form>
 </body>
