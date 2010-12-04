@@ -4,6 +4,7 @@ Public Class Employee
 
     Dim sqlconnection As SqlDataSource
     Dim grid As GridView
+    Dim message As String = ""
     Private m_username As String
     Private m_userID As Integer
     Private m_first_name As String
@@ -198,27 +199,28 @@ Public Class Employee
     Public Function requestTraining(ByVal job_id As Integer, ByVal initial_experience As Integer, ByVal status As Integer, ByVal did As Integer) As String
         Dim sqlTraining As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
         Dim level As Integer = trainingLevel(job_id)
-        Dim message As String = ""
-        Select Case level
-            Case 0
-                initial_experience = 0
-                message = "Training Requested"
-            Case 1
-                initial_experience = 1
-                message = "Training Requested"
-            Case 2
-                message = "No Training Available"
-                initial_experience = 2
-            Case 3
-                message = "Pending Training Request"
-                initial_experience = 3
-            Case 4
-                message = "Pending Training Request"
-                initial_experience = 4
-            Case 5
-                message = "Error"
-                initial_experience = 5
-        End Select
+        'Dim message As String = ""
+        'Select Case level
+        '    Case 0
+        '        initial_experience = 0
+        '        message = "Training Requested"
+        '    Case 1
+        '        initial_experience = 1
+        '        message = "Training Requested"
+        '    Case 2
+        '        message = "No Training Available"
+        '        initial_experience = 2
+        '    Case 3
+        '        message = "Pending Training Request"
+        '        initial_experience = 3
+        '    Case 4
+        '        message = "Pending Training Request"
+        '        initial_experience = 4
+        '    Case 5
+        '        message = "Error"
+        '        initial_experience = 5
+        'End Select
+        initial_experience = setExperience(level)
 
         If initial_experience = 0 Or initial_experience = 1 Then
             sqlTraining.InsertCommand = "INSERT INTO training(trainee_id, department_id, job_id, initial_experience, status) VALUES (@trainee_id, @department_id, @job_id, @initial_experience, @status)"
@@ -296,4 +298,37 @@ Public Class Employee
         End Select
         Return "Error"
     End Function
+
+    Public Function setExperience(ByVal level1 As Integer) As Integer
+        Dim init_experience As Integer
+
+        Select Case level1
+            Case 0
+                init_experience = 0
+                message = "Training Requested"
+                Return init_experience
+            Case 1
+                init_experience = 1
+                message = "Training Requested"
+                Return init_experience
+            Case 2
+                message = "No Training Available"
+                init_experience = 2
+                Return init_experience
+            Case 3
+                message = "Pending Training Request"
+                init_experience = 3
+                Return init_experience
+            Case 4
+                message = "Pending Training Request"
+                init_experience = 4
+                Return init_experience
+            Case 5
+                message = "Error"
+                init_experience = 5
+                Return init_experience
+        End Select
+
+    End Function
+
 End Class
