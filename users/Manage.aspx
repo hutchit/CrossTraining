@@ -645,15 +645,6 @@
                     <div class="two">
                         <br />
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
                     </div>
                 </div>
             </asp:View>

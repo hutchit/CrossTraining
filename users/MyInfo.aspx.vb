@@ -22,7 +22,7 @@ Partial Class users_Train
         Dim _user As MembershipUser = Membership.GetUser(Page.User.Identity.Name)
         question.Text = _user.PasswordQuestion
         m_employee = New Employee(_user.UserName)
-        lblWelcome.Text = lblWelcome.Text & m_employee.first_name & " " & m_employee.last_name
+        lblWelcome.Text = "Welcome, " & m_user.first_name & " " & m_user.last_name
         Dim weather As Animaonline.Weather.WeatherData.GoogleWeatherData = Animaonline.Weather.GoogleWeatherAPI.GetWeather(Animaonline.Globals.LanguageCode.en_US, "Wichita")
 
         lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"

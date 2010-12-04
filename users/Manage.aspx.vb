@@ -126,7 +126,7 @@ Partial Class users_Manage
         Dim _user As MembershipUser = Membership.GetUser(Page.User.Identity.Name)
         m_user = New Employee(_user.UserName)
         Label1.Text = id
-        lblWelcome.Text = lblWelcome.Text & m_user.first_name & " " & m_user.last_name
+        lblWelcome.Text = "Welcome, " & m_user.first_name & " " & m_user.last_name
         Dim weather As Animaonline.Weather.WeatherData.GoogleWeatherData = Animaonline.Weather.GoogleWeatherAPI.GetWeather(Animaonline.Globals.LanguageCode.en_US, "Wichita")
 
         lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
@@ -186,5 +186,25 @@ Partial Class users_Manage
 
     Protected Sub DropDownList6_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList6.SelectedIndexChanged
         DropDownList7.DataBind()
+    End Sub
+    Private Function buildReport() As HtmlTable
+        Dim table As New HtmlTable
+        Dim sqlDepartments As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * from Departments")
+        Dim dgDepartments As New DataGrid
+        sqlDepartments.Select(System.Web.UI.DataSourceSelectArguments.Empty)
+        dgDepartments.DataSource = sqlDepartments
+        dgDepartments.DataBind()
+        For Each row As DataGridItem In dgDepartments.Items
+            Dim rowhtml As New HtmlTableRow
+            Dim cellDepartment As New HtmlTableCell
+            cellDepartment.InnerText = row.Cells(1).Text
+            rowhtml.Cells.Add(cellDepartment)
+            table.Rows.Add(rowhtml)
+        Next
+        Return table
+    End Function
+
+    Protected Sub View4_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles View4.Load
+        View4.Controls.Add(buildReport)
     End Sub
 End Class
