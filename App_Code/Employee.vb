@@ -235,7 +235,37 @@ Public Class Employee
 
         Return message
     End Function
+    Public Function setExperience(ByVal level1 As Integer) As Integer
+        Dim init_experience As Integer
 
+        Select Case level1
+            Case 0
+                init_experience = 0
+                message = "Training Requested"
+                Return init_experience
+            Case 1
+                init_experience = 1
+                message = "Training Requested"
+                Return init_experience
+            Case 2
+                message = "No Training Available"
+                init_experience = 2
+                Return init_experience
+            Case 3
+                message = "Pending Training Request"
+                init_experience = 3
+                Return init_experience
+            Case 4
+                message = "Pending Training Request"
+                init_experience = 4
+                Return init_experience
+            Case 5
+                message = "Error"
+                init_experience = 5
+                Return init_experience
+        End Select
+
+    End Function
 
 
     Public Function trainingLevel(ByVal jobid As Integer) As Integer
@@ -299,36 +329,6 @@ Public Class Employee
         Return "Error"
     End Function
 
-    Public Function setExperience(ByVal level1 As Integer) As Integer
-        Dim init_experience As Integer
-
-        Select Case level1
-            Case 0
-                init_experience = 0
-                message = "Training Requested"
-                Return init_experience
-            Case 1
-                init_experience = 1
-                message = "Training Requested"
-                Return init_experience
-            Case 2
-                message = "No Training Available"
-                init_experience = 2
-                Return init_experience
-            Case 3
-                message = "Pending Training Request"
-                init_experience = 3
-                Return init_experience
-            Case 4
-                message = "Pending Training Request"
-                init_experience = 4
-                Return init_experience
-            Case 5
-                message = "Error"
-                init_experience = 5
-                Return init_experience
-        End Select
-
-    End Function
+    
 
 End Class
