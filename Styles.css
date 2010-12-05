@@ -158,3 +158,12 @@
             font-family: "Times New Roman";
             font-size: 16px;
         }
+        .headerCell
+        {
+			color: black;
+			text-align: center;
+			font-weight: bold;
+            font-family: "Times New Roman";
+            font-size: 16px;
+				
+        }
