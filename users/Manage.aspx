@@ -103,6 +103,8 @@
                         <asp:Button ID="Button1" runat="server" Text="Assign" Width="85px" />
                         <br />
                         <br />
+                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" 
+                            ForeColor="#009900" Text="Trainning Assigned"></asp:Label>
                         <br />
                         <br />
                         <asp:SqlDataSource ID="SqlDataSource7" runat="server" 

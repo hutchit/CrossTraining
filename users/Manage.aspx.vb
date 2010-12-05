@@ -133,6 +133,9 @@ Partial Class users_Manage
 
         imgWeather.ImageUrl = "~/images/weather/" & weather.CurrentConditions.Condition & ".png"
 
+        Label4.Visible = False
+
+
     End Sub
 
     Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -165,6 +168,9 @@ Partial Class users_Manage
 
         sqlTraining3.Insert()
         ListView2.DataBind()
+
+        Label4.Visible = True
+
 
     End Sub
 
