@@ -28,6 +28,7 @@ Partial Class users_MyTraining
             message.ForeColor = Drawing.Color.Red
         End If
         lblTrainingRequested.Text = ""
+        trainingHistoryListview.DataBind()
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -92,6 +93,7 @@ Partial Class users_MyTraining
         End If
         message.Text = ""
         ListView1.DataBind()
+        trainingHistoryListview.DataBind()
     End Sub
 
     Protected Sub jobs_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles jobs.SelectedIndexChanged
