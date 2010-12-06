@@ -28,6 +28,7 @@ Partial Class users_MyTraining
             message.ForeColor = Drawing.Color.Red
         End If
         lblTrainingRequested.Text = ""
+        trainingHistoryListview.DataBind()
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -92,6 +93,7 @@ Partial Class users_MyTraining
         End If
         message.Text = ""
         ListView1.DataBind()
+        trainingHistoryListview.DataBind()
     End Sub
 
     Protected Sub jobs_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles jobs.SelectedIndexChanged
@@ -131,9 +133,9 @@ Partial Class users_MyTraining
 
     Protected Sub department_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles department.DataBound
         department.SelectedValue = m_user.departmentID
-        If Not Page.IsPostBack Then
-            fillJobsDropdown(m_user.userid, department.SelectedValue)
-        End If
+        'If Not Page.IsPostBack Then
+        fillJobsDropdown(m_user.userid, department.SelectedValue)
+        'End If
     End Sub
 
     Protected Sub department_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles department.SelectedIndexChanged

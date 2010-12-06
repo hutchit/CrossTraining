@@ -156,7 +156,6 @@
                 </div>
             </asp:View>
             <asp:View ID="View2" runat="server">
-                <br />
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
@@ -480,7 +479,6 @@
                 </div>
             </asp:View>
             <asp:View ID="View3" runat="server">
-                <br />
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>

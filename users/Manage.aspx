@@ -6,6 +6,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <LINK REL=StyleSheet HREF="~/styles.css" TYPE="text/css" MEDIA=screen>
+    <script type="text/javascript">
+        function showhide(c) {
+            var next = c.parentNode.nextSibling;
+            while (next.nodeName.toLowerCase() != 'tr') {
+                next = next.nextSibling;
+            }
+            next.style.display = (next.style.display == '') ? 'none' : '';
+        }
+    </script>
     <title>Cross Training Manager - Manage</title>
 </head>
 <body>
@@ -114,7 +123,6 @@
                 </div>
             </asp:View>
             <asp:View ID="View2" runat="server">
-                <br />
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
@@ -564,7 +572,6 @@
                 </div>
             </asp:View>
             <asp:View ID="View3" runat="server">
-                <br />
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
@@ -612,7 +619,6 @@
                 </div>
             </asp:View>
             <asp:View ID="View4" runat="server">
-                <br />
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
@@ -642,9 +648,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="two">
-                        <br />
-                        <br />
+                    <div class="two" runat="server" id ="content">
                     </div>
                 </div>
             </asp:View>
