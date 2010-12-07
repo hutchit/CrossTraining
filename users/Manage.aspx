@@ -93,6 +93,8 @@
                     <div class="two">
                         <br />
                         <b>ASSIGN TRAINNING</b><br />
+                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" 
+                            ForeColor="#009900" Text="Trainning Assigned"></asp:Label>
                         <br />
                         <br />
                         <br />
@@ -130,10 +132,6 @@
                         <asp:Button ID="Button1" runat="server" Text="Assign" Width="85px" />
                         <br />
                         <br />
-                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" 
-                            ForeColor="#009900" Text="Trainning Assigned"></asp:Label>
-                        <br />
-                        <br />
                         <asp:SqlDataSource ID="SqlDataSource7" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT name, id FROM jobs WHERE (department_id = @id)">
@@ -146,8 +144,6 @@
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT departments.name, departments.id FROM departments">
                         </asp:SqlDataSource>
-                        <br />
-                        <br />
                     </div>
                 </div>
             </asp:View>

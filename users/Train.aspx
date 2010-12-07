@@ -43,7 +43,7 @@
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
                             <td width="60%">
-                                <a class="tabUnSelected" style="margin-left: 30px" href="Manage.aspx">Manage</a>
+                                <a class="tabUnSelected" runat="server" id="managerTabView1" style="margin-left: 30px" href="Manage.aspx">Manage</a>
                                 <a class="tabSelected" href="Train.aspx">Train</a> <a class="tabUnSelected" href="MyTraining.aspx">
                                     My Training</a>
                             </td>
@@ -379,12 +379,11 @@
                 </div>
             </asp:View>
             <asp:View ID="View2" runat="server">
-                <br />
                 <div class="toolbar">
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
                             <td width="60%">
-                                <a class="tabUnSelected" style="margin-left: 30px" href="Manage.aspx">Manage</a>
+                                <a class="tabUnSelected" runat="server" id="managerTabView2" style="margin-left: 30px" href="Manage.aspx">Manage</a>
                                 <a class="tabSelected" href="Train.aspx">Train</a> <a class="tabUnSelected" href="MyTraining.aspx">
                                     My Training</a>
                             </td>

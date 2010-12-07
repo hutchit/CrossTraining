@@ -27,7 +27,7 @@
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
                             <td width="60%">
-                                <a class="tabUnSelected" style="margin-left: 30px" href="manage.aspx">Manage</a>
+                                <a class="tabUnSelected" runat="server" id="managerTabView1" style="margin-left: 30px" href="manage.aspx">Manage</a>
                                 <a class="tabUnSelected" href="train.aspx">Train</a> <a class="tabSelected" href="MyTraining.aspx">
                                     My Training</a>
                             </td>
@@ -160,7 +160,7 @@
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
                             <td width="60%">
-                                <a class="tabUnSelected" style="margin-left: 30px" href="manage.aspx">Manage</a>
+                                <a class="tabUnSelected" runat="server" id="managerTabView2" style="margin-left: 30px" href="manage.aspx">Manage</a>
                                 <a class="tabUnSelected" href="train.aspx">Train</a> <a class="tabSelected" href="MyTraining.aspx">
                                     My Training</a>
                             </td>
@@ -483,7 +483,7 @@
                     <table width="100%" style="margin-bottom: -3px">
                         <tr>
                             <td width="60%" class="style1">
-                                <a class="tabUnSelected" style="margin-left: 30px" href="manage.aspx">Manage</a>
+                                <a class="tabUnSelected" runat="server" id="managerTabView3" style="margin-left: 30px" href="manage.aspx">Manage</a>
                                 <a class="tabUnSelected" href="train.aspx">Train</a> <a class="tabSelected" href="MyTraining.aspx">
                                     My Training</a>
                             </td>

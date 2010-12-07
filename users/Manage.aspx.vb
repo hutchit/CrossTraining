@@ -170,8 +170,10 @@ Partial Class users_Manage
         ListView2.DataBind()
 
         Label4.Visible = True
-
-
+        DropDownList7.DataBind()
+        If chkTrainer.Checked Then
+            chkTrainer.Checked = False
+        End If
     End Sub
 
     Protected Sub DropDownList8_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList8.DataBound
@@ -296,9 +298,13 @@ Partial Class users_Manage
             cellJobs.Attributes.Add("class", "reportData")
             cellJobs.Style.Add("width", "124px")
             rowhtml.Cells.Add(cellJobs)
-            rowhtml.Cells.Add(getJobnotTrainerTotal())
-            rowhtml.Cells.Add(getJobTrainedTotal())
-            rowhtml.Cells.Add(getJobTrainerTotal(department, row.Cells(0).Text))
+            Dim notTrainedCell As New HtmlTableCell
+            Dim trainedCell As New HtmlTableCell
+            Dim trainerCell As New HtmlTableCell
+            getTotals(row.Cells(0).Text, notTrainedCell, trainedCell, trainerCell)
+            rowhtml.Cells.Add(notTrainedCell)
+            rowhtml.Cells.Add(trainedCell)
+            rowhtml.Cells.Add(trainerCell)
             rowEmployees.Cells.Add(cellEmployee)
             table.Rows.Add(rowhtml)
             'table.Rows.Add(rowEmployees)
@@ -306,37 +312,48 @@ Partial Class users_Manage
         Return table
     End Function
 
-    Private Function getJobTrainerTotal(ByVal department As Integer, ByVal job As Integer) As HtmlTableCell
-        Dim cell As New HtmlTableCell
-        cell.Attributes.Add("class", "reportData")
-        cell.Style.Add("width", "99px")
-        Dim sqlTrainers As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * from training WHERE (department_Id = @department AND job_id = @job_id) AND final_experience = 2")
-        Dim dgtrainers As New DataGrid
-        sqlTrainers.SelectParameters.Add("department", department)
-        sqlTrainers.SelectParameters.Add("job_id", job)
-        sqlTrainers.Select(System.Web.UI.DataSourceSelectArguments.Empty)
-        dgtrainers.DataSource = sqlTrainers
-        dgtrainers.DataBind()
-        cell.InnerText = dgtrainers.Items.Count
-        Return cell
-    End Function
+    Private Sub getTotals(ByVal job As Integer, ByRef notTrained As HtmlTableCell, ByRef trained As HtmlTableCell, ByRef trainer As HtmlTableCell)
+        notTrained.Attributes.Add("class", "reportData")
+        trained.Attributes.Add("class", "reportData")
+        trainer.Attributes.Add("class", "reportData")
+        notTrained.Style.Add("width", "100px")
+        trained.Style.Add("width", "100px")
+        trainer.Style.Add("width", "100px")
+        Dim sqlEmployees As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * from Employees")
+        Dim dgEmployees As New DataGrid
+        sqlEmployees.Select(System.Web.UI.DataSourceSelectArguments.Empty)
+        dgEmployees.DataSource = sqlEmployees
+        dgEmployees.DataBind()
+        Dim intNotTrained As Integer
+        Dim intTrained As Integer
+        Dim intTrainer As Integer
+        For Each row As DataGridItem In dgEmployees.Items
+            Dim employee As New Employee(CType(row.Cells(0).Text, Integer))
+            Dim level As Integer = employee.trainingLevel(job)
 
-    Private Function getJobnotTrainerTotal() As HtmlTableCell
-        Dim cell As New HtmlTableCell
-        cell.Attributes.Add("class", "reportData")
-        cell.Style.Add("width", "99px")
-        cell.InnerText = 0
-        Return cell
-    End Function
-
-    Private Function getJobTrainedTotal() As HtmlTableCell
-        Dim cell As New HtmlTableCell
-        cell.Attributes.Add("class", "reportData")
-        cell.InnerText = 0
-        Return cell
-    End Function
+            If level = 0 Then
+                intNotTrained += 1
+            ElseIf level = 1 Then
+                intTrained += 1
+            ElseIf level = 2 Then
+                intTrainer += 1
+            End If
+        Next
+        notTrained.InnerText = intNotTrained
+        trained.InnerText = intTrained
+        trainer.InnerText = intTrainer
+    End Sub
 
     Protected Sub content_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles content.Load
         content.Controls.Add(buildReport)
+    End Sub
+
+    Protected Sub DropDownList7_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList7.DataBound
+        If DropDownList7.Items.Count > 0 Then
+            chkTrainer.Visible = False
+        Else
+            chkTrainer.Visible = True
+        End If
+
     End Sub
 End Class

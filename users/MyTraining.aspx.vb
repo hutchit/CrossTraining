@@ -46,6 +46,15 @@ Partial Class users_MyTraining
         lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
 
         imgWeather.ImageUrl = "~/images/weather/" & weather.CurrentConditions.Condition & ".png"
+        If m_user.isSupervisor Then
+            managerTabView1.Visible = True
+            managerTabView2.Visible = True
+            managerTabView3.Visible = True
+        Else
+            managerTabView1.Visible = False
+            managerTabView2.Visible = False
+            managerTabView3.Visible = False
+        End If
     End Sub
 
 

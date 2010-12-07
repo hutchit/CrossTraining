@@ -329,6 +329,20 @@ Public Class Employee
         Return "Error"
     End Function
 
+    Public Function isSupervisor() As Boolean
+        Dim sqlSupervisor As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM Supervisee_Supervisor WHERE Supervisor_id = @id")
+        Dim gridSupervisor As New GridView
+        sqlSupervisor.SelectParameters.Add("id", userid)
+        gridSupervisor.DataSource = sqlSupervisor
+        sqlSupervisor.Select(DataSourceSelectArguments.Empty)
+        gridSupervisor.DataBind()
+        If gridSupervisor.Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     
 
 End Class
