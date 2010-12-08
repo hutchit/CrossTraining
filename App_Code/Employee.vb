@@ -4,7 +4,6 @@ Public Class Employee
 
     Dim sqlconnection As SqlDataSource
     Dim grid As GridView
-    Dim message As String = ""
     Private m_username As String
     Private m_userID As Integer
     Private m_first_name As String
@@ -196,31 +195,11 @@ Public Class Employee
         End If
     End Function
 
-    Public Function requestTraining(ByVal job_id As Integer, ByVal initial_experience As Integer, ByVal status As Integer, ByVal did As Integer) As String
+    Public Function requestTraining(ByVal job_id As Integer, ByVal status As Integer, ByVal did As Integer) As String
         Dim sqlTraining As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "")
-        Dim level As Integer = trainingLevel(job_id)
-        'Dim message As String = ""
-        'Select Case level
-        '    Case 0
-        '        initial_experience = 0
-        '        message = "Training Requested"
-        '    Case 1
-        '        initial_experience = 1
-        '        message = "Training Requested"
-        '    Case 2
-        '        message = "No Training Available"
-        '        initial_experience = 2
-        '    Case 3
-        '        message = "Pending Training Request"
-        '        initial_experience = 3
-        '    Case 4
-        '        message = "Pending Training Request"
-        '        initial_experience = 4
-        '    Case 5
-        '        message = "Error"
-        '        initial_experience = 5
-        'End Select
-        initial_experience = setExperience(level)
+
+        Dim initial_experience As Integer = trainingLevel(job_id)
+        Dim message As String = setExperienceMsg(initial_experience)
 
         If initial_experience = 0 Or initial_experience = 1 Then
             sqlTraining.InsertCommand = "INSERT INTO training(trainee_id, department_id, job_id, initial_experience, status) VALUES (@trainee_id, @department_id, @job_id, @initial_experience, @status)"
@@ -235,39 +214,41 @@ Public Class Employee
 
         Return message
     End Function
-    Public Function setExperience(ByVal level1 As Integer) As Integer
-        Dim init_experience As Integer
-
-        Select Case level1
-            Case 0
-                init_experience = 0
-                message = "Training Requested"
-                Return init_experience
-            Case 1
-                init_experience = 1
-                message = "Training Requested"
-                Return init_experience
-            Case 2
-                message = "No Training Available"
-                init_experience = 2
-                Return init_experience
-            Case 3
-                message = "Pending Training Request"
-                init_experience = 3
-                Return init_experience
-            Case 4
-                message = "Pending Training Request"
-                init_experience = 4
-                Return init_experience
-            Case 5
-                message = "Error"
-                init_experience = 5
-                Return init_experience
-        End Select
-
+   
+    Public Function setExperienceMsg(ByVal level As Integer) As String
+        If level = 0 Or 1 Then Return "Training Requested"
+        If level = 2 Then Return "No Training Available"
+        If level = 3 Then Return "Pending Training Request"
+        If level = 4 Then Return "Pending Training Request"
+        Return "Error"
     End Function
 
 
+    'Public Function setExperience(ByVal level1 As Integer) As Integer
+    '    Dim init_experience As Integer
+
+    '    Select Case level1
+    '        Case 0
+    '            init_experience = 0
+    '            Return init_experience
+    '        Case 1
+    '            init_experience = 1
+    '            Return init_experience
+    '        Case 2
+    '            init_experience = 2
+    '            Return init_experience
+    '        Case 3
+    '            init_experience = 3
+    '            Return init_experience
+    '        Case 4
+    '            init_experience = 4
+    '            Return init_experience
+    '        Case 5
+    '            init_experience = 5
+    '            Return init_experience
+    '    End Select
+
+    'End Function
     Public Function trainingLevel(ByVal jobid As Integer) As Integer
         Dim sqltraining As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM training WHERE trainee_id = @trainee_id and job_id = @job_id")
         Dim grid As New GridView
