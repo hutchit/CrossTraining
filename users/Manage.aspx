@@ -93,13 +93,14 @@
                         <br />
                         DEPARTMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:DropDownList ID="DropDownList8" runat="server" AutoPostBack="True" 
-                            DataSourceID="SqlDataSource8" DataTextField="name" DataValueField="id" >
+                            DataSourceID="SqlDataSource8" DataTextField="name" DataValueField="id" 
+                            Height="16px" >
                         </asp:DropDownList>
                         <br />
                         <br />
-                        JOB NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>&nbsp;<asp:DropDownList ID="DropDownList6" runat="server" 
-                            AutoPostBack="True" DataSourceID="SqlDataSource7" DataTextField="name" 
-                            DataValueField="id">
+                        JOB NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>&nbsp;<asp:DropDownList 
+                            ID="DropDownList6" runat="server" 
+                            AutoPostBack="True">
                         </asp:DropDownList>
                         &nbsp;&nbsp;
                         <asp:CheckBox ID="chkTrainer" runat="server" Text="Promote To Trainer" />

@@ -147,6 +147,13 @@ Partial Class users_MyTraining
         'End If
     End Sub
 
+    Protected Sub departments_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles departments.DataBound
+        departments.SelectedValue = m_user.departmentID
+        'If Not Page.IsPostBack Then
+        fillJobsDropdown(m_user.userid, departments.SelectedValue)
+        'End If
+    End Sub
+
     Protected Sub department_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles department.SelectedIndexChanged
         fillJobsDropdown(m_user.userid, department.SelectedValue)
     End Sub
@@ -173,4 +180,23 @@ Partial Class users_MyTraining
         supervisor_idLabel.Text = supervisor.first_name & " " & supervisor.last_name
         department_idLabel.Text = supervisor.getDepartmentName(department_idLabel.Text)
     End Sub
+
+    Protected Sub DropDownList1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles departments.SelectedIndexChanged
+        If departments.SelectedValue = -1 Then
+            SqlJobs.SelectCommand = "SELECT jobs.id, jobs.name, jobs.department_id, jobs.description, departments.name AS departmentName FROM jobs INNER JOIN departments ON jobs.department_id = departments.id ORDER BY departmentName, name"
+        Else
+            SqlJobs.SelectCommand = "SELECT jobs.id, jobs.name, jobs.department_id, jobs.description, departments.name AS departmentName FROM jobs INNER JOIN departments ON jobs.department_id = departments.id WHERE (jobs.department_id = @department_id) ORDER BY departmentName, name"
+        End If
+    End Sub
+    Dim _currentCategory As String = ""
+    Public Function GetGroup(ByVal template As String) As String
+        Dim category As String = Eval("departmentName")
+        If Not _currentCategory = category Then
+            _currentCategory = category
+            Return String.Format(template, category)
+        Else
+            Return ""
+        End If
+    End Function
+
 End Class

@@ -82,7 +82,7 @@ Partial Class users_Manage
         sqlTraining1.Update()
         ListView1.DataBind()
         ListView2.DataBind()
-
+        fillJobsDropdown(DropDownList5.SelectedValue, DropDownList8.SelectedValue)
     End Sub
 
 
@@ -176,8 +176,40 @@ Partial Class users_Manage
         ListView2.DataBind()
 
         Label4.Visible = True
+        DropDownList7.DataBind()
+        If chkTrainer.Checked Then
+            chkTrainer.Checked = False
+        End If
+        fillJobsDropdown(DropDownList5.SelectedValue, DropDownList8.SelectedValue)
+    End Sub
 
-
+    Private Sub fillJobsDropdown(ByVal employeeID As Integer, ByVal department_id As Integer)
+        DropDownList6.Items.Clear()
+        Dim sqlJobs As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM jobs WHERE department_id = @department_id")
+        sqlJobs.SelectParameters.Add("department_id", department_id)
+        Dim grid As New GridView
+        grid.DataSource = sqlJobs
+        sqlJobs.Select(DataSourceSelectArguments.Empty)
+        grid.DataBind()
+        For Each row As GridViewRow In grid.Rows
+            Dim level As Integer = New Employee(DropDownList5.SelectedValue).trainingLevel(row.Cells(0).Text)
+            Select Case level
+                Case 0
+                    Dim i As New ListItem
+                    i.Text = row.Cells(1).Text.ToString.Trim
+                    i.Value = row.Cells(0).Text.ToString.Trim
+                    DropDownList6.Items.Add(i)
+                Case 1
+                    Dim i As New ListItem
+                    i.Text = row.Cells(1).Text.ToString.Trim
+                    i.Value = row.Cells(0).Text.ToString.Trim
+                    DropDownList6.Items.Add(i)
+                Case 2
+                Case 3
+                Case 4
+                Case 5
+            End Select
+        Next
     End Sub
 
     Protected Sub DropDownList8_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList8.DataBound
@@ -185,6 +217,7 @@ Partial Class users_Manage
         If DropDownList5.SelectedValue <> "" Then
             sv = New Employee(CType(DropDownList5.SelectedValue, Integer)).departmentID
             DropDownList8.SelectedValue = sv
+            fillJobsDropdown(DropDownList5.SelectedValue, DropDownList8.SelectedValue)
         End If
     End Sub
 
@@ -336,5 +369,9 @@ Partial Class users_Manage
 
         ListView3.DataBind()
 
+    End Sub
+
+    Protected Sub DropDownList8_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList8.SelectedIndexChanged
+        fillJobsDropdown(DropDownList5.SelectedValue, DropDownList8.SelectedValue)
     End Sub
 End Class
