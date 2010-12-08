@@ -58,14 +58,16 @@
                             Font-Names="Times New Roman" Font-Size="Large" ForeColor="Red" />
                         <br />
                         Department Filter
-                        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" 
-                            DataSourceID="SqlDepartmentst" DataTextField="name" DataValueField="id">
+                        <asp:DropDownList ID="departments" runat="server" AutoPostBack="True" 
+                            DataSourceID="SqlDepartmentst" DataTextField="name" DataValueField="id" AppendDataBoundItems="true">
+                                                        <asp:ListItem Value="-1">All</asp:ListItem>
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="SqlDepartmentst" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT * FROM [departments]"></asp:SqlDataSource>
+                            SelectCommand="SELECT * FROM [departments] ORDER BY name"></asp:SqlDataSource>
                         &nbsp;<asp:ListView ID="ListView1" runat="server" DataSourceID="SqlJobs">
                             <ItemTemplate>
+                                <%#GetGroup("<tr><td colspan='3' style='background-color:Red;color:White;'>{0}</td></tr>")%>
                                 <tr style="background-color:#DCDCDC;color: #000000;">
                                     <td>
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
@@ -80,6 +82,7 @@
                                 </tr>
                             </ItemTemplate>
                             <AlternatingItemTemplate>
+                                <%#GetGroup("<tr><td colspan='3' style='background-color:Red;color:White;'>{0}</td></tr>")%>
                                 <tr style="background-color:#FFFFFF;">
                                     <td>
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
@@ -110,7 +113,7 @@
                                                 style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
                                                 <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
                                                     <th runat="server">
-                                                        name</th>
+                                                        Name</th>
                                                     <th>
                                                         Experience
                                                     </th>
@@ -122,33 +125,19 @@
                                             </table>
                                         </td>
                                     </tr>
-                                    <tr runat="server">
-                                        <td runat="server" 
-                                            style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
-                                            <asp:DataPager ID="DataPager1" runat="server">
-                                                <Fields>
-                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" 
-                                                        ShowNextPageButton="False" ShowPreviousPageButton="False" />
-                                                    <asp:NumericPagerField />
-                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="True" 
-                                                        ShowNextPageButton="False" ShowPreviousPageButton="False" />
-                                                </Fields>
-                                            </asp:DataPager>
-                                        </td>
-                                    </tr>
+                                   
                                 </table>
                             </LayoutTemplate>
                         </asp:ListView>
                         <asp:SqlDataSource ID="SqlJobs" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            
-                            SelectCommand="SELECT * FROM [jobs] WHERE ([department_id] = @department_id)">
+                            SelectCommand="SELECT jobs.id, jobs.name, jobs.department_id, jobs.description, departments.name AS departmentName FROM jobs INNER JOIN departments ON jobs.department_id = departments.id WHERE (jobs.department_id = @department_id) ORDER BY departmentName, name">
                             <SelectParameters>
-                                <asp:ControlParameter ControlID="DropDownList1" Name="department_id" 
+                                <asp:ControlParameter ControlID="departments" Name="department_id" 
                                     PropertyName="SelectedValue" Type="Int32" />
                             </SelectParameters>
                             <FilterParameters>
-                                <asp:ControlParameter ControlID="DropDownList1" Name="department" 
+                                <asp:ControlParameter ControlID="departments" Name="department" 
                                     PropertyName="SelectedValue" />
                             </FilterParameters>
                         </asp:SqlDataSource>
