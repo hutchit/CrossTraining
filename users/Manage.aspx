@@ -164,7 +164,7 @@
                                 <td>
                                     <asp:LinkButton ID="LinkButton1" class="tabUnSelected" runat="server" Style="margin-left: 30px">Assign</asp:LinkButton>
                                     <asp:LinkButton ID="LinkButton2" class="tabSelected" runat="server">Approve</asp:LinkButton>
-                                    <asp:LinkButton ID="LinkButton3" class="tabUnSelected" runat="server">System Charts</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton3" class="tabUnSelected" runat="server">Monthly Reports</asp:LinkButton>
                                     <asp:LinkButton ID="LinkButton4" class="tabUnSelected" runat="server">Governance Reports</asp:LinkButton>
                                 </td>
                             </tr>
@@ -852,7 +852,7 @@
                                 <td>
                                     <asp:LinkButton ID="LinkButton9" class="tabUnSelected" runat="server" Style="margin-left: 30px">Assign</asp:LinkButton>
                                     <asp:LinkButton ID="LinkButton10" class="tabUnSelected" runat="server">Approve</asp:LinkButton>
-                                    <asp:LinkButton ID="LinkButton11" class="tabUnSelected" runat="server">System Charts</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton11" class="tabUnSelected" runat="server">Monthly Reports</asp:LinkButton>
                                     <asp:LinkButton ID="LinkButton12" class="tabSelected" runat="server">Governance Reports</asp:LinkButton>
                                 </td>
                             </tr>
