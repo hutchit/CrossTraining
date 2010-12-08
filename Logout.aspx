@@ -24,7 +24,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    &nbsp;<div class="newStyle1">
+    &nbsp;<div class="one">
     
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Image ID="Image1" runat="server" Height="88px" 

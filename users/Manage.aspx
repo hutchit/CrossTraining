@@ -8,40 +8,28 @@
     <LINK REL=StyleSheet HREF="~/styles.css" TYPE="text/css" MEDIA=screen>
     <script type="text/javascript">
         function showhide(c) {
-            var next = c.parentNode;
-            next = next.parentNode.nextSibling;
+            var next = c.parentNode.nextSibling;
             while (next.nodeName.toLowerCase() != 'tr') {
                 next = next.nextSibling;
             }
             next.style.display = (next.style.display == '') ? 'none' : '';
-            c.src = (c.src.substr(-14) == "plus-hover.png") ? "../images/minus.png" : "../images/plus.png";
-            c.width = 10;
-        }
-        function mouseOver(img){
-        if(img.src.substr(-8) == "plus.png")
-        {
-            img.src = "../images/plus-hover.png";
-            img.width = 12;
-        }
-        else if (img.src.substr(-9) == "minus.png")
-        {
-            img.src = "../images/minus-hover.png";
-            img.width = 12;
-        }
-        }
-        function mouseOut(img) {
-        if(img.src.substr(-14) == "plus-hover.png")
-        {
-            img.src = "../images/plus.png";
-            img.width = 10;
-        }
-        else if (img.src.substr(-15) == "minus-hover.png")
-        {
-            img.src = "../images/minus.png";
-            img.width = 10;
-        }
         }
     </script>
+     <link type="text/css" href="jquery-ui-1.8.6.custom.css" rel="stylesheet" />
+
+     <script src="jquery-1.4.2.min.js" type="text/javascript"></script>
+
+     <script src="jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
+
+    <SCRIPT type="text/javascript">
+
+        $(function() {
+
+                $(".datePicker").datepicker();
+
+        });   
+
+       </SCRIPT>
     <title>Cross Training Manager - Manage</title>
 </head>
 <body>
@@ -93,8 +81,6 @@
                     <div class="two">
                         <br />
                         <b>ASSIGN TRAINNING</b><br />
-                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" 
-                            ForeColor="#009900" Text="Trainning Assigned"></asp:Label>
                         <br />
                         <br />
                         <br />
@@ -132,6 +118,10 @@
                         <asp:Button ID="Button1" runat="server" Text="Assign" Width="85px" />
                         <br />
                         <br />
+                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" 
+                            ForeColor="#009900" Text="Trainning Assigned"></asp:Label>
+                        <br />
+                        <br />
                         <asp:SqlDataSource ID="SqlDataSource7" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT name, id FROM jobs WHERE (department_id = @id)">
@@ -144,6 +134,8 @@
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT departments.name, departments.id FROM departments">
                         </asp:SqlDataSource>
+                        <br />
+                        <br />
                     </div>
                 </div>
             </asp:View>
@@ -627,6 +619,185 @@
                         </table>
                     </div>
                     <div class="two">
+                        <b>Select a Date Range</b><br />
+                        <br />
+                        Start Date
+                        <asp:TextBox ID="TextBox1" CssClass="datePicker" runat="server"></asp:TextBox>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End Date
+                        <asp:TextBox ID="TextBox2" CssClass="datePicker" runat="server"></asp:TextBox>
+                        <br />
+                        <br />
+                        Select Department&nbsp;
+                        <asp:DropDownList ID="DropDownList9" runat="server" AutoPostBack="True" 
+                            DataSourceID="SqlDataSourceDropDown" DataTextField="name" DataValueField="id" AppendDataBoundItems="true">
+                            <asp:ListItem Text="All" Value ="-1" />
+                        </asp:DropDownList>
+                        <br />
+                        <asp:ListView ID="ListView3" runat="server" DataSourceID="SqlDataSourceTable">
+                            <ItemTemplate>
+                                <tr style="background-color:#DCDCDC;color: #000000;">
+                                    <td>
+                                        <asp:Label ID="TraineeLabel" runat="server" Text='<%# Eval("Trainee") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TrainerLabel" runat="server" Text='<%# Eval("Trainer") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="JobLabel" runat="server" Text='<%# Eval("Job") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="dateLabel" runat="server" Text='<%# Eval("date") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="hoursLabel" runat="server" Text='<%# Eval("hours") %>' />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                            <AlternatingItemTemplate>
+                                <tr style="background-color:#FFF8DC;">
+                                    <td>
+                                        <asp:Label ID="TraineeLabel" runat="server" Text='<%# Eval("Trainee") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TrainerLabel" runat="server" Text='<%# Eval("Trainer") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="JobLabel" runat="server" Text='<%# Eval("Job") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="dateLabel" runat="server" Text='<%# Eval("date") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="hoursLabel" runat="server" Text='<%# Eval("hours") %>' />
+                                    </td>
+                                </tr>
+                            </AlternatingItemTemplate>
+                            <EmptyDataTemplate>
+                                <table runat="server" 
+                                    style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
+                                    <tr>
+                                        <td>
+                                            No data was returned.</td>
+                                    </tr>
+                                </table>
+                            </EmptyDataTemplate>
+                            <InsertItemTemplate>
+                                <tr style="">
+                                    <td>
+                                        <asp:Button ID="InsertButton" runat="server" CommandName="Insert" 
+                                            Text="Insert" />
+                                        <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" 
+                                            Text="Clear" />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="TraineeTextBox" runat="server" Text='<%# Bind("Trainee") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="TrainerTextBox" runat="server" Text='<%# Bind("Trainer") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="JobTextBox" runat="server" Text='<%# Bind("Job") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="dateTextBox" runat="server" Text='<%# Bind("date") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="hoursTextBox" runat="server" Text='<%# Bind("hours") %>' />
+                                    </td>
+                                </tr>
+                            </InsertItemTemplate>
+                            <LayoutTemplate>
+                                <table runat="server">
+                                    <tr runat="server">
+                                        <td runat="server">
+                                            <table ID="itemPlaceholderContainer" runat="server" border="1" 
+                                                style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                                <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
+                                                    <th runat="server">
+                                                        Trainee</th>
+                                                    <th runat="server">
+                                                        Trainer</th>
+                                                    <th runat="server">
+                                                        name</th>
+                                                    <th runat="server">
+                                                        Job</th>
+                                                    <th runat="server">
+                                                        date</th>
+                                                    <th runat="server">
+                                                        hours</th>
+                                                </tr>
+                                                <tr ID="itemPlaceholder" runat="server">
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr runat="server">
+                                        <td runat="server" 
+                                            style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </LayoutTemplate>
+                            <EditItemTemplate>
+                                <tr style="background-color:#008A8C;color: #FFFFFF;">
+                                    <td>
+                                        <asp:Button ID="UpdateButton" runat="server" CommandName="Update" 
+                                            Text="Update" />
+                                        <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" 
+                                            Text="Cancel" />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="TraineeTextBox" runat="server" Text='<%# Bind("Trainee") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="TrainerTextBox" runat="server" Text='<%# Bind("Trainer") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="JobTextBox" runat="server" Text='<%# Bind("Job") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="dateTextBox" runat="server" Text='<%# Bind("date") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="hoursTextBox" runat="server" Text='<%# Bind("hours") %>' />
+                                    </td>
+                                </tr>
+                            </EditItemTemplate>
+                            <SelectedItemTemplate>
+                                <tr style="background-color:#008A8C;font-weight: bold;color: #FFFFFF;">
+                                    <td>
+                                        <asp:Label ID="TraineeLabel" runat="server" Text='<%# Eval("Trainee") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TrainerLabel" runat="server" Text='<%# Eval("Trainer") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="JobLabel" runat="server" Text='<%# Eval("Job") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="dateLabel" runat="server" Text='<%# Eval("date") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="hoursLabel" runat="server" Text='<%# Eval("hours") %>' />
+                                    </td>
+                                </tr>
+                            </SelectedItemTemplate>
+                        </asp:ListView>
                         <br />
                         <br />
                         <br />
@@ -636,8 +807,21 @@
                         <br />
                         <br />
                         <br />
-                        <br />
-                        <br />
+                        <asp:SqlDataSource ID="SqlDataSourceTable" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT Trainee.username AS Trainee, Trainer.username AS Trainer, departments.name, jobs.name AS Job, training.date, training.hours FROM jobs INNER JOIN employees AS Trainee INNER JOIN training ON Trainee.id = training.trainee_id INNER JOIN employees AS Trainer ON training.trainer_id = Trainer.id INNER JOIN departments ON training.department_id = departments.id ON jobs.id = training.job_id WHERE (training.department_id = @id) AND (training.status = @status) AND (training.date &gt;= @startdate) AND (training.date &lt;= @enddate)">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="DropDownList9" Name="id" 
+                                    PropertyName="SelectedValue" />
+                                <asp:Parameter DefaultValue="3" Name="status" />
+                                <asp:ControlParameter ControlID="TextBox1" Name="startdate" 
+                                    PropertyName="Text" />
+                                <asp:ControlParameter ControlID="TextBox2" Name="enddate" PropertyName="Text" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSourceDropDown" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
+                            SelectCommand="SELECT [id], [name] FROM [departments]"></asp:SqlDataSource>
                         <br />
                         <br />
                     </div>
