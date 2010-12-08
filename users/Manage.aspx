@@ -8,11 +8,38 @@
     <LINK REL=StyleSheet HREF="~/styles.css" TYPE="text/css" MEDIA=screen>
     <script type="text/javascript">
         function showhide(c) {
-            var next = c.parentNode.nextSibling;
+            var next = c.parentNode;
+            next = next.parentNode.nextSibling;
             while (next.nodeName.toLowerCase() != 'tr') {
                 next = next.nextSibling;
             }
             next.style.display = (next.style.display == '') ? 'none' : '';
+            c.src = (c.src.substr(-14) == "plus-hover.png") ? "../images/minus.png" : "../images/plus.png";
+            c.width = 10;
+        }
+        function mouseOver(img){
+        if(img.src.substr(-8) == "plus.png")
+        {
+            img.src = "../images/plus-hover.png";
+            img.width = 12;
+        }
+        else if (img.src.substr(-9) == "minus.png")
+        {
+            img.src = "../images/minus-hover.png";
+            img.width = 12;
+        }
+        }
+        function mouseOut(img) {
+        if(img.src.substr(-14) == "plus-hover.png")
+        {
+            img.src = "../images/plus.png";
+            img.width = 10;
+        }
+        else if (img.src.substr(-15) == "minus-hover.png")
+        {
+            img.src = "../images/minus.png";
+            img.width = 10;
+        }
         }
     </script>
     <title>Cross Training Manager - Manage</title>
@@ -66,6 +93,8 @@
                     <div class="two">
                         <br />
                         <b>ASSIGN TRAINNING</b><br />
+                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" 
+                            ForeColor="#009900" Text="Trainning Assigned"></asp:Label>
                         <br />
                         <br />
                         <br />
@@ -103,10 +132,6 @@
                         <asp:Button ID="Button1" runat="server" Text="Assign" Width="85px" />
                         <br />
                         <br />
-                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" 
-                            ForeColor="#009900" Text="Trainning Assigned"></asp:Label>
-                        <br />
-                        <br />
                         <asp:SqlDataSource ID="SqlDataSource7" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT name, id FROM jobs WHERE (department_id = @id)">
@@ -119,8 +144,6 @@
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
                             SelectCommand="SELECT departments.name, departments.id FROM departments">
                         </asp:SqlDataSource>
-                        <br />
-                        <br />
                     </div>
                 </div>
             </asp:View>

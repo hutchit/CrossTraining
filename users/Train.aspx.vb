@@ -57,6 +57,13 @@ Partial Class users_Train
         lblTemp.Text = weather.CurrentConditions.Temperature.Fahrenheit & "&deg; F"
 
         imgWeather.ImageUrl = "~/images/weather/" & weather.CurrentConditions.Condition & ".png"
+        If m_trainer.isSupervisor Then
+            managerTabView1.Visible = True
+            managerTabView2.Visible = True
+        Else
+            managerTabView1.Visible = False
+            managerTabView2.Visible = False
+        End If
     End Sub
 
     Protected Sub ListViewTrain_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ListViewItemEventArgs) Handles ListViewTrain.ItemDataBound
