@@ -160,9 +160,15 @@ Partial Class users_Manage
             sqlTraining3.InsertParameters.Add("trainer_id", suprID)
         Else
             Dim trainer As Integer = DropDownList7.SelectedValue
+            Dim exp As Integer = New Employee(user_id).trainingLevel(jobID)
             sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, status,supervisor_id) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @status, @supervisor_id)"
             sqlTraining3.InsertParameters.Add("status", 2)
-            sqlTraining3.InsertParameters.Add("initial_experience", New Employee(user_id).trainingLevel(jobID))
+            'If exp = 3 Then
+            '    sqlTraining3.InsertParameters.Add("initial_experience", 0)
+            '    sqlTraining3.InsertParameters.Add("status", 0)
+            'ElseIf exp = 1 Then
+            sqlTraining3.InsertParameters.Add("initial_experience", exp)
+
             sqlTraining3.InsertParameters.Add("trainer_id", trainer)
         End If
 
