@@ -324,6 +324,18 @@ Public Class Employee
         End If
     End Function
 
+    Public Function isSupervisor(ByVal supervisee_id As Integer) As Boolean
+        Dim sqlSupervisor As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * FROM Supervisee_Supervisor WHERE (Supervisee_id = @supervisee_id) AND (Supervisor_id = @supervisor_id)")
+        Dim gridSupervisor As New GridView
+
+        sqlSupervisor.SelectParameters.Add("supervisor_id", userid)
+        sqlSupervisor.SelectParameters.Add("supervisee_id", supervisee_id)
+
+        gridSupervisor.DataSource = sqlSupervisor
+        sqlSupervisor.Select(DataSourceSelectArguments.Empty)
+        gridSupervisor.DataBind()
+        Return gridSupervisor.Rows.Count > 0
+    End Function
     
 
 End Class
