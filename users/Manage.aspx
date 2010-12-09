@@ -186,12 +186,12 @@
                             DataSourceID="SqlDataSource3" DataTextField="first_name" 
                             DataValueField="trainee_id">
                         </asp:DropDownList>
-                        <asp:ListView ID="ListView1" runat="server" DataKeyNames="Expr1" 
+                        <asp:ListView ID="ListView1" runat="server" DataKeyNames="ID" 
                             DataSourceID="SqlDataSource1">
                             <ItemTemplate>
                                 <tr style="background-color:#DCDCDC;color: #000000;">
                                     <td>
-                                        <asp:Label ID="Expr1Label" runat="server" Text='<%# Eval("Expr1") %>' />
+                                        <asp:Label ID="IDLabel" runat="server" Text='<%# Eval("ID") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="statusLabel" runat="server" Text='<%# Eval("status") %>' />
@@ -200,7 +200,7 @@
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Expr2Label" runat="server" Text='<%# Eval("Expr2") %>' />
+                                        <asp:Label ID="DeptNameLabel" runat="server" Text='<%# Eval("DeptName") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="job_idLabel" runat="server" Text='<%# Eval("job_id") %>' />
@@ -211,18 +211,18 @@
                                     </td>
                                     <td>
                                         <asp:Button ID="acceptButton" runat="server" OnClick="acceptTraining" 
-                                            Text="Accept Request" training_ID='<%# Eval("Expr1") %>' />
+                                            Text="Accept Request" training_ID='<%# Eval("ID") %>' />
                                     </td>
                                     <td>
                                         <asp:Button ID="resetButton" runat="server" OnClick="denyTraining" 
-                                            Text="Deny Request" training_ID='<%# Eval("Expr1") %>' />
+                                            Text="Deny Request" training_ID='<%# Eval("ID") %>' />
                                     </td>
                                 </tr>
                             </ItemTemplate>
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#FFF8DC;">
                                     <td>
-                                        <asp:Label ID="Expr1Label" runat="server" Text='<%# Eval("Expr1") %>' />
+                                        <asp:Label ID="IDLabel" runat="server" Text='<%# Eval("ID") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="statusLabel" runat="server" Text='<%# Eval("status") %>' />
@@ -231,7 +231,7 @@
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Expr2Label" runat="server" Text='<%# Eval("Expr2") %>' />
+                                        <asp:Label ID="DeptNameLabel" runat="server" Text='<%# Eval("DeptName") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="job_idLabel" runat="server" Text='<%# Eval("job_id") %>' />
@@ -242,11 +242,11 @@
                                     </td>
                                     <td>
                                         <asp:Button ID="acceptButton" runat="server" OnClick="acceptTraining" 
-                                            Text="Accept Request" training_ID='<%# Eval("Expr1") %>' />
+                                            Text="Accept Request" training_ID='<%# Eval("ID") %>' />
                                     </td>
                                     <td>
                                         <asp:Button ID="resetButton" runat="server" OnClick="denyTraining" 
-                                            Text="Deny Request" training_ID='<%# Eval("Expr1") %>' />
+                                            Text="Deny Request" training_ID='<%# Eval("ID") %>' />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -276,7 +276,7 @@
                                         <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="Expr2TextBox" runat="server" Text='<%# Bind("Expr2") %>' />
+                                        <asp:TextBox ID="DeptNameTextBox" runat="server" Text='<%# Bind("DeptName") %>' />
                                     </td>
                                     <td>
                                         <asp:TextBox ID="job_idTextBox" runat="server" Text='<%# Bind("job_id") %>' />
@@ -295,13 +295,13 @@
                                                 style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
                                                 <tr runat="server" style="background-color:#DCDCDC;color: #000000;">
                                                     <th runat="server">
-                                                        Expr1</th>
+                                                        ID</th>
                                                     <th runat="server">
                                                         status</th>
                                                     <th runat="server">
                                                         name</th>
                                                     <th runat="server">
-                                                        Expr2</th>
+                                                        DeptName</th>
                                                     <th runat="server">
                                                         job_id</th>
                                                     <th runat="server">
@@ -337,7 +337,7 @@
                                             Text="Cancel" />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Expr1Label1" runat="server" Text='<%# Eval("Expr1") %>' />
+                                        <asp:Label ID="IDLabel1" runat="server" Text='<%# Eval("ID") %>' />
                                     </td>
                                     <td>
                                         <asp:TextBox ID="statusTextBox" runat="server" Text='<%# Bind("status") %>' />
@@ -346,7 +346,7 @@
                                         <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="Expr2TextBox" runat="server" Text='<%# Bind("Expr2") %>' />
+                                        <asp:TextBox ID="DeptNameTextBox" runat="server" Text='<%# Bind("DeptName") %>' />
                                     </td>
                                     <td>
                                         <asp:TextBox ID="job_idTextBox" runat="server" Text='<%# Bind("job_id") %>' />
@@ -360,7 +360,7 @@
                             <SelectedItemTemplate>
                                 <tr style="background-color:#008A8C;font-weight: bold;color: #FFFFFF;">
                                     <td>
-                                        <asp:Label ID="Expr1Label" runat="server" Text='<%# Eval("Expr1") %>' />
+                                        <asp:Label ID="IDLabel" runat="server" Text='<%# Eval("ID") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="statusLabel" runat="server" Text='<%# Eval("status") %>' />
@@ -369,7 +369,7 @@
                                         <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Expr2Label" runat="server" Text='<%# Eval("Expr2") %>' />
+                                        <asp:Label ID="DeptNameLabel" runat="server" Text='<%# Eval("DeptName") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="job_idLabel" runat="server" Text='<%# Eval("job_id") %>' />
@@ -550,7 +550,7 @@
                             
                             
                             
-                            SelectCommand="SELECT training.id AS Expr1, training.status, jobs.name, departments.name AS Expr2, training.job_id, training.initial_experience FROM training INNER JOIN jobs ON training.job_id = jobs.id INNER JOIN departments ON training.department_id = departments.id WHERE (training.status = @status) AND (training.trainee_id = @trainee_id)">
+                            SelectCommand="SELECT training.id AS ID, training.status, jobs.name, departments.name AS DeptName, training.job_id, training.initial_experience FROM training INNER JOIN jobs ON training.job_id = jobs.id INNER JOIN departments ON training.department_id = departments.id WHERE (training.status = @status) AND (training.trainee_id = @trainee_id)">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="Label2" DefaultValue="" Name="status" 
                                     PropertyName="Text" />
