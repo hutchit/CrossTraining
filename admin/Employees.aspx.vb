@@ -32,7 +32,7 @@ Partial Class users_MyTraining
 
     Protected Sub ContinueButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         CreateUserWizard1.ActiveStepIndex = 0
-        Context.Response.Redirect(Context.Request.Url.AbsoluteUri)
+        Context.Response.Redirect("http://hutchit.com:8888/project/admin/Employees.aspx")
         Context.Response.End()
     End Sub
     Protected Sub deleteUser(ByVal sender As Object, ByVal e As System.EventArgs)

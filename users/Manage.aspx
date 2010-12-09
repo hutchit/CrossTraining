@@ -6,14 +6,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <LINK REL=StyleSheet HREF="~/styles.css" TYPE="text/css" MEDIA=screen>
-    <script type="text/javascript">
-        function showhide(c) {
-            var next = c.parentNode.nextSibling;
-            while (next.nodeName.toLowerCase() != 'tr') {
-                next = next.nextSibling;
+        <script type="text/javascript">
+            function showhide(c) {
+                var next = c.parentNode;
+                next = next.parentNode.nextSibling;
+                while (next.nodeName.toLowerCase() != 'tr') {
+                    next = next.nextSibling;
+                }
+                next.style.display = (next.style.display == '') ? 'none' : '';
+                c.src = (c.src.substr(-14) == "plus-hover.png") ? "../images/minus.png" : "../images/plus.png";
+                c.width = 10;
             }
-            next.style.display = (next.style.display == '') ? 'none' : '';
-        }
+            function mouseOver(img) {
+                if (img.src.substr(-8) == "plus.png") {
+                    img.src = "../images/plus-hover.png";
+                    img.width = 12;
+                }
+                else if (img.src.substr(-9) == "minus.png") {
+                    img.src = "../images/minus-hover.png";
+                    img.width = 12;
+                }
+            }
+            function mouseOut(img) {
+                if (img.src.substr(-14) == "plus-hover.png") {
+                    img.src = "../images/plus.png";
+                    img.width = 10;
+                }
+                else if (img.src.substr(-15) == "minus-hover.png") {
+                    img.src = "../images/minus.png";
+                    img.width = 10;
+                }
+            }
     </script>
      <link type="text/css" href="jquery-ui-1.8.6.custom.css" rel="stylesheet" />
 

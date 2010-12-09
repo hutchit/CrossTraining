@@ -242,6 +242,7 @@ Partial Class users_Manage
         dgDepartments.DataSource = sqlDepartments
         dgDepartments.DataBind()
         table = reportHeader()
+        table.Attributes.Add("class", "reportTable")
         For Each row As DataGridItem In dgDepartments.Items
             Dim rowhtml As New HtmlTableRow
             Dim rowJobs As New HtmlTableRow
@@ -249,6 +250,11 @@ Partial Class users_Manage
             Dim notTrained As New HtmlTableCell
             Dim trained As New HtmlTableCell
             Dim trainer As New HtmlTableCell
+            notTrained.Attributes.Add("class", "reportData")
+            trained.Attributes.Add("class", "reportData")
+            trainer.Attributes.Add("class", "reportData")
+            cellJobs.Attributes.Add("class", "reportData")
+            cellJobs.Style.Add("text-align", "left")
             notTrained.InnerText = 0
             trained.InnerText = 0
             trainer.InnerText = 0
@@ -261,9 +267,14 @@ Partial Class users_Manage
             Next
             cellJobs.Controls.Add(jobsTable)
             Dim cellDepartment As New HtmlTableCell
-            cellDepartment.Attributes.Add("onclick", "showhide(this)")
+            cellDepartment.Attributes.Add("class", "reportData")
+            cellDepartment.Style.Add("text-align", "left")
+            cellDepartment.Style.Add("width", "175px")
+            'cellDepartment.Attributes.Add("onclick", "showhide(this)")
             rowJobs.Style.Add("display", "none")
-            cellDepartment.InnerText = row.Cells(1).Text
+            cellJobs.Style.Add("background-color", "black")
+            cellDepartment.InnerHtml = "&nbsp;<img alt='plus' onclick='showhide(this)' src=""../images/plus.png"" onmouseover='mouseOver(this)' onmouseout='mouseOut(this)' width='10px' />&nbsp;" & row.Cells(1).Text
+            'cellDepartment.InnerText = row.Cells(1).Text
             rowhtml.Cells.Add(cellDepartment)
             rowhtml.Cells.Add(notTrained)
             rowhtml.Cells.Add(trained)
@@ -309,12 +320,14 @@ Partial Class users_Manage
 
     Private Function buildJobsTable(ByVal department As Integer) As HtmlTable
         Dim table As New HtmlTable
+        table.Style.Add("float", "right")
         Dim sqlJobs As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * from Jobs WHERE department_id = @department_id")
         Dim dgJobs As New DataGrid
         sqlJobs.SelectParameters.Add("department_id", department)
         sqlJobs.Select(System.Web.UI.DataSourceSelectArguments.Empty)
         dgJobs.DataSource = sqlJobs
         dgJobs.DataBind()
+        table.Attributes.Add("class", "reportTable")
         For Each row As DataGridItem In dgJobs.Items
             Dim rowhtml As New HtmlTableRow
             Dim rowEmployees As New HtmlTableRow
@@ -322,10 +335,16 @@ Partial Class users_Manage
             cellEmployee.ColSpan = 4
             Dim cellJobs As New HtmlTableCell
             cellJobs.InnerText = row.Cells(1).Text
+            cellJobs.Attributes.Add("class", "reportData")
+            cellJobs.Style.Add("width", "150px")
             rowhtml.Cells.Add(cellJobs)
-            rowhtml.Cells.Add(getJobnotTrainerTotal())
-            rowhtml.Cells.Add(getJobTrainedTotal())
-            rowhtml.Cells.Add(getJobTrainerTotal(department, row.Cells(0).Text))
+            Dim notTrainedCell As New HtmlTableCell
+            Dim trainedCell As New HtmlTableCell
+            Dim trainerCell As New HtmlTableCell
+            getTotals(row.Cells(0).Text, notTrainedCell, trainedCell, trainerCell)
+            rowhtml.Cells.Add(notTrainedCell)
+            rowhtml.Cells.Add(trainedCell)
+            rowhtml.Cells.Add(trainerCell)
             rowEmployees.Cells.Add(cellEmployee)
             table.Rows.Add(rowhtml)
             'table.Rows.Add(rowEmployees)
@@ -333,30 +352,37 @@ Partial Class users_Manage
         Return table
     End Function
 
-    Private Function getJobTrainerTotal(ByVal department As Integer, ByVal job As Integer) As HtmlTableCell
-        Dim cell As New HtmlTableCell
-        Dim sqlTrainers As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * from training WHERE (department_Id = @department AND job_id = @job_id) AND final_experience = 2")
-        Dim dgtrainers As New DataGrid
-        sqlTrainers.SelectParameters.Add("department", department)
-        sqlTrainers.SelectParameters.Add("job_id", job)
-        sqlTrainers.Select(System.Web.UI.DataSourceSelectArguments.Empty)
-        dgtrainers.DataSource = sqlTrainers
-        dgtrainers.DataBind()
-        cell.InnerText = dgtrainers.Items.Count
-        Return cell
-    End Function
+    Private Sub getTotals(ByVal job As Integer, ByRef notTrained As HtmlTableCell, ByRef trained As HtmlTableCell, ByRef trainer As HtmlTableCell)
+        notTrained.Attributes.Add("class", "reportData")
+        trained.Attributes.Add("class", "reportData")
+        trainer.Attributes.Add("class", "reportData")
+        notTrained.Style.Add("width", "100px")
+        trained.Style.Add("width", "100px")
+        trainer.Style.Add("width", "98px")
+        Dim sqlEmployees As New SqlDataSource(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("ProjectConnectionString").ToString(), "SELECT * from Employees")
+        Dim dgEmployees As New DataGrid
+        sqlEmployees.Select(System.Web.UI.DataSourceSelectArguments.Empty)
+        dgEmployees.DataSource = sqlEmployees
+        dgEmployees.DataBind()
+        Dim intNotTrained As Integer
+        Dim intTrained As Integer
+        Dim intTrainer As Integer
+        For Each row As DataGridItem In dgEmployees.Items
+            Dim employee As New Employee(CType(row.Cells(0).Text, Integer))
+            Dim level As Integer = employee.trainingLevel(job)
 
-    Private Function getJobnotTrainerTotal() As HtmlTableCell
-        Dim cell As New HtmlTableCell
-        cell.InnerText = 0
-        Return cell
-    End Function
-
-    Private Function getJobTrainedTotal() As HtmlTableCell
-        Dim cell As New HtmlTableCell
-        cell.InnerText = 0
-        Return cell
-    End Function
+            If level = 0 Then
+                intNotTrained += 1
+            ElseIf level = 1 Then
+                intTrained += 1
+            ElseIf level = 2 Then
+                intTrainer += 1
+            End If
+        Next
+        notTrained.InnerText = intNotTrained
+        trained.InnerText = intTrained
+        trainer.InnerText = intTrainer
+    End Sub
 
     Protected Sub content_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles content.Load
         content.Controls.Add(buildReport)
