@@ -17,7 +17,7 @@ Partial Class users_MyTraining
     End Sub
     Protected Sub requestTraining(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim button1 As Button = CType(sender, Button)
-        message.Text = m_user.requestTraining(button1.Attributes("jobID").ToString, 1, DropDownList1.SelectedValue) + " for " & m_user.getJobName(button1.Attributes("jobID").ToString)
+        message.Text = m_user.requestTraining(button1.Attributes("jobID").ToString, 1, departments.SelectedValue) + " for " & m_user.getJobName(button1.Attributes("jobID").ToString)
         ListView1.DataBind()
         If department.SelectedValue <> "" Then
             fillJobsDropdown(m_user.userid, department.SelectedValue)
