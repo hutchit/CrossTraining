@@ -153,12 +153,13 @@ Partial Class users_Manage
         sqlTraining3.InsertParameters.Add("supervisor_id", suprID)
 
         If chkTrainer.Checked = True Then
-            sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, final_experience, status,supervisor_id,date) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @final_experience, @status, @supervisor_id, @training_date)"
+            sqlTraining3.InsertCommand = "INSERT INTO training(trainer_id,trainee_id, department_id, job_id, initial_experience, final_experience, status,supervisor_id,date, hours) VALUES (@trainer_id, @trainee_id, @department_id, @job_id, @initial_experience, @final_experience, @status, @supervisor_id, @training_date, @hours)"
             sqlTraining3.InsertParameters.Add("status", 3)
             sqlTraining3.InsertParameters.Add("initial_experience", 0)
             sqlTraining3.InsertParameters.Add("final_experience", 2)
             sqlTraining3.InsertParameters.Add("trainer_id", suprID)
             sqlTraining3.InsertParameters.Add("training_date", DateTime.Now.Date.ToString("MM/dd/yyyy"))
+            sqlTraining3.InsertParameters.Add("hours", 0)
         Else
             Dim trainer As Integer = DropDownList7.SelectedValue
             Dim exp As Integer = New Employee(user_id).trainingLevel(jobID)
