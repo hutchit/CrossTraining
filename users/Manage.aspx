@@ -591,7 +591,8 @@
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
-                            SelectCommand="SELECT training.trainee_id, employees.first_name FROM training INNER JOIN employees ON training.trainee_id = employees.id WHERE (training.final_experience = 2)">
+                            
+                            SelectCommand="SELECT DISTINCT training.trainee_id, employees.first_name FROM training INNER JOIN employees ON training.trainee_id = employees.id WHERE (training.final_experience = 2)">
                         </asp:SqlDataSource>
                         <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" 
