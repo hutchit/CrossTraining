@@ -106,6 +106,7 @@ Partial Class users_Manage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim user1 As String
+        ListView2.DataBind()
 
         user1 = User.Identity.Name
 
